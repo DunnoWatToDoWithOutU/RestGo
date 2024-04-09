@@ -2,9 +2,12 @@ import { authOptions } from "@/libs/authOptions";
 import { getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
+import { Logout } from "./Logout";
 
 export async function NavBar() {
   const session = await getServerSession(authOptions);
+  // console.log(session);
   return (
     <div className="w-full h-16 px-[10%] bg-white shadow-md flex items-center justify-between">
       <div
@@ -25,8 +28,8 @@ export async function NavBar() {
           Hotel List
         </Link>
       </div>
-      {session ? (
-        <div className="flex space-x-1">
+      {session?.user ? (
+        <div className="flex space-x-3">
           <button
             className="w-7 h-7 hover:scale-110 transition-all duration-200 rounded-full bg-contain bg-center bg-no-repeat"
             style={{ backgroundImage: `url(/img/bell.png)` }}
@@ -35,6 +38,8 @@ export async function NavBar() {
             className="w-7 hover:scale-110  transition-all duration-200 h-7 rounded-full bg-contain bg-center bg-no-repeat"
             style={{ backgroundImage: `url(/img/user.png)` }}
           ></button>
+          <p className="text-primary">{session.user?.name}</p>
+          <Logout></Logout>
         </div>
       ) : (
         <div className="flex space-x-1">
