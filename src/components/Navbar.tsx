@@ -12,7 +12,7 @@ export function NavBar() {
           href="/"
           className="font-bold text p-2 px-4 transition-colors duration-200 bg-[#fafafa] hover:bg-[#f1f2ff] shadow-md rounded-full text-primary"
         >
-          Transporation
+          My Booking
         </Link>
         <Link
           href="/"
@@ -21,15 +21,27 @@ export function NavBar() {
           Hotel List
         </Link>
       </div>
-      <div className="flex space-x-2">
-        <button
+      <div className="flex space-x-1">
+        {/* <button
           className="w-7 h-7 hover:scale-110 transition-all duration-200 rounded-full bg-contain bg-center bg-no-repeat"
           style={{ backgroundImage: `url(/img/bell.png)` }}
         ></button>
         <button
           className="w-7 hover:scale-110  transition-all duration-200 h-7 rounded-full bg-contain bg-center bg-no-repeat"
           style={{ backgroundImage: `url(/img/user.png)` }}
-        ></button>
+        ></button> */}
+        <Link
+          className="text-white hover:bg-primary_dark bg-primary p-1 px-4 rounded-full font-bold"
+          href="/"
+        >
+          Sign In
+        </Link>
+        <Link
+          className=" text-primary hover:text-primary_dark hover:underline p-1 px-4 rounded-full "
+          href="/"
+        >
+          Sign up
+        </Link>
       </div>
     </div>
   );

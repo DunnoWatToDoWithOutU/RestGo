@@ -27,7 +27,7 @@ const HotelData: HotelProps[] = [
 
 export function HotelList() {
   return (
-    <div className="min-h-screen space-y-3  w-full py-10">
+    <div className=" mb-20 space-y-3 mt-5  w-full py-10">
       {HotelData.map((hotel, index) => {
         return <HotelCard {...hotel} key={index}></HotelCard>;
       })}
