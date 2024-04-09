@@ -1,9 +1,17 @@
+"use client";
 import { Rating } from "@mui/material";
 import { HotelProps } from "../../../@types/type";
+import { useRouter } from "next/navigation";
 
 export function HotelCard(props: HotelProps) {
+  const router = useRouter();
   return (
-    <div className="w-[100%] mx-auto text-[#15439C] p-3 shadow-lg text-start  space-x-6 bg-zinc-50 hover:bg-zinc-100 rounded-lg flex">
+    <button
+      onClick={() => {
+        router.push(`/hotel/${props.index}`);
+      }}
+      className="w-[100%] mx-auto text-[#15439C] p-3 shadow-lg text-start  space-x-6 bg-zinc-50 hover:bg-zinc-100 rounded-lg flex"
+    >
       <div
         className="h-40 min-w-56  rounded-lg  bg-cover bg-center"
         style={{ backgroundImage: `url(${props.pic})` }}
@@ -38,6 +46,6 @@ export function HotelCard(props: HotelProps) {
           </div>
         </div>
       </div>
-    </div>
+    </button>
   );
 }

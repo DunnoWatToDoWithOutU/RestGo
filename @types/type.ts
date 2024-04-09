@@ -4,4 +4,5 @@ export interface HotelProps{
     stars:number;
     location:string;
     pic:string;
+    index:number;
 }
