@@ -3,7 +3,7 @@ import { HotelProps } from "../../../@types/type";
 
 export function HotelCard(props: HotelProps) {
   return (
-    <div className="w-[100%] mx-auto text-[#15439C] p-3 shadow-lg text-start  space-x-6 bg-zinc-50 rounded-lg flex">
+    <div className="w-[100%] mx-auto text-[#15439C] p-3 shadow-lg text-start  space-x-6 bg-zinc-50 hover:bg-zinc-100 rounded-lg flex">
       <div
         className="h-40 min-w-56  rounded-lg  bg-cover bg-center"
         style={{ backgroundImage: `url(${props.pic})` }}
@@ -27,7 +27,8 @@ export function HotelCard(props: HotelProps) {
             </div>
             <div className="flex space-x-3 text-lg font-bold">
               <Rating
-                name="read-only"
+                precision={0.1}
+                name="half-rating-read"
                 value={props.stars}
                 readOnly
                 className="ml-auto text-[#15439C]"
