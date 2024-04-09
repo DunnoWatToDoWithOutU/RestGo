@@ -32,13 +32,13 @@ export function NavBar() {
         ></button> */}
         <Link
           className="text-white hover:bg-primary_dark bg-primary p-1 px-4 rounded-full font-bold"
-          href="/"
+          href="/auth/SignIn"
         >
           Sign In
         </Link>
         <Link
           className=" text-primary hover:text-primary_dark hover:underline p-1 px-4 rounded-full "
-          href="/"
+          href="/auth/SignUp"
         >
           Sign up
         </Link>
