@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Anuphan } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { NavBar } from "@/components/Navbar";
 
-const anuphan = Anuphan({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={anuphan.className}>
+      <body className={inter.className}>
         <NavBar></NavBar>
         {children}
       </body>
