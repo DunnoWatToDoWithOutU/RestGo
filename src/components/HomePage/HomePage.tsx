@@ -1,3 +1,4 @@
+import { HotelList } from "./HotelList";
 import { MenuBox } from "./MenuBox";
 import { SearchBar } from "./SearchBar";
 
@@ -9,6 +10,7 @@ export function HomePage() {
       </p>
       <SearchBar></SearchBar>
       <MenuBox></MenuBox>
+      <HotelList></HotelList>
     </div>
   );
 }
