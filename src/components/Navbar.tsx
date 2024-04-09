@@ -27,7 +27,7 @@ export function NavBar() {
           style={{ backgroundImage: `url(/img/bell.png)` }}
         ></button>
         <button
-          className="w-7 hover:scale-110 transition-all duration-200 h-7 rounded-full bg-contain bg-center bg-no-repeat"
+          className="w-7 hover:scale-110  transition-all duration-200 h-7 rounded-full bg-contain bg-center bg-no-repeat"
           style={{ backgroundImage: `url(/img/user.png)` }}
         ></button>
       </div>
