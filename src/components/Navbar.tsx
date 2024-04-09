@@ -1,6 +1,10 @@
+import { authOptions } from "@/libs/authOptions";
+import { getServerSession } from "next-auth";
+import { getSession } from "next-auth/react";
 import Link from "next/link";
 
-export function NavBar() {
+export async function NavBar() {
+  const session = await getServerSession(authOptions);
   return (
     <div className="w-full h-16 px-[10%] bg-white shadow-md flex items-center justify-between">
       <div
@@ -21,28 +25,33 @@ export function NavBar() {
           Hotel List
         </Link>
       </div>
-      <div className="flex space-x-1">
-        {/* <button
-          className="w-7 h-7 hover:scale-110 transition-all duration-200 rounded-full bg-contain bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(/img/bell.png)` }}
-        ></button>
-        <button
-          className="w-7 hover:scale-110  transition-all duration-200 h-7 rounded-full bg-contain bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(/img/user.png)` }}
-        ></button> */}
-        <Link
-          className="text-white hover:bg-primary_dark bg-primary p-1 px-4 rounded-full font-bold"
-          href="/auth/SignIn"
-        >
-          Sign In
-        </Link>
-        <Link
-          className=" text-primary hover:text-primary_dark hover:underline p-1 px-4 rounded-full "
-          href="/auth/SignUp"
-        >
-          Sign up
-        </Link>
-      </div>
+      {session ? (
+        <div className="flex space-x-1">
+          <button
+            className="w-7 h-7 hover:scale-110 transition-all duration-200 rounded-full bg-contain bg-center bg-no-repeat"
+            style={{ backgroundImage: `url(/img/bell.png)` }}
+          ></button>
+          <button
+            className="w-7 hover:scale-110  transition-all duration-200 h-7 rounded-full bg-contain bg-center bg-no-repeat"
+            style={{ backgroundImage: `url(/img/user.png)` }}
+          ></button>
+        </div>
+      ) : (
+        <div className="flex space-x-1">
+          <Link
+            className="text-white hover:bg-primary_dark bg-primary p-1 px-4 rounded-full font-bold"
+            href="/auth/SignIn"
+          >
+            Sign In
+          </Link>
+          <Link
+            className=" text-primary hover:text-primary_dark hover:underline p-1 px-4 rounded-full "
+            href="/auth/SignUp"
+          >
+            Sign up
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
