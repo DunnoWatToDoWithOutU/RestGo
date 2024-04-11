@@ -1,13 +1,12 @@
 import { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { login } from "./login";
-import { getMe } from "./getMe";
 
 
 export const authOptions: AuthOptions = {
     providers: [
         CredentialsProvider({
-          name: "Hello",
+          name: "credentials",
           credentials: {
             email: { label: "Email", type: "email", placeholder: "email" },
             password: { label: "Password", type: "password" }
@@ -15,8 +14,7 @@ export const authOptions: AuthOptions = {
           async authorize(credentials, req) {
             if(!credentials)   return null;
             try{
-                const user_login = await login(credentials.email, credentials.password);
-                const user = await getMe(user_login.token);
+                const user = await login(credentials.email, credentials.password);
                 console.log(user);
                 return user
             } catch(err){

@@ -18,11 +18,11 @@ export async function POST(req: NextRequest) {
             address: address,
             telephone: telephone,
             price: price,
-            tag: tag,
+            tag: tag ? tag : [],
             review: [],
         });
         return NextResponse.json(hotel, { status: 201 });
-    } catch (error) {
-        return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    } catch (err:any) {
+        return NextResponse.json({ error: err.message }, { status: 500 });
     }
 }

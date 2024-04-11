@@ -19,12 +19,9 @@ async function connectDB() {
 
     if(!cached.promise) {
         const opts = {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
             serverSelectionTimeoutMS: 5000,
             socketTimeoutMS: 45000,
             family: 4,
-            authSource: 'admin',
         }
     
         cached.promise = mongoose.connect(MONGO_URI, opts).then(() => {
