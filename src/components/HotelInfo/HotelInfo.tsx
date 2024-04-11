@@ -1,7 +1,12 @@
+"use client";
+import craeteAppointment from "@/libs/createAppointment";
 import { HotelProps } from "../../../@types/type";
 import { ReviewCard } from "./ReviewCard";
+import { useState } from "react";
 
 export function HotelInfo(props: HotelProps) {
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   return (
     <div className=" px-[10%] mt-10   text-[#15439C]">
       <ImageHotel pic={props.pic}></ImageHotel>
@@ -34,19 +39,41 @@ export function HotelInfo(props: HotelProps) {
               <p className="text-2xl font-bold">Data Reserve :</p>
               <div className="flex mt-4 space-x-2 justify-start items-center">
                 <p className=" text-lg min-w-20 font-bold">From : </p>
-                <div className="h-10 rounded-lg w-full bg-white border-2 border-[#15439C]"></div>
+                <input
+                  type="date"
+                  onChange={(e) => {
+                    setStartDate(new Date(e.target.value));
+                  }}
+                  className="h-10 rounded-lg w-full bg-white border-2 border-[#15439C]"
+                ></input>
               </div>
               <div className="flex mt-4 space-x-2 justify-start items-center">
                 <p className=" text-lg  min-w-20 font-bold">To : </p>
-                <div className="h-10 rounded-lg w-full bg-white border-2 border-[#15439C]"></div>
+                <input
+                  onChange={(e) => {
+                    setEndDate(new Date(e.target.value));
+                  }}
+                  type="date"
+                  className="h-10 rounded-lg w-full bg-white border-2 border-[#15439C]"
+                ></input>
               </div>
               <p className=" mt-5    mb-5 text-start font-bold text-lg">
-                Durations : <span className=" font-normal">2 days</span>
+                Durations :{" "}
+                <span className=" font-normal">
+                  {(endDate.getTime() - startDate.getTime()) /
+                    (1000 * 60 * 60 * 24)}{" "}
+                  days
+                </span>
               </p>
             </div>
-            <div className=" w-[80%] text-3xl text-center  rounded-lg py-3 hover:bg-primary_dark mt-10 mx-auto text-white bg-primary">
+            <button
+              onClick={async () => {
+                await craeteAppointment(props.id, startDate, endDate);
+              }}
+              className=" w-[80%] mx-10  text-3xl text-center  rounded-lg py-3 hover:bg-primary_dark mt-10 text-white bg-primary"
+            >
               Reserve
-            </div>
+            </button>
           </div>
         </div>
       </div>
