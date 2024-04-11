@@ -24,7 +24,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please enter your telephone number'],
         trim: true,
-        match: [/^(\+\d{1,3}[- ]?)?\d{10}$/, 'Please enter a valid telephone number'],  
+        match: [
+            /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/, 
+            'Please enter a valid telephone number'
+        ],
     },
     role: {
         type: String,
