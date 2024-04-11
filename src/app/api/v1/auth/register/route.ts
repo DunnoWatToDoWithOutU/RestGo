@@ -1,3 +1,4 @@
+import connectDB from '@/libs/connectDB';
 import User from '@/models/User'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -5,6 +6,7 @@ export async function POST(
     req: NextRequest
 ) {
     try {
+        await connectDB();
         const { name, email, password, telephone, role } = await req.json();
         const lowerEmail = email.toLowerCase();
         const user = await User.create({

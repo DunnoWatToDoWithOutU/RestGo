@@ -1,8 +1,10 @@
+import connectDB from "@/libs/connectDB";
 import User from "@/models/User";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
     try {
+        await connectDB();
         const { email, password } = await req.json();
         const user = await User.findOne({ email: email }).select("+password");
         if (!user) {

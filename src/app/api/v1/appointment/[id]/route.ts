@@ -7,6 +7,7 @@ export async function GET( req: NextRequest,
     {params}: {params: {id: string}}) {
     console.log("params",params.id);
     try { 
+        await connectDB();
         const appointments = await Appointment.find({ user:params.id});
         return NextResponse.json(appointments, { status: 200 });
     } catch (err) {

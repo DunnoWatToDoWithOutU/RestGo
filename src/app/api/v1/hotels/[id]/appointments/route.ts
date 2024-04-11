@@ -4,6 +4,8 @@ import { getSession } from 'next-auth/react';
 import { authOptions } from '@/libs/authOptions';
 import { getServerSession } from 'next-auth';
 import exp from 'constants';
+import { connect } from 'http2';
+import connectDB from '@/libs/connectDB';
 
 
 
@@ -13,6 +15,7 @@ export const POST = async (
     {params}: {params: {id: string}}
 ) => {
     try {
+        await connectDB();
         const { startDate, endDate } = await req.json();
         const session = await getServerSession(authOptions);
         if (!session?.user) {
