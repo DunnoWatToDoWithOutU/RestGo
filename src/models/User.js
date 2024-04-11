@@ -58,6 +58,13 @@ userSchema.methods.matchPassword = async function(enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
 }
 
+userSchema.virtual(`Appointment`, {
+    ref: `appointments`,
+    localField: '_id',
+    foreignField: `users`,
+    justOne: false
+});
+
 const User = mongoose.models.User || mongoose.model('User', userSchema);
 
 export default User;

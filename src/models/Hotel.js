@@ -37,6 +37,14 @@ const hotelSchema = new mongoose.Schema({
     toObject: { virtuals: true } 
 });
 
+hotelSchema.virtual(`Appointment`, {
+    ref: `Appointment`,
+    localField: '_id',
+    foreignField: `Hotel`,
+    justOne: false
+});
+
+
 const Hotel = mongoose.models.Hotel || mongoose.model('Hotel', hotelSchema);
 
 export default Hotel;

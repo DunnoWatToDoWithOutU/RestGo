@@ -23,6 +23,11 @@ const appointmentSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    status:{
+        type:String,
+        enum:['pending','finish'],
+        default:'pending'
+    },
 }, {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },

@@ -7,3 +7,13 @@ export interface HotelProps{
     tags:string[],
     reviews:string[],
 }
+
+export interface AppointmnetProps{
+    _id:string;
+    user:string;
+    hotel:string;
+    startDate:Date;
+    endDate:Date;
+    status:string;
+    createdAt:Date;
+}
