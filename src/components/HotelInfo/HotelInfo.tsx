@@ -3,6 +3,7 @@ import craeteAppointment from "@/libs/createAppointment";
 import { HotelProps } from "../../../@types/type";
 import { ReviewCard } from "./ReviewCard";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export function HotelInfo(props: HotelProps) {
   const [startDate, setStartDate] = useState(new Date());
@@ -68,7 +69,16 @@ export function HotelInfo(props: HotelProps) {
             </div>
             <button
               onClick={async () => {
-                await craeteAppointment(props.id, startDate, endDate);
+                const response = await craeteAppointment(
+                  props.id,
+                  startDate,
+                  endDate
+                );
+                if (response == 200) {
+                  toast.success("Booking Success!");
+                } else {
+                  toast.error("Booking Fail");
+                }
               }}
               className=" w-[80%] mx-10  text-3xl text-center  rounded-lg py-3 hover:bg-primary_dark mt-10 text-white bg-primary"
             >

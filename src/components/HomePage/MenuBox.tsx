@@ -1,3 +1,7 @@
+"use client";
+
+import { toast } from "sonner";
+
 export function MenuBox() {
   return (
     <div className=" w-[42rem] text-[#15439C] relative p-3 px-5 rounded-md mx-auto h-40 bg-white border-2 border-primary">

@@ -6,12 +6,13 @@ import connectDB from "@/libs/connectDB";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/libs/authOptions";
 import NextAuthProvider from "@/providers/NextAuthProvider";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
   title: "RestGO",
-  description: "Web Application for someone who want to GO REST.",
+  description: "Web Application for someone who want to GO",
 };
 
 export default async function RootLayout({
@@ -23,6 +24,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Toaster expand={true} richColors />
         <NextAuthProvider session={nextAuthSession}>
           <NavBar></NavBar>
           {children}

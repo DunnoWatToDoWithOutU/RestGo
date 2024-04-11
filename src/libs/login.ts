@@ -1,3 +1,5 @@
+import { toast } from "sonner";
+
 export async function login(email: string, password: string) {
     const response = await fetch("https://rest-go.vercel.app/api/v1/auth/login",{
         method: "POST",
@@ -10,6 +12,7 @@ export async function login(email: string, password: string) {
         }),
     });
     if (!response.ok) {
+        
         throw new Error("Error failed to fetch");
     }
     const data = await response.json()

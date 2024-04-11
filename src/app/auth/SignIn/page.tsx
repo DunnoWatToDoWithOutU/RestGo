@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
+import { Toaster, toast } from "sonner";
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -42,7 +43,8 @@ export default function Home() {
           <button
             onClick={async () => {
               if (!email || !password) {
-                setError("Please fill in all fields");
+                toast.error("Please fill all fields");
+
                 return;
               }
               try {
@@ -52,9 +54,7 @@ export default function Home() {
                   retdirect: true,
                   callbackUrl: "/",
                 });
-              } catch (error) {
-                setError("Invalid credentials");
-              }
+              } catch (error) {}
             }}
             className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary_dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-primary"
           >

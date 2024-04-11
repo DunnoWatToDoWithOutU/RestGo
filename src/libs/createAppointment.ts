@@ -13,8 +13,7 @@ export default async function craeteAppointment(id:string,startDate:Date,endDate
     if (!response.ok) {
         throw new Error("Error failed to fetch");
     }
-    const data = await response.json();
-    return data;
+    return response.status;
 
     
 }
