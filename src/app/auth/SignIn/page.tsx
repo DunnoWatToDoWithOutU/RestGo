@@ -1,5 +1,5 @@
 "use client";
-import { login } from "@/libs/login";
+
 import Link from "next/link";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
@@ -7,6 +7,7 @@ import { signIn } from "next-auth/react";
 export default function Home() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   return (
     <div className="flex justify-center items-center h-[90vh]">
       <div className="bg-white p-10 my-auto rounded-lg shadow-xl w-[30rem]">
@@ -40,18 +41,26 @@ export default function Home() {
           </div>
           <button
             onClick={async () => {
-              await signIn("credentials", {
-                email: email,
-                password: password,
-                retdirect: true,
-                callbackUrl: "/",
-              });
+              if (!email || !password) {
+                setError("Please fill in all fields");
+                return;
+              }
+              try {
+                await signIn("credentials", {
+                  email: email,
+                  password: password,
+                  retdirect: true,
+                  callbackUrl: "/",
+                });
+              } catch (error) {
+                setError("Invalid credentials");
+              }
             }}
             className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary_dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-primary"
           >
             Sign In
           </button>
-
+          {error && <div className="text-red-500 text-sm">{error}</div>}
           <div className="flex justify-between items-center">
             <span className="text-sm">Dont have an account?</span>
             <Link href="/auth/sign-up">

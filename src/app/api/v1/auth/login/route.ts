@@ -4,11 +4,12 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
     try {
         const { email, password } = await req.json();
-        const user = await User.findOne({ email: email });
+        const user = await User.findOne({ email: email }).select("+password");
         if (!user) {
             return NextResponse.json({ error: "User not found" }, { status: 404 });
         }
-        if (!user.matchPassword(password)) {
+        const isMatch = await user.matchPassword(password);
+        if (!isMatch) {
             return NextResponse.json({ error: "Invalid password" }, { status: 401 });
         }
         return NextResponse.json({
@@ -18,7 +19,7 @@ export async function POST(req: NextRequest) {
             telephone: user.telephone,
             role: user.role,
         }, { status: 200 });
-    } catch (err: any) {
-        return NextResponse.json({ error: err.message }, { status: 500 });
+    } catch (err) {
+        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
     }
 }

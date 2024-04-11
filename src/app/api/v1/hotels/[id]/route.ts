@@ -9,6 +9,6 @@ export async function GET(
         const hotel = await Hotel.findById(params.id)
         return NextResponse.json(hotel, {status: 200})
     } catch (err) {
-        return NextResponse.json({error: err}, {status: 500})
+        return NextResponse.json({error: "Internal server error"}, {status: 500})
     }
 }

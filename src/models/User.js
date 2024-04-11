@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import { match } from 'assert';
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -12,10 +13,7 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Please enter your email'],
         unique: true,
         trim: true,
-        format: {
-            pattern: '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$',
-            message: 'Please enter a valid email',
-        },
+        match: [/^[\w-\.]+@([\w-]+\.)+[\w-]{2,}$/, 'Please enter a valid email'],
     },
     password: {
         type: String,
@@ -26,10 +24,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please enter your telephone number'],
         trim: true,
-        format: {
-            pattern: '^[0-9]{10}$',
-            message: 'Please enter a valid telephone number',
-        },
+        match: [
+            /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/, 
+            'Please enter a valid telephone number'
+        ],
     },
     role: {
         type: String,
@@ -54,7 +52,6 @@ userSchema.pre('save', async function(next) {
 
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
-    next();
 });
 
 userSchema.methods.matchPassword = async function(enteredPassword) {

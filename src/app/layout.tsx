@@ -3,6 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { NavBar } from "@/components/Navbar";
 import connectDB from "@/libs/connectDB";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/libs/authOptions";
+import NextAuthProvider from "@/providers/NextAuthProvider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -17,11 +20,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   await connectDB();
+  const nextAuthSession = await getServerSession(authOptions);
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NavBar></NavBar>
-        {children}
+        <NextAuthProvider session={nextAuthSession}>
+          <NavBar></NavBar>
+          {children}
+        </NextAuthProvider>
       </body>
     </html>
   );

@@ -16,10 +16,7 @@ const hotelSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please enter the telephone number'],
         trim: true,
-        format: {
-            pattern: '^[0-9]{10}$',
-            message: 'Please enter a valid telephone number',
-        },
+        match: [/^(\+\d{1,3}[- ]?)?\d{10}$/, 'Please enter a valid telephone number'],
     },
     price: {
         type: Number,
