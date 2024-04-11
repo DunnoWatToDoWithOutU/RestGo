@@ -1,8 +1,9 @@
 export interface HotelProps{
+    id:string;
     name:string;
-    price:number;
-    stars:number;
-    location:string;
-    pic:string;
-    index:number;
+    address:string,
+    telephone:string,
+    price:number,
+    tags:string[],
+    reviews:string[],
 }

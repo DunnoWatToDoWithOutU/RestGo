@@ -85,13 +85,22 @@ function BasicInfo(props: HotelProps) {
       <div className="pl-7 space-y-3">
         <p className="text-2xl font-semibold">
           Location :{" "}
-          <span className="font-normal text-xl">{props.location}</span>
+          <span className="font-normal text-xl">{props.address}</span>
         </p>
         <p className="text-2xl font-semibold">
-          Tel : <span className="font-normal text-xl">{props.location}</span>
+          Tel : <span className="font-normal text-xl">{props.telephone}</span>
         </p>
         <p className="text-2xl font-semibold">
-          Tags : <span className="font-normal text-xl">{props.location}</span>
+          Tags :
+          <span className="font-normal text-xl">
+            {props.tags?.map((tag, index) => {
+              return (
+                <span key={index} className="mx-1">
+                  {tag}
+                </span>
+              );
+            })}
+          </span>
         </p>
       </div>
     </div>

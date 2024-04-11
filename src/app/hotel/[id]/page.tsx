@@ -1,12 +1,12 @@
 import { HotelCard } from "@/components/HomePage/HotelCard";
-import { HotelData } from "@/components/HomePage/HotelList";
 import { HotelInfo } from "@/components/HotelInfo/HotelInfo";
+import { getHotel } from "@/libs/getHotel";
 
-export default function HotelDetailPage({
+export default async function HotelDetailPage({
   params,
 }: {
   params: { id: string };
 }) {
-  const hotel = HotelData[parseInt(params.id)];
+  const hotel = await getHotel({ id: params.id });
   return <HotelInfo {...hotel}></HotelInfo>;
 }

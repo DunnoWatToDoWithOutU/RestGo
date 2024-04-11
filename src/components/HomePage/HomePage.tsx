@@ -1,8 +1,10 @@
+import getHotels from "@/libs/getHotels";
 import { HotelList } from "./HotelList";
 import { MenuBox } from "./MenuBox";
 import { SearchBar } from "./SearchBar";
 
-export function HomePage() {
+export async function HomePage() {
+  const hotels = await getHotels();
   return (
     <div className="px-[10%] mt-20 text-center ">
       <p className=" text-3xl font-semibold">
@@ -10,7 +12,7 @@ export function HomePage() {
       </p>
       <SearchBar></SearchBar>
       <MenuBox></MenuBox>
-      <HotelList></HotelList>
+      <HotelList HotelData={hotels}></HotelList>
     </div>
   );
 }

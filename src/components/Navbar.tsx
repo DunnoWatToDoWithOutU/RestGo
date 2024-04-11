@@ -10,10 +10,11 @@ export async function NavBar() {
   // console.log(session);
   return (
     <div className="w-full h-16 px-[10%] bg-white shadow-md flex items-center justify-between">
-      <div
+      <Link
+        href="/"
         className="h-12 w-12 rounded-full bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(/logo.png)` }}
-      ></div>
+      ></Link>
       <div className="flex space-x-2">
         <Link
           href="/"
@@ -22,7 +23,7 @@ export async function NavBar() {
           My Booking
         </Link>
         <Link
-          href="/"
+          href="/hotellist"
           className="font-bold text p-2 px-4 transition-colors duration-200 bg-[#fafafa] hover:bg-[#f1f2ff] shadow-md rounded-full text-primary"
         >
           Hotel List
