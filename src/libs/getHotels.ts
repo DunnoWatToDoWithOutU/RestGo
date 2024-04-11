@@ -9,6 +9,5 @@ export default async function getHotels(){
         throw new Error("Error failed to fetch");
     }
     const data = await response.json()
-    console.log(data);
     return data;
 }

@@ -3,34 +3,37 @@ import { Rating } from "@mui/material";
 import { HotelProps } from "../../../@types/type";
 import { useRouter } from "next/navigation";
 
-export function HotelCard(props: HotelProps) {
+import { motion } from "framer-motion";
+
+export function HotelCard(props: { hotel: HotelProps }) {
   const router = useRouter();
   return (
-    <button
+    <motion.button
+      whileHover={{ left: 10 }}
       onClick={() => {
-        router.push(`/hotel/${props.id}`);
+        router.push(`/hotel/${props.hotel.id}`);
       }}
-      className="w-[100%] mx-auto text-[#15439C] p-3 shadow-lg text-start  space-x-6 bg-zinc-50 hover:bg-zinc-100 rounded-lg flex"
+      style={{
+        backgroundImage: `url(img/hotel/${props.hotel.id}/${props.hotel.pic[0]})`,
+      }}
+      className="w-[100%]   relative  bg-cover bg-center  h-48 mx-auto text-white p-3 shadow-lg text-start  space-x-6  hover:bg-zinc-100 rounded-2xl flex"
     >
-      <div
-        className="h-40 min-w-56  rounded-lg  bg-cover bg-center"
-        // style={{ backgroundImage: `url(${props.pic})` }}
-      ></div>
-      <div className="w-full flex justify-between">
+      <div className="absolute inset-0 bg-black rounded-2xl opacity-40 z-0"></div>
+      <div className="w-full flex justify-between z-10">
         <div className="min-w-[50%]  ">
-          <p className=" text-2xl font-bold">{props.name}</p>
+          <p className=" text-2xl font-bold">{props.hotel.name}</p>
           <div className="flex mt-2 -ml-1">
             <div
               className="h-7 w-7 bg-cover bg-center bg-no-repeat"
               style={{ backgroundImage: `url(/img/homepage/ping.png)` }}
             ></div>
-            <p className="mt-1 font-bold ml-1 text-lg">{props.address}</p>
+            <p className="mt-1 font-bold ml-1 text-lg">{props.hotel.address}</p>
           </div>
         </div>
         <div className="w-full text-end">
           <div className="flex h-full flex-col justify-between">
             <div>
-              <div className=" font-bold text-3xl ">{props.price} ฿</div>
+              <div className=" font-bold text-3xl ">{props.hotel.price} ฿</div>
               <p>/ night</p>
             </div>
             <div className="flex space-x-3 text-lg font-bold">
@@ -46,6 +49,6 @@ export function HotelCard(props: HotelProps) {
           </div>
         </div>
       </div>
-    </button>
+    </motion.button>
   );
 }

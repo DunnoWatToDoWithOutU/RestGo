@@ -6,6 +6,7 @@ export interface HotelProps{
     price:number,
     tags:string[],
     reviews:string[],
+    pic:string[],
 }
 
 export interface AppointmnetProps{
