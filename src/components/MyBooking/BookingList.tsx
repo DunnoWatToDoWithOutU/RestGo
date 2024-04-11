@@ -9,7 +9,7 @@ import { authOptions } from "@/libs/authOptions";
 export async function BookingList() {
   const session = await getServerSession(authOptions);
   if (!session?.user) {
-    return <div></div>;
+    return <div>Please Login</div>;
   }
   const bookingDatas: AppointmnetProps[] = await getAppointments(
     session.user._id

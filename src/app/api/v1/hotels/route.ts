@@ -12,7 +12,8 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
     try {
-        const { name, address, telephone, price, tag } = await req.json();
+        const { name, address, telephone, price, tag, pic } = await req.json();
+        console.log(name, address, telephone, price, tag, pic);
         const hotel = await Hotel.create({
             name: name,
             address: address,
@@ -20,9 +21,11 @@ export async function POST(req: NextRequest) {
             price: price,
             tag: tag ? tag : [],
             review: [],
+            pic:pic,
         });
         return NextResponse.json(hotel, { status: 201 });
     } catch (err) {
+        console.log(err);
         return NextResponse.json({ error: "Internal server error" }, { status: 500 });
     }
 }

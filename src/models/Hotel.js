@@ -32,18 +32,14 @@ const hotelSchema = new mongoose.Schema({
             reviewText: String
         }],
     },
+    pic:{
+        type:[String],
+        required: [true, 'Please enter the picture'],
+    }
 }, { 
     toJSON: { virtuals: true }, 
     toObject: { virtuals: true } 
 });
-
-hotelSchema.virtual(`Appointment`, {
-    ref: `Appointment`,
-    localField: '_id',
-    foreignField: `Hotel`,
-    justOne: false
-});
-
 
 const Hotel = mongoose.models.Hotel || mongoose.model('Hotel', hotelSchema);
 

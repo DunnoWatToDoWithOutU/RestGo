@@ -9,7 +9,7 @@ export function HotelInfo(props: HotelProps) {
   const [endDate, setEndDate] = useState(new Date());
   return (
     <div className=" px-[10%] mt-10   text-[#15439C]">
-      <ImageHotel pic={props.pic}></ImageHotel>
+      {/* <ImageHotel pic={props.pic}></ImageHotel> */}
       <div className="  my-10 flex w-full space-x-4">
         <div className="w-2/3 space-y-4 ">
           <BasicInfo {...props}></BasicInfo>
