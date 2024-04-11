@@ -2,6 +2,7 @@ import Appointment from "@/models/Appointment";
 import {  NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/libs/authOptions";
+import connectDB from "@/libs/connectDB";
 
 export async function GET( req: NextRequest,
     {params}: {params: {id: string}}) {
