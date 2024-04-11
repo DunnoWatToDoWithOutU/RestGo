@@ -38,7 +38,7 @@ export function BookingCard(props: {
       style={{
         backgroundImage: `url(img/hotel/${props.hotel.id}/${props.hotel.pic[0]})`,
       }}
-      className="flex text-white relative text-lg font-bold p-2 px-4 w-full h-40 border-2 justify-between rounded-2xl border-[#15439C]"
+      className="flex bg-cover bg-center text-white relative text-lg font-bold p-2 px-4 w-full h-40 border-2 justify-between rounded-2xl border-[#15439C]"
     >
       <div className="absolute inset-0 bg-black rounded-2xl opacity-40 z-0"></div>
       <div className="flex flex-col justify-between relative z-10">

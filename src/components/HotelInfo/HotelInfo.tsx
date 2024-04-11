@@ -9,7 +9,7 @@ export function HotelInfo(props: HotelProps) {
   const [endDate, setEndDate] = useState(new Date());
   return (
     <div className=" px-[10%] mt-10   text-[#15439C]">
-      {/* <ImageHotel pic={props.pic}></ImageHotel> */}
+      <ImageHotel pic={props.pic} id={props.id}></ImageHotel>
       <div className="  my-10 flex w-full space-x-4">
         <div className="w-2/3 space-y-4 ">
           <BasicInfo {...props}></BasicInfo>
@@ -81,23 +81,55 @@ export function HotelInfo(props: HotelProps) {
   );
 }
 
-function ImageHotel(props: { pic: string }) {
+function ImageHotel(props: { pic: string[]; id: string }) {
   return (
     <div className="flex h-80  w-full space-x-4">
       <div
         className=" w-2/5 h-full bg-zinc-600 rounded-lg bg-cover bg-center"
-        style={{ backgroundImage: `url(${props.pic})` }}
+        style={{
+          backgroundImage: `url(img/hotel/${props.id}/${props.pic[0]})`,
+        }}
       ></div>
       <div className=" w-3/5 h-full  space-y-4">
         <div className="h-[9.5rem] w-full  space-x-4 flex">
-          <div className="w-1/3 h-full bg-zinc-400 rounded-md"></div>
-          <div className="w-1/3 h-full bg-zinc-400 rounded-md"></div>
-          <div className="w-1/3 h-full bg-zinc-400 rounded-md"></div>
+          <div
+            className="w-1/3 h-full  rounded-md bg-cover bg-center"
+            style={{
+              backgroundImage: `url(img/hotel/${props.id}/${props.pic[1]})`,
+            }}
+          ></div>
+          <div
+            className="w-1/3 h-full  rounded-md bg-cover bg-center"
+            style={{
+              backgroundImage: `url(img/hotel/${props.id}/${props.pic[2]})`,
+            }}
+          ></div>
+          <div
+            className="w-1/3 h-full  rounded-md bg-cover bg-center"
+            style={{
+              backgroundImage: `url(img/hotel/${props.id}/${props.pic[3]})`,
+            }}
+          ></div>
         </div>
         <div className="h-[9.5rem] w-full  space-x-4 flex">
-          <div className="w-1/3 h-full bg-zinc-400 rounded-md"></div>
-          <div className="w-1/3 h-full bg-zinc-400 rounded-md"></div>
-          <div className="w-1/3 h-full bg-zinc-400 rounded-md"></div>
+          <div
+            className="w-1/3 h-full  rounded-md bg-cover bg-center"
+            style={{
+              backgroundImage: `url(img/hotel/${props.id}/${props.pic[4]})`,
+            }}
+          ></div>
+          <div
+            className="w-1/3 h-full  rounded-md bg-cover bg-center"
+            style={{
+              backgroundImage: `url(img/hotel/${props.id}/${props.pic[5]})`,
+            }}
+          ></div>
+          <div
+            className="w-1/3 h-full  rounded-md bg-cover bg-center"
+            style={{
+              backgroundImage: `url(img/hotel/${props.id}/${props.pic[6]})`,
+            }}
+          ></div>
         </div>
       </div>
     </div>
