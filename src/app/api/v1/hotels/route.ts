@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
             review: [],
         });
         return NextResponse.json(hotel, { status: 201 });
-    } catch (err:any) {
-        return NextResponse.json({ error: err.message }, { status: 500 });
+    } catch (err) {
+        return NextResponse.json({ error: "Internal server error" }, { status: 500 });
     }
 }

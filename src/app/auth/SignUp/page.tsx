@@ -1,7 +1,7 @@
 "use client";
 
 import { register } from "@/libs/register";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function SignUp() {
@@ -10,6 +10,38 @@ export default function SignUp() {
   const [telephone, setTelephone] = useState("");
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
+  const [error, setError] = useState("");
+
+  const router = useRouter();
+
+  const handleRegister = async () => {
+    if (password !== rePassword) {
+      setError("Password does not match");
+      return;
+    }
+    if (!name) {
+      setError("Name is required");
+      return;
+    }
+    if (!email) {
+      setError("Email is required");
+      return;
+    }
+    if (!telephone) {
+      setError("Telephone is required");
+      return;
+    }
+    if (!password) {
+      setError("Password is required");
+      return;
+    }
+    const response = await register(name, email, telephone, password);
+    if (response.error) {
+      setError(response.error);
+      return;
+    }
+    router.push("/auth/SignIn");
+  };
 
   return (
     <div className="flex justify-center items-center h-[90vh]">
@@ -70,7 +102,7 @@ export default function SignUp() {
           </div>
           <div className="space-y-1">
             <label htmlFor="password" className="block text-sm font-medium">
-              Re-Password
+              Confirm Password
             </label>
             <input
               onChange={(e) => {
@@ -82,19 +114,12 @@ export default function SignUp() {
             />
           </div>
           <button
-            onClick={async () => {
-              const response = await register(name, email, telephone, password);
-              console.log(response);
-              if (response.status === "success") {
-                alert("register success");
-              } else {
-                alert("Please fill correct information");
-              }
-            }}
+            onClick={handleRegister}
             className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary_dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-primary"
           >
             Sign Up
           </button>
+          {error && <p className="text-red-500 text-sm">{error}</p>}
         </div>
       </div>
     </div>

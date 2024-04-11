@@ -15,7 +15,6 @@ export const authOptions: AuthOptions = {
             if(!credentials)   return null;
             try{
                 const user = await login(credentials.email, credentials.password);
-                console.log(user);
                 return user
             } catch(err){
                 console.error(err);
