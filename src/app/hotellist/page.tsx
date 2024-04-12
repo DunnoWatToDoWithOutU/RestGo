@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { TagContainer } from "@/components/TagFilter/TagContainer";
 
 export default function HotelListPage() {
   return (
@@ -13,6 +14,7 @@ export default function HotelListPage() {
         </input>
         <button className="absolute absolute top-1/2 right-5 -translate-x-1/2 -translate-y-1/2 hover:scale-110"> <Image src={`/icon/searchIcon.png`} alt="search Icon" width={20} height={20}></Image></button>
       </div>
+      <TagContainer></TagContainer>
     </main>
   );
 }
