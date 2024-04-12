@@ -1,6 +1,6 @@
 import getHotels from "@/libs/getHotels";
 import { HotelList } from "./HotelList";
-import { MenuBox } from "./MenuBox";
+import { MenuBox } from "./MenuBox/MenuBox";
 import { SearchBar } from "./SearchBar";
 
 export async function HomePage() {

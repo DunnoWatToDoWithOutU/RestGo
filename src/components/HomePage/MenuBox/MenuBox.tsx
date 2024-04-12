@@ -1,8 +1,30 @@
 "use client";
 
 import { toast } from "sonner";
+import { useState, useRef } from "react";
+import { AddPeoplePopup } from "./AddPeoplePopup";
 
 export function MenuBox() {
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [showAddPeople, setShowAddPeople] = useState(false);
+  const addPeopleButtonRef = useRef(null);
+
+  const handleCheckIn = () => {
+    
+  }
+
+  const handleCheckOut = () => {
+    
+  }
+
+  const handleAddPeople = () => {
+    setShowAddPeople(true);
+  }
+
+  const handleCloseAddPeople = () => {
+    setShowAddPeople(false);
+  }
+
   return (
     <div className=" w-[42rem] text-[#15439C] relative p-3 px-5 rounded-md mx-auto h-40 bg-white border-2 border-primary">
       <div className=" flex">
@@ -23,13 +45,22 @@ export function MenuBox() {
             ></div>
           </button>
         </div>
-        <button className="h-16 w-[50%] flex ml-2 hover:bg-zinc-50 bg-white border-2 relative text-center items-center  border-[#26CBFC] rounded-md">
+        <button 
+          className="h-16 w-[50%] flex ml-2 hover:bg-zinc-50 bg-white border-2 relative text-center items-center  border-[#26CBFC] rounded-md"
+          onClick={handleAddPeople}
+          ref={addPeopleButtonRef}
+          >
           <div
             className="h-7  w-7 bg-contain bg-center bg-no-repeat  absolute left-5"
             style={{ backgroundImage: `url(/img/addpeople.png)` }}
           ></div>
           <p className="mx-auto font-semibold">Add People</p>
         </button>
+          {showAddPeople && (
+          <div className="absolute top-[50%] right-5 z-50">
+            <AddPeoplePopup onClose={handleCloseAddPeople}/>
+          </div>)
+          }
       </div>
       <div className="flex justify-center w-full mt-5  space-x-3">
         <p className="py-[0.125rem] bg-white hover:bg-zinc-50 text-sm px-4 rounded-full border-2 border-[#26CBFC]">
