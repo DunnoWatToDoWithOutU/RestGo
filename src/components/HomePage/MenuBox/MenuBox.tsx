@@ -7,7 +7,21 @@ export function MenuBox() {
   const [showCalendar, setShowCalendar] = useState(false);
   const [showAddPeople, setShowAddPeople] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const addPeopleButtonRef = useRef(null);
+
+  const [peopleValues, setPeopleValues] = useState({
+    adults: 1,
+    children: 0,
+    babies: 0,
+    rooms: 1,
+  });
+
+  const handlePeopleSubmit = (values: any) => {
+    setPeopleValues(values);
+    setIsSubmitted(true);
+  };
+
 
   const handleCheckIn = () => {
     setShowAddPeople(false);
@@ -18,6 +32,7 @@ export function MenuBox() {
   };
 
   const handleAddPeople = () => {
+    // console.log("Add people clicked");
     setShowCalendar(false);
     setShowAddPeople(true);
   };
@@ -65,11 +80,13 @@ export function MenuBox() {
             className="h-7 w-7 bg-contain bg-center bg-no-repeat absolute left-5"
             style={{ backgroundImage: `url(/img/addpeople.png)` }}
           ></div>
-          <p className="mx-auto font-semibold">Add People</p>
+          <p className="mx-auto font-semibold">
+            {isSubmitted ? `${peopleValues.adults + peopleValues.children + peopleValues.babies} People, ${peopleValues.rooms} Rooms` : 'Add People'}
+          </p>
         </button>
         {showAddPeople && (
           <div className="absolute top-[50%] right-5 z-50">
-            <AddPeoplePopup onClose={handleCloseAddPeople} />
+            <AddPeoplePopup onClose={handleCloseAddPeople} onSubmit={handlePeopleSubmit}/>
           </div>
         )}
       </div>

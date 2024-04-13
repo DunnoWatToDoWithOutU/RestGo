@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
-export const AddPeoplePopup: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+// export const AddPeoplePopup: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+export const AddPeoplePopup: React.FC<{ onClose: () => void; onSubmit: (values: any) => void }> = ({ onClose, onSubmit }) => {
   const [adults, setAdults] = useState(1);
   const [children, setChildren] = useState(0);
   const [babies, setBabies] = useState(0);
@@ -49,15 +50,18 @@ export const AddPeoplePopup: React.FC<{ onClose: () => void }> = ({ onClose }) =
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Do something with the form data (adults, children, babies, rooms)
+    const values = { adults, children, babies, rooms };
+    onSubmit(values);
+    onClose();
+    setIsSubmitted(true);
+
+    // ... (existing console logs)
     console.log('Adults:', adults);
     console.log('Children:', children);
     console.log('Babies:', babies);
     console.log('Rooms:', rooms);
     console.log('Is Submitted:', isSubmitted);
     // Close the popup
-    onClose();
-    setIsSubmitted(true);
   };
 
   return (
@@ -83,7 +87,7 @@ export const AddPeoplePopup: React.FC<{ onClose: () => void }> = ({ onClose }) =
           </svg>
         </button>
         <h2 className="text-xl font-bold mb-4">
-          {isSubmitted ? `${adults} Adults, ${children} Children, ${babies} Babies, ${rooms} Rooms` : 'Add People'}
+          Add People 
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4 flex items-center flex-row space-x-4">
