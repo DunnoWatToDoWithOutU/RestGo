@@ -26,7 +26,7 @@ export function MenuBox() {
     setShowAddPeople(false);
   };
 
-  const handleFilterClick = (filter:any) => {
+  const handleFilterClick = (filter: any) => {
     setSelectedFilter(filter === selectedFilter ? null : filter);
   };
 

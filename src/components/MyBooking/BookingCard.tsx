@@ -54,7 +54,7 @@ export function BookingCard(props: {
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-between">
+      <div className="flex flex-col justify-between z-10">
         <div className="flex space-x-1 justify-end">
           <div className="h-5 w-5 bg-zinc-300"></div>
           <div className="h-5 w-5 bg-zinc-300"></div>
