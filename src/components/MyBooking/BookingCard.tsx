@@ -2,7 +2,7 @@ import Link from "next/link";
 import { AppointmnetProps, HotelProps } from "../../../@types/type";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 function formatDate(dateString: string) {
   const months = [
