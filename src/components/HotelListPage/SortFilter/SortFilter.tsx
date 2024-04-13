@@ -1,4 +1,5 @@
-import React from 'react';
+'use client'
+import React, { useState } from 'react';
 import Image from 'next/image';
 
 const SortItem = [
@@ -21,10 +22,20 @@ const SortItem = [
 ];
 
 export default function SortFilter() {
+  const [selectedButtonIndexes, setSelectedButtonIndexes] = useState<number[]>([]);
+
+  const handleSortClick = (index: number) => {
+    if (selectedButtonIndexes.includes(index)) {
+      setSelectedButtonIndexes(selectedButtonIndexes.filter(i => i !== index));
+    } else {
+      setSelectedButtonIndexes([...selectedButtonIndexes, index]);
+    }
+  };
+
   return (
-    <div className=" mx-auto flex mt-1 text-sm text-[#15439C] rounded-md border-2 border-[#15439C] items-center font-bold">
+    <div className=" mx-auto flex mt-1 text-sm text-[#15439C] rounded-md border-2 border-[#2465E2] items-center font-bold">
       <div className="flex px-3 space-x-2 ">
-        <p>Sort By</p>
+       <p className='text-lg mx-2'>Sort By</p>
         <div className="h-6 w-6 bg-zinc-300 rounded-md flex items-center justify-center">
         <Image src={"/sortingIcon/sortByIcon.png"} alt="Sort By Icon" width={20} height={20} />
       </div>
@@ -33,12 +44,17 @@ export default function SortFilter() {
         return (
           <button
             key={index}
-            className="flex border-l-2 border-black px-5 py-1  space-x-2 hover:bg-slate-100 "
+            className="flex border-l-2 border-zinc-200 space-x-2 hover:bg-slate-100 "
+            onClick={() => handleSortClick(index)}
           >
-            <p>{item.name}</p>
+            <div className={`${selectedButtonIndexes.includes(index) ? 'bg-[#D9D9D980] rounded-md  mx-3 px-2 py-0.5 ' : 'mx-5 my-2'} flex `}>
+              <p className='text-xl mx-2'>{item.name}</p>
             <div className="h-6 w-6 ">
-            <Image src={item.img} alt={`${item.name} Icon`} width={22} height={22} />
+            <Image src={item.img} alt={`${item.name} Icon`} width={22} height={22} className='my-1'/>
             </div>
+
+            </div>
+            
           </button>
         );
       })}
