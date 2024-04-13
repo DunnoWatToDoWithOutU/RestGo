@@ -13,7 +13,7 @@ const mockTags = [
 
 export function TagContainer() {
   return (
-    <div className="flex flex-row items-center rounded-md border border-[#2465E2] rounded-xl p-2 my-3 mx-12 border-4">
+    <div className="flex flex-row items-center border-[#2465E2] rounded-xl p-2 my-3 mx-12 border-2">
       <span className="font-bold text-[9pt] sm:text-[11pt] md:text-[14pt] text-[#15439C] whitespace-nowrap mr-3">
         Tag Filter:{" "}
       </span>
