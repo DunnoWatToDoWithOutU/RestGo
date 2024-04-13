@@ -32,14 +32,14 @@ export async function NavBar() {
       {session?.user ? (
         <div className="flex space-x-3">
           <button
-            className="w-7 h-7 hover:scale-110 transition-all duration-200 rounded-full bg-contain bg-center bg-no-repeat"
+            className="self-center w-7 h-7 hover:scale-110 transition-all duration-200 rounded-full bg-contain bg-center bg-no-repeat"
             style={{ backgroundImage: `url(/img/bell.png)` }}
           ></button>
           <button
-            className="w-7 hover:scale-110  transition-all duration-200 h-7 rounded-full bg-contain bg-center bg-no-repeat"
+            className="self-center w-7 hover:scale-110  transition-all duration-200 h-7 rounded-full bg-contain bg-center bg-no-repeat"
             style={{ backgroundImage: `url(/img/user.png)` }}
           ></button>
-          <p className="text-primary">{session.user?.name}</p>
+          <p className="text-primary self-center mr-2">{session.user?.name}</p>
           <Logout></Logout>
         </div>
       ) : (
