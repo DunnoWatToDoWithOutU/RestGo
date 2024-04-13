@@ -16,6 +16,4 @@ export default async function craeteAppointment(id:string,startDate:Date,endDate
         throw new Error("Error failed to fetch");
     }
     return response.status;
-
-    
 }
