@@ -19,7 +19,7 @@ export function TagContainer() {
       </span>
       <div className="flex flex-row justify-evenly">
         {mockTags.map((tag, index) => (
-          <TagPiece key={index} image={`Tags/${tag[0]}`} type={tag[1]} />
+          <TagPiece key={index} image={`/Tags/${tag[0]}`} type={tag[1]} />
         ))}
       </div>
     </div>
