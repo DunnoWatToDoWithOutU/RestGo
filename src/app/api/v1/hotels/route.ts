@@ -2,7 +2,7 @@ import connectDB from '@/libs/connectDB';
 import Hotel from '@/models/Hotel';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET() {
+export async function GET(req: NextRequest) {
     try {
         await connectDB();
         const hotels = await Hotel.find();
@@ -16,7 +16,6 @@ export async function POST(req: NextRequest) {
     try {
         await connectDB();
         const { name, address, telephone, price, tag, pic } = await req.json();
-        console.log(name, address, telephone, price, tag, pic);
         const hotel = await Hotel.create({
             name: name,
             address: address,
@@ -28,7 +27,6 @@ export async function POST(req: NextRequest) {
         });
         return NextResponse.json(hotel, { status: 201 });
     } catch (err) {
-        console.log(err);
         return NextResponse.json({ error: "Internal server error" }, { status: 500 });
     }
 }

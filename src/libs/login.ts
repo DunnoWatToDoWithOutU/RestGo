@@ -1,7 +1,5 @@
-import { toast } from "sonner";
-
 export async function login(email: string, password: string) {
-    const response = await fetch("https://rest-go.vercel.app/api/v1/auth/login",{
+    const response = await fetch(`http://localhost:3000/api/v1/auth/login`,{
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -10,6 +8,7 @@ export async function login(email: string, password: string) {
             email: email,
             password: password,
         }),
+        credentials: "include",
     });
     if (!response.ok) {
         

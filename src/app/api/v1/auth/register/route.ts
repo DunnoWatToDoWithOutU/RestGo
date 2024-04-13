@@ -21,6 +21,5 @@ export async function POST(
         for (const key in err.errors) {
             return NextResponse.json({ error: err.errors[key].message }, { status: 400 });
         }
-        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
     }
 }
