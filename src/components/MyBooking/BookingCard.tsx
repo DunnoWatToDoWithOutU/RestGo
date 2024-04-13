@@ -2,7 +2,6 @@ import Link from "next/link";
 import { AppointmnetProps, HotelProps } from "../../../@types/type";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
 
 function formatDate(dateString: string) {
   const months = [
@@ -36,13 +35,12 @@ export function BookingCard(props: {
   const startDate = formatDate(props.appointment.startDate); // @ts-ignore;
   const endDate = formatDate(props.appointment.endDate); // @ts-ignore;
   const createdAt = formatDate(props.appointment.createdAt);
-  const router = useRouter();
   return (
     <motion.button
       whileHover={{ left: 10 }}
-      onClick={() => {
-        router.push(`/hotel/${props.hotel.id}`);
-      }}
+      // onClick={() => {
+      //   router.push(`/hotel/${props.hotel.id}`);
+      // }}
       // style={{
       //   backgroundImage: `url(img/hotel/${props.hotel.id}/${props.hotel.pic[0]})`,
       // }}
