@@ -1,14 +1,18 @@
 const SortItem = [
-  {
-    name: "Name",
-    img: "/",
-  },
-  {
+   {
     name: "Price",
     img: "/",
   },
   {
     name: "Rating",
+    img: "/",
+  },
+  {
+    name: "Distance",
+    img: "/",
+  },
+  {
+    name: "Name",
     img: "/",
   },
 ];
