@@ -4,6 +4,7 @@ import { HotelProps } from "../../../@types/type";
 import { ReviewCard } from "./ReviewCard";
 import { useState } from "react";
 import { toast } from "sonner";
+import Image from "next/image";
 
 export function HotelInfo(props: HotelProps) {
   const [startDate, setStartDate] = useState(new Date());
@@ -94,52 +95,59 @@ export function HotelInfo(props: HotelProps) {
 function ImageHotel(props: { pic: string[]; id: string }) {
   return (
     <div className="flex h-80  w-full space-x-4">
-      <div
+      <Image
+        alt="hotel"
+        src={`/img/hotel/${props.id}/${props.pic[0]}`}
         className=" w-2/5 h-full bg-zinc-600 rounded-lg bg-cover bg-center"
-        style={{
-          backgroundImage: `url(img/hotel/${props.id}/${props.pic[0]})`,
-        }}
-      ></div>
+        width={500}
+        height={500}
+      ></Image>
       <div className=" w-3/5 h-full  space-y-4">
-        <div className="h-[9.5rem] w-full  space-x-4 flex">
-          <div
+        <div className="h-[9.5rem] relative w-full  space-x-4 flex">
+          <Image
+            alt="hotel"
+            src={`/img/hotel/${props.id}/${props.pic[1]}`}
             className="w-1/3 h-full  rounded-md bg-cover bg-center"
-            style={{
-              backgroundImage: `url(img/hotel/${props.id}/${props.pic[1]})`,
-            }}
-          ></div>
-          <div
+            width={500}
+            height={500}
+          ></Image>
+          <Image
+            alt="hotel"
+            src={`/img/hotel/${props.id}/${props.pic[2]}`}
             className="w-1/3 h-full  rounded-md bg-cover bg-center"
-            style={{
-              backgroundImage: `url(img/hotel/${props.id}/${props.pic[2]})`,
-            }}
-          ></div>
-          <div
+            width={500}
+            height={500}
+          ></Image>
+          <Image
+            alt="hotel"
+            src={`/img/hotel/${props.id}/${props.pic[3]}`}
             className="w-1/3 h-full  rounded-md bg-cover bg-center"
-            style={{
-              backgroundImage: `url(img/hotel/${props.id}/${props.pic[3]})`,
-            }}
-          ></div>
+            width={500}
+            height={500}
+          ></Image>
         </div>
-        <div className="h-[9.5rem] w-full  space-x-4 flex">
-          <div
+        <div className="h-[9.5rem] relative w-full  space-x-4 flex">
+          <Image
+            alt="hotel"
+            src={`/img/hotel/${props.id}/${props.pic[4]}`}
             className="w-1/3 h-full  rounded-md bg-cover bg-center"
-            style={{
-              backgroundImage: `url(img/hotel/${props.id}/${props.pic[4]})`,
-            }}
-          ></div>
-          <div
+            width={500}
+            height={500}
+          ></Image>
+          <Image
+            alt="hotel"
+            src={`/img/hotel/${props.id}/${props.pic[5]}`}
             className="w-1/3 h-full  rounded-md bg-cover bg-center"
-            style={{
-              backgroundImage: `url(img/hotel/${props.id}/${props.pic[5]})`,
-            }}
-          ></div>
-          <div
+            width={500}
+            height={500}
+          ></Image>
+          <Image
+            alt="hotel"
+            src={`/img/hotel/${props.id}/${props.pic[6]}`}
             className="w-1/3 h-full  rounded-md bg-cover bg-center"
-            style={{
-              backgroundImage: `url(img/hotel/${props.id}/${props.pic[6]})`,
-            }}
-          ></div>
+            width={500}
+            height={500}
+          ></Image>
         </div>
       </div>
     </div>
