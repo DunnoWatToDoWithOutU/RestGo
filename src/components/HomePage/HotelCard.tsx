@@ -2,6 +2,7 @@
 import { Rating } from "@mui/material";
 import { HotelProps } from "../../../@types/type";
 import { useRouter } from "next/navigation";
+import StarIcon from "@mui/icons-material/Star";
 
 import { motion } from "framer-motion";
 
@@ -31,7 +32,7 @@ export function HotelCard(props: { hotel: HotelProps }) {
           </div>
         </div>
         <div className="w-full text-end">
-          <div className="flex h-full flex-col justify-between">
+          <div className="flex h-40 flex-col justify-between">
             <div>
               <div className=" font-bold text-3xl ">{props.hotel.price} ฿</div>
               <p>/ night</p>
@@ -40,9 +41,9 @@ export function HotelCard(props: { hotel: HotelProps }) {
               <Rating
                 precision={0.1}
                 name="half-rating-read"
-                //value={props.stars}
+                //value={5}
                 readOnly
-                className="ml-auto text-[#15439C]"
+                className="ml-auto text-[#fff] "
               />
               {/* <p>{props.stars}</p> */}
             </div>

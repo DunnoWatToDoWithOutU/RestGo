@@ -15,7 +15,7 @@ export async function NavBar() {
         className="h-12 w-12 rounded-full bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(/logo.png)` }}
       ></Link>
-      <div className="flex space-x-2">
+      <div className=" absolute left-[41%] flex space-x-2">
         <Link
           href="/mybooking"
           className="font-bold text p-2 px-4 transition-colors duration-200 bg-[#fafafa] hover:bg-[#f1f2ff] shadow-md rounded-full text-primary"

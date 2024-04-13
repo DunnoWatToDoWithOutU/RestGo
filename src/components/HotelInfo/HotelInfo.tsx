@@ -45,7 +45,7 @@ export function HotelInfo(props: HotelProps) {
                   onChange={(e) => {
                     setStartDate(new Date(e.target.value));
                   }}
-                  className="h-10 rounded-lg w-full bg-white border-2 border-[#15439C]"
+                  className="h-10 px-2 rounded-lg w-full bg-white border-2 border-[#15439C]"
                 ></input>
               </div>
               <div className="flex mt-4 space-x-2 justify-start items-center">
@@ -55,7 +55,7 @@ export function HotelInfo(props: HotelProps) {
                     setEndDate(new Date(e.target.value));
                   }}
                   type="date"
-                  className="h-10 rounded-lg w-full bg-white border-2 border-[#15439C]"
+                  className="h-10 px-2 rounded-lg w-full bg-white border-2 border-[#15439C]"
                 ></input>
               </div>
               <p className=" mt-5    mb-5 text-start font-bold text-lg">
