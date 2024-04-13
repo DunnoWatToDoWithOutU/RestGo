@@ -1,7 +1,5 @@
 import Link from "next/link";
 import { AppointmnetProps, HotelProps } from "../../../@types/type";
-import Image from "next/image";
-import { motion } from "framer-motion";
 
 function formatDate(dateString: string) {
   const months = [
@@ -36,23 +34,12 @@ export function BookingCard(props: {
   const endDate = formatDate(props.appointment.endDate); // @ts-ignore;
   const createdAt = formatDate(props.appointment.createdAt);
   return (
-    <motion.button
-      whileHover={{ left: 10 }}
-      // onClick={() => {
-      //   router.push(`/hotel/${props.hotel.id}`);
-      // }}
-      // style={{
-      //   backgroundImage: `url(img/hotel/${props.hotel.id}/${props.hotel.pic[0]})`,
-      // }}
-      className="w-[100%]   relative  bg-cover bg-center  h-48 mx-auto text-white p-3 shadow-lg text-start hover:bg-zinc-100 rounded-2xl flex overflow-hidden"
+    <div
+      style={{
+        backgroundImage: `url(img/hotel/${props.hotel.id}/${props.hotel.pic[0]})`,
+      }}
+      className="flex bg-cover bg-center text-white relative text-lg font-bold p-2 px-4 w-full h-40 border-2 justify-between rounded-2xl border-[#15439C]"
     >
-      <Image
-        alt="hotel"
-        src={`/img/hotel/${props.hotel.id}/${props.hotel.pic[0]}`}
-        objectFit="cover"
-        layout="fill"
-        className="absolute w-full left-0"
-      />
       <div className="absolute inset-0 bg-black rounded-2xl opacity-40 z-0"></div>
       <div className="flex flex-col justify-between relative z-10">
         <div>
@@ -83,6 +70,6 @@ export function BookingCard(props: {
           </Link>
         </div>
       </div>
-    </motion.button>
+    </div>
   );
 }
