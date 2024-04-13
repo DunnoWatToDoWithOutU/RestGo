@@ -25,8 +25,8 @@ export default function SortFilter() {
     <div className=" mx-auto flex mt-1 text-sm text-[#15439C] rounded-md border-2 border-[#15439C] items-center font-bold">
       <div className="flex px-3 space-x-2 ">
         <p>Sort By</p>
-        <div className="h-6 w-6 bg-zinc-300"> 
-        <Image src={"/sortingIcon/sortByIcon.png"} alt="Sort By Icon" width={24} height={24} />
+        <div className="h-6 w-6 bg-zinc-300 rounded-md flex items-center justify-center">
+        <Image src={"/sortingIcon/sortByIcon.png"} alt="Sort By Icon" width={20} height={20} />
       </div>
       </div>
       {SortItem.map((item, index) => {
@@ -37,7 +37,7 @@ export default function SortFilter() {
           >
             <p>{item.name}</p>
             <div className="h-6 w-6 ">
-            <Image src={item.img} alt={`${item.name} Icon`} width={200} height={200} />
+            <Image src={item.img} alt={`${item.name} Icon`} width={22} height={22} />
             </div>
           </button>
         );
