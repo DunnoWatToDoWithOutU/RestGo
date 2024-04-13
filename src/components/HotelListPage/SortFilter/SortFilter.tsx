@@ -47,7 +47,7 @@ export default function SortFilter() {
             className="flex border-l-2 border-zinc-200 space-x-2 hover:bg-slate-100 "
             onClick={() => handleSortClick(index)}
           >
-            <div className={`${selectedButtonIndexes.includes(index) ? 'bg-[#D9D9D980] rounded-md  mx-3 my-2 px-2 py-0.5 ' : 'mx-5 my-2'} flex `}>
+            <div className={`${selectedButtonIndexes.includes(index) ? 'bg-[#D9D9D980] rounded-md  mx-3 my-2 px-2 py-0.5 ' : 'mx-5 my-2.5'} flex `}>
               <p className='text-xl mx-2'>{item.name}</p>
             <div className="h-6 w-6 ">
             <Image src={item.img} alt={`${item.name} Icon`} width={22} height={22} className='my-1'/>
