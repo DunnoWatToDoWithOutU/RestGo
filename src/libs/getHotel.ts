@@ -1,9 +1,10 @@
-export async function getHotel(params: { id: string }) {
-  const response = await fetch(`https://rest-go.vercel.app/api/v1/hotels/${params.id}`, {
+export default async function getHotel(params: { id: string }) {
+  const response = await fetch(`http://localhost:3000/api/v1/hotels/${params.id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: "include",
   });
   if (!response.ok) {
     throw new Error("Error failed to fetch");

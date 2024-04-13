@@ -1,6 +1,6 @@
 import { HotelCard } from "@/components/HomePage/HotelCard";
 import { HotelInfo } from "@/components/HotelInfo/HotelInfo";
-import { getHotel } from "@/libs/getHotel";
+import getHotel from "@/libs/getHotel";
 
 export default async function HotelDetailPage({
   params,

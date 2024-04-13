@@ -24,8 +24,8 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Toaster expand={true} richColors />
         <NextAuthProvider session={nextAuthSession}>
+          <Toaster expand={true} richColors />
           <NavBar></NavBar>
           {children}
         </NextAuthProvider>

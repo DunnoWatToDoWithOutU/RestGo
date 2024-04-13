@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
-import { match } from 'assert';
+import jwt from 'jsonwebtoken';
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -56,6 +56,12 @@ userSchema.pre('save', async function(next) {
 
 userSchema.methods.matchPassword = async function(enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
+}
+
+userSchema.methods.getSignedJwtToken = function() {
+    return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRE,
+    });
 }
 
 userSchema.virtual(`Appointment`, {

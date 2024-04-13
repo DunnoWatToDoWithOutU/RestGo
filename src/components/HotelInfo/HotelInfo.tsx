@@ -4,11 +4,13 @@ import { HotelProps } from "../../../@types/type";
 import { ReviewCard } from "./ReviewCard";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 
 export function HotelInfo(props: HotelProps) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const { data: session } = useSession();
   return (
     <div className=" px-[10%] mt-10   text-[#15439C]">
       <ImageHotel pic={props.pic} id={props.id}></ImageHotel>
@@ -73,9 +75,10 @@ export function HotelInfo(props: HotelProps) {
                 const response = await craeteAppointment(
                   props.id,
                   startDate,
-                  endDate
+                  endDate,
+                  session ? session.user.token : ""
                 );
-                if (response == 200) {
+                if (response == 201) {
                   toast.success("Booking Success!");
                 } else {
                   toast.error("Booking Fail");

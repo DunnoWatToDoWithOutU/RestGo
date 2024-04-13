@@ -14,12 +14,14 @@ export async function POST(req: NextRequest) {
         if (!isMatch) {
             return NextResponse.json({ error: "Invalid password" }, { status: 401 });
         }
+        const token = user.getSignedJwtToken();
         return NextResponse.json({
             _id: user._id,
             name: user.name,
             email: user.email,
             telephone: user.telephone,
             role: user.role,
+            token: token,
         }, { status: 200 });
     } catch (err) {
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
