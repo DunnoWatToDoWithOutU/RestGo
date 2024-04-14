@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import { useState, useRef } from "react";
 import { AddPeoplePopup } from "./AddPeoplePopup";
 import { CheckInPopup } from "./CheckInPopup";
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from "dayjs";
 import { CheckOutPopup } from "./CheckOutPopup";
 
 export function MenuBox() {
@@ -14,11 +14,13 @@ export function MenuBox() {
   const addPeopleButtonRef = useRef(null);
 
   const [showCheckInPopup, setShowCheckInPopup] = useState(false);
-  const [checkInDate, setCheckInDate] = useState(dayjs().format('DD/MM/YYYY'));
+  const [checkInDate, setCheckInDate] = useState(dayjs().format("DD/MM/YYYY"));
   const [isSubmittedCheckIn, setIsSubmittedCheckIn] = useState(false);
 
   const [showCheckOutPopup, setShowCheckOutPopup] = useState(false);
-  const [checkOutDate, setCheckOutDate] = useState(dayjs().format('DD/MM/YYYY'));
+  const [checkOutDate, setCheckOutDate] = useState(
+    dayjs().format("DD/MM/YYYY")
+  );
   const [isSubmittedCheckOut, setIsSubmittedCheckOut] = useState(false);
 
   const [peopleValues, setPeopleValues] = useState({
@@ -32,7 +34,6 @@ export function MenuBox() {
     setPeopleValues(values);
     setIsSubmitted(true);
   };
-
 
   const handleCheckIn = () => {
     setShowAddPeople(false);
@@ -74,14 +75,13 @@ export function MenuBox() {
     <div className=" w-[42rem] text-[#15439C] relative p-3 px-5 rounded-md mx-auto h-40 bg-white border-2 border-primary">
       <div className=" flex">
         <div className="h-16 w-[50%] rounded-md flex bg-white border-2 border-[#26CBFC]">
-
           <button
             className="h-full w-[50%] hover:bg-zinc-50 text-sm"
             onClick={handleCheckIn}
           >
-          <p className="mx-auto font-semibold">
-            {isSubmittedCheckIn ? `${checkInDate}`: 'Check In'}
-          </p>
+            <p className="mx-auto font-semibold">
+              {isSubmittedCheckIn ? `${checkInDate}` : "Check In"}
+            </p>
             <div
               className="h-5 w-5 mx-auto mt-1 bg-contain bg-center bg-no-repeat"
               style={{ backgroundImage: `url(/img/checkin.png)` }}
@@ -89,11 +89,14 @@ export function MenuBox() {
           </button>
           <div className="w-[0.105rem] h-[80%] my-auto bg-[#15439C]"></div>
           {showCheckInPopup && (
-            < div className="absolute top-[50%] right-5 z-50">
-              <CheckInPopup onClose={handleCloseCheckInPopup} onChange={(newDate:string)=>{
-                setCheckInDate(newDate)
-                setIsSubmittedCheckIn(true)
-                }} />
+            <div className="absolute top-[50%] right-5 z-50">
+              <CheckInPopup
+                onClose={handleCloseCheckInPopup}
+                onChange={(newDate: string) => {
+                  setCheckInDate(newDate);
+                  setIsSubmittedCheckIn(true);
+                }}
+              />
             </div>
           )}
 
@@ -101,23 +104,25 @@ export function MenuBox() {
             className="h-full hover:bg-zinc-50 w-[50%] text-sm"
             onClick={handleCheckOut}
           >
-          <p className="mx-auto font-semibold">
-            {isSubmittedCheckOut ? `${checkOutDate}`: 'Check Out'}
-          </p>
+            <p className="mx-auto font-semibold">
+              {isSubmittedCheckOut ? `${checkOutDate}` : "Check Out"}
+            </p>
             <div
               className="h-5 w-5 mx-auto mt-1 bg-contain bg-center bg-no-repeat"
               style={{ backgroundImage: `url(/img/checkout.png)` }}
             ></div>
           </button>
           {showCheckOutPopup && (
-            < div className="absolute top-[50%] right-5 z-50">
-              <CheckOutPopup onClose={handleCloseCheckOutPopup} onChange={(newDate:string)=>{
-                setCheckOutDate(newDate)
-                setIsSubmittedCheckOut(true)
-                }} />
+            <div className="absolute top-[50%] right-5 z-50">
+              <CheckOutPopup
+                onClose={handleCloseCheckOutPopup}
+                onChange={(newDate: string) => {
+                  setCheckOutDate(newDate);
+                  setIsSubmittedCheckOut(true);
+                }}
+              />
             </div>
           )}
-
         </div>
 
         <button
@@ -130,15 +135,23 @@ export function MenuBox() {
             style={{ backgroundImage: `url(/img/addpeople.png)` }}
           ></div>
           <p className="mx-auto font-semibold">
-            {isSubmitted ? `${peopleValues.adults + peopleValues.children + peopleValues.babies} People, ${peopleValues.rooms} Rooms` : 'Add People'}
+            {isSubmitted
+              ? `${
+                  peopleValues.adults +
+                  peopleValues.children +
+                  peopleValues.babies
+                } People, ${peopleValues.rooms} Rooms`
+              : "Add People"}
           </p>
         </button>
         {showAddPeople && (
           <div className="absolute top-[50%] right-5 z-50">
-            <AddPeoplePopup onClose={handleCloseAddPeople} onSubmit={handlePeopleSubmit}/>
+            <AddPeoplePopup
+              onClose={handleCloseAddPeople}
+              onSubmit={handlePeopleSubmit}
+            />
           </div>
         )}
-
       </div>
       <div className="flex justify-center w-full mt-5 space-x-3">
         <p
