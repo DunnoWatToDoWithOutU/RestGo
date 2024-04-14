@@ -91,7 +91,7 @@ export function MenuBox() {
 
           <button
             className="h-full hover:bg-zinc-50 w-[50%] text-sm"
-            onClick={handleCheckOut}
+            onClick={handleCheckInCheckOut}
           >
             <p className="mx-auto font-semibold">
               {isSubmittedCheckOut ? `${checkOutDate}` : "Check Out"}
