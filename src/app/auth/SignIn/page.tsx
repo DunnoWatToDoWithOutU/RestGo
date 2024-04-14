@@ -44,7 +44,6 @@ export default function Home() {
             onClick={async () => {
               if (!email || !password) {
                 toast.error("Please fill all fields");
-
                 return;
               }
               try {

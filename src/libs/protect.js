@@ -1,8 +1,7 @@
 import User from '@/models/User';
 import jwt from 'jsonwebtoken';
-import { NextRequest } from 'next/server';
 import connectDB from './connectDB';
-export default async function protect(req: NextRequest) {
+export default async function protect(req) {
     await connectDB();
     if (!req.headers.get('authorization') && !req.headers.get('authorization')?.startsWith('Bearer')) {
         return null;

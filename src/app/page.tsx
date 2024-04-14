@@ -5,7 +5,6 @@ import { Toaster } from "sonner";
 export default function Home() {
   return (
     <div>
-      <Toaster expand={true} />
       <HomePage></HomePage>;
     </div>
   );

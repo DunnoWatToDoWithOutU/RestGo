@@ -1,0 +1,33 @@
+import Image from "next/image";
+import { HotelProps, PromotionProps } from "../../../@types/type";
+import { useRouter } from "next/navigation";
+
+export default function PromotionCard(props: {
+  promotion: PromotionProps;
+  hotel: HotelProps;
+}) {
+  const router = useRouter();
+  return (
+    <button
+      onClick={() => {
+        router.push(`/hotel/${props.hotel.id}`);
+      }}
+      className=" flex space-x-2 h-16 w-full items-center hover:bg-zinc-100 transition-all duration-200 bg-white rounded-lg"
+    >
+      <div className="h-full w-20 relative rounded-lg overflow-hidden ">
+        <Image
+          alt="hotel"
+          src={`/img/hotel/${props.hotel.id}/${props.hotel.pic[0]}`}
+          objectFit="cover"
+          layout="fill"
+          className="absolute w-full left-0"
+        />
+      </div>
+      <div className=" text-sm text-start">
+        <p className=" font-bold">{props.hotel.name}</p>
+        <p className="text-sm">{props.promotion.name}</p>
+        <p>Discount :{props.promotion.discount}%</p>
+      </div>
+    </button>
+  );
+}

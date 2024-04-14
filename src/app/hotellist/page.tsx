@@ -17,10 +17,7 @@ export default async function HotelListPage() {
             className="px-5 py-1  w-full focus:outline-none "
             placeholder="Search..."
           ></input>
-          <button
-            className=" py-2  
-         "
-          >
+          <button className="py-2">
             {" "}
             <Image
               src={`/icon/searchIcon.png`}

@@ -27,6 +27,7 @@ export default async function RootLayout({
         <NextAuthProvider session={nextAuthSession}>
           <Toaster expand={true} richColors />
           <NavBar></NavBar>
+          <div className="h-10"></div>
           {children}
         </NextAuthProvider>
       </body>

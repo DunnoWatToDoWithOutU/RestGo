@@ -7,6 +7,6 @@ export default async function HotelDetailPage({
 }: {
   params: { id: string };
 }) {
-  const hotel = await getHotel({ id: params.id });
+  const hotel = await getHotel(params.id);
   return <HotelInfo {...hotel}></HotelInfo>;
 }
