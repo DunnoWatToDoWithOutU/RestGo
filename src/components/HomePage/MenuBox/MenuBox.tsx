@@ -51,6 +51,7 @@ export function MenuBox() {
     //setShowCalendar(false);
     setShowAddPeople(true);
     setShowCheckInPopup(false);
+    setShowCheckOutPopup(false);
   };
 
   const handleCloseAddPeople = () => {

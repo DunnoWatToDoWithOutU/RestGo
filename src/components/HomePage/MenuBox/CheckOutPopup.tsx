@@ -11,13 +11,13 @@ export const CheckOutPopup: React.FC<{ onClose: () => void; onChange: (values: a
 
   return (
     <div className="inset-20 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg shadow-lg p-7">
+      <div className="bg-white rounded-lg shadow-lg p-7 mr-[6rem]">
         <button
           className="absolute top-2 right-2 text-blue-500 hover:text-[#15439C] focus:outline-none transition-all duration-200"
           onClick={onClose}
         >
           <svg
-            className="h-6 w-6"
+            className="h-6 w-6 mr-[6rem]"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
