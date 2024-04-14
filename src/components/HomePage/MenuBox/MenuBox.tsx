@@ -57,11 +57,11 @@ export function MenuBox() {
   };
   
   return (
-    <div className=" w-[42rem] text-[#15439C] relative p-3 px-5 rounded-md mx-auto h-40 bg-white border-2 border-primary">
+    <div className=" w-[42rem] text-[#15439C] relative p-3 px-5 rounded-md mx-auto h-40 bg-white border-2 border-primary shadow-xl transition-all duration-200 ">
       <div className=" flex">
         <div className="h-16 w-[50%] rounded-md flex bg-white border-2 border-[#26CBFC]">
           <button
-            className="h-full w-[50%] hover:bg-zinc-50 text-sm"
+            className="h-full w-[50%] rounded-lg hover:bg-zinc-100 text-sm transition-all duration-300 "
             onClick={handleCheckInCheckOut}
           >
             <p className="mx-auto font-semibold">
@@ -91,7 +91,7 @@ export function MenuBox() {
 
           <button
             className="h-full hover:bg-zinc-50 w-[50%] text-sm"
-            onClick={handleCheckInCheckOut}
+            onClick={handleCheckOut}
           >
             <p className="mx-auto font-semibold">
               {isSubmittedCheckOut ? `${checkOutDate}` : "Check Out"}
@@ -119,7 +119,7 @@ export function MenuBox() {
         </div>
 
         <button
-          className="h-16 w-[50%] flex ml-2 hover:bg-zinc-50 bg-white border-2 relative text-center items-center border-[#26CBFC] rounded-md"
+          className="h-16 w-[50%] flex ml-2 hover:bg-zinc-100 bg-white border-2 relative text-center items-center border-[#26CBFC] rounded-md transition-all duration-300"
           onClick={handleAddPeople}
           ref={addPeopleButtonRef}
         >
@@ -147,48 +147,48 @@ export function MenuBox() {
         )}
       </div>
       <div className="flex justify-center w-full mt-5 space-x-3">
-        <p
+        <button
           className={`py-[0.125rem] text-sm px-4 rounded-full border-2 border-[#26CBFC] ${
             selectedFilter === "Hotel"
               ? "bg-[#26CBFC] text-white hover:bg-[#15439C]"
-              : "bg-white hover:bg-zinc-50"
+              : "bg-white hover:bg-zinc-100 transition-all duration-300"
           }`}
           onClick={() => handleFilterClick("Hotel")}
         >
           Hotel
-        </p>
-        <p
+        </button>
+        <button
           className={`py-[0.125rem] text-sm px-4 rounded-full border-2 border-[#26CBFC] ${
             selectedFilter === "Hostel"
               ? "bg-[#26CBFC] text-white hover:bg-[#15439C]"
-              : "bg-white hover:bg-zinc-50"
+              : "bg-white hover:bg-zinc-100 transition-all duration-300"
           }`}
           onClick={() => handleFilterClick("Hostel")}
         >
           Hostel
-        </p>
-        <p
+        </button>
+        <button
           className={`py-[0.125rem] text-sm px-4 rounded-full border-2 border-[#26CBFC] ${
             selectedFilter === "Home-Stay"
               ? "bg-[#26CBFC] text-white hover:bg-[#15439C]"
-              : "bg-white hover:bg-zinc-50"
+              : "bg-white hover:bg-zinc-100 transition-all duration-300"
           }`}
           onClick={() => handleFilterClick("Home-Stay")}
         >
           Home-Stay
-        </p>
-        <p
+        </button>
+        <button
           className={`py-[0.125rem] text-sm px-4 rounded-full border-2 border-[#26CBFC] ${
             selectedFilter === "Private-stay"
               ? "bg-[#26CBFC] text-white hover:bg-[#15439C]"
-              : "bg-white hover:bg-zinc-50"
+              : "bg-white hover:bg-zinc-100 transition-all duration-300"
           }`}
           onClick={() => handleFilterClick("Private-stay")}
         >
           Private-stay
-        </p>
+        </button>
       </div>
-      <button className=" absolute left-[38%] hover:bg-primary_dark -bottom-5 text-white bg-primary px-6 rounded-lg p-1 text-xl">
+      <button className=" absolute left-[28%] hover:bg-primary_dark -bottom-5 text-white bg-primary px-24 rounded-lg p-1 text-xl shadow-lg">
         Search Here
       </button>
     </div>

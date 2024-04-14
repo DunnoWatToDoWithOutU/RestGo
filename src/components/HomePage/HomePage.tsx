@@ -9,7 +9,7 @@ export async function HomePage() {
   return (
     <div>
       <div className="px-[10%] mt-20  relative z-10 text-center ">
-        <p className=" text-3xl font-semibold text-white ">
+        <p className=" text-3xl font-semibold text-white shadow-lg">
           Welcome to REST GO. We will get you to rest in piece.
         </p>
         <SearchBar></SearchBar>
@@ -17,6 +17,7 @@ export async function HomePage() {
         <HotelList HotelData={hotels}></HotelList>
       </div>
       <div className=" overflow-hidden h-96 w-full bg-black z-0 absolute left-0 top-0">
+      <div className="absolute inset-0 bg-black opacity-15 z-10"></div>
         <Image
           src={"/img/homepage.png"}
           alt="hotelhomepage"
