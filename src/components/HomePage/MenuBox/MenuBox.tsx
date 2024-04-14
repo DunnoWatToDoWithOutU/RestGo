@@ -195,7 +195,7 @@ export function MenuBox() {
           Private-stay
         </p>
       </div>
-      <button className=" absolute left-[38%] hover:bg-primary_dark -bottom-5 text-white bg-primary px-6 rounded-lg p-1 text-xl">
+      <button className=" absolute left-[28%] hover:bg-primary_dark -bottom-5 text-white bg-primary px-24 rounded-lg p-1 text-xl">
         Search Here
       </button>
     </div>
