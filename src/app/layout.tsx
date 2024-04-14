@@ -7,6 +7,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/libs/authOptions";
 import NextAuthProvider from "@/providers/NextAuthProvider";
 import { Toaster } from "sonner";
+import Footer from "@/components/Footer/footer";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -29,6 +30,7 @@ export default async function RootLayout({
           <NavBar></NavBar>
           <div className="h-10"></div>
           {children}
+          <Footer></Footer>
         </NextAuthProvider>
       </body>
     </html>
