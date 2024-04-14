@@ -7,14 +7,16 @@ import { authOptions } from "@/libs/authOptions";
 
 export async function BookingList() {
   const session = await getServerSession(authOptions);
-  const bookingDatas: AppointmnetProps[] = await getAppointments(session ? session?.user.token : "");
+  const bookingDatas: AppointmnetProps[] = await getAppointments(
+    session ? session?.user.token : ""
+  );
   if (bookingDatas.length === 0) {
     return <div></div>;
   }
   return (
     <div className="space-y-4 mt-4">
       {bookingDatas.map(async (bookingData, index) => {
-        const hotel = await getHotel({ id: bookingData.hotel });
+        const hotel = await getHotel(bookingData.hotel);
         return (
           <BookingCard
             key={index}
