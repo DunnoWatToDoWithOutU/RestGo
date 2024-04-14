@@ -7,6 +7,11 @@ const promotionSchema = new mongoose.Schema({
         required: [true, 'Please enter the promotion name'],
         trim: true,
     },
+    hotel:{
+        type: mongoose.Schema.ObjectId,
+        ref: 'Hotel',
+        required: [true, 'Please enter the hotel'],
+    },
     description: {
         type: String,
         required: [true, 'Please enter the promotion description'],

@@ -4,18 +4,20 @@ import { getSession } from "next-auth/react";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 import { Logout } from "./Logout";
+import ProButton from "./Promotion/ProButton";
+import PromotionData from "./Promotion/PromotionData";
 
 export async function NavBar() {
   const session = await getServerSession(authOptions);
   // console.log(session);
   return (
-    <div className="w-full h-16 px-[10%] bg-white shadow-md flex items-center justify-between">
+    <div className="w-full h-16 px-[10%] fixed z-50 top-0 bg-white shadow-md flex items-center justify-between">
       <Link
         href="/"
         className="h-12 w-12 rounded-full bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(/logo.png)` }}
       ></Link>
-      <div className=" absolute left-[41%] flex space-x-2">
+      <div className=" flex space-x-2">
         <Link
           href="/mybooking"
           className="font-bold text p-2 px-4 transition-colors duration-200 bg-[#fafafa] hover:bg-[#f1f2ff] shadow-md rounded-full text-primary"
@@ -31,10 +33,7 @@ export async function NavBar() {
       </div>
       {session?.user ? (
         <div className="flex space-x-3">
-          <button
-            className="self-center w-7 h-7 hover:scale-110 transition-all duration-200 rounded-full bg-contain bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(/img/bell.png)` }}
-          ></button>
+          <PromotionData></PromotionData>
           <button
             className="self-center w-7 hover:scale-110  transition-all duration-200 h-7 rounded-full bg-contain bg-center bg-no-repeat"
             style={{ backgroundImage: `url(/img/user.png)` }}

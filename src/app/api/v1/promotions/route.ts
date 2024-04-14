@@ -18,13 +18,14 @@ export const GET = async ()=>{
 export const POST = async (req :NextRequest)=>{
     try{
         await connectDB();
-        const {name, discount, startDate, endDate, pic,description} = await req.json();
+        const {name, discount, startDate,hotel, endDate, pic,description} = await req.json();
         const promotion = await Promotion.create({
             name: name,
             description: description,
             discount: discount,
             startDate: startDate,
             endDate: endDate,
+            hotel:hotel,
             pic:pic 
         });
         return NextResponse.json(promotion, {status: 201});

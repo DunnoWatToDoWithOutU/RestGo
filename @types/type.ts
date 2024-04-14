@@ -18,3 +18,15 @@ export interface AppointmnetProps{
     status:string;
     createdAt:Date;
 }
+
+export interface PromotionProps{
+    _id:string;
+    name:string;
+    description:string;
+    startDate:Date;
+    endDate:Date;
+    discount:number;
+    hotel:string;
+    pic:string;
+    hotelInfo:HotelProps;
+}
