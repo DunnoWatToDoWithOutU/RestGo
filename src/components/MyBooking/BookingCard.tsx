@@ -1,5 +1,7 @@
+"use client";
 import Link from "next/link";
 import { AppointmnetProps, HotelProps } from "../../../@types/type";
+import { toast } from "sonner";
 
 function formatDate(dateString: string) {
   const months = [
@@ -49,16 +51,31 @@ export function BookingCard(props: {
         <div className="space-y-2">
           <p className="text-2xl">{props.hotel.name}</p>
           <div className="flex space-x-2 items-center">
-            <div className="h-5 w-5 bg-zinc-400"></div>
+            <div
+              className="h-5 w-5 bg-cover bg-center"
+              style={{ backgroundImage: `url(/img/homepage/ping.png)` }}
+            ></div>
             <p className="text-sm">{props.hotel.address}</p>
           </div>
         </div>
       </div>
       <div className="flex flex-col justify-between z-10">
         <div className="flex space-x-1 justify-end">
-          <div className="h-5 w-5 bg-zinc-300"></div>
-          <div className="h-5 w-5 bg-zinc-300"></div>
-          <div className="h-5 w-5 bg-zinc-300"></div>
+          <button
+            onClick={() => {
+              toast.info(`Phone : ${props.hotel.telephone}`);
+            }}
+            className="h-5 w-5 bg-cover bg-center hover:scale-110"
+            style={{ backgroundImage: `url(/img/homepage/phone.png)` }}
+          ></button>
+          <button
+            className="h-5 w-5 bg-cover bg-center hover:scale-110"
+            style={{ backgroundImage: `url(/img/homepage/edit.png)` }}
+          ></button>
+          <button
+            className="h-5 w-5 bg-cover bg-center hover:scale-110"
+            style={{ backgroundImage: `url(/img/homepage/trash.png)` }}
+          ></button>
         </div>
         <div className=" text-end flex flex-col space-y-2 ">
           <p className="text-sm">Created At : {createdAt}</p>
