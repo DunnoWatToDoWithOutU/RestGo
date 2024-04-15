@@ -15,6 +15,35 @@ export const CheckInCheckOutPopup: React.FC<{
   const [checkInDate, setCheckInDate] = useState(dayjs());
   const [checkOutDate, setCheckOutDate] = useState(dayjs());
 
+  var relativeTime = require('dayjs/plugin/relativeTime')
+  dayjs.extend(relativeTime)
+
+  const checkCheckInDate = (newDateIn:any) =>{
+    var x = (newDateIn.fromNow()).substr(-3);
+    if(x==="ago"){
+      alert("Please Choose a Date That Is Not Today.");
+    }
+    else{
+      setIsSubmittedCheckIn(true)
+      setCheckInDate(newDateIn)
+      onChange1(newDateIn.format('DD/MM/YYYY'))
+    }
+  }
+
+  const checkCheckOutDate = (newDateOut:any) =>{
+    var y = (newDateOut.from(checkInDate)).substr(-3);
+
+    if(y==="ago"){
+      alert("Please Choose a Date That Is Not Today.");
+    }
+    else{
+      setIsSubmittedCheckOut(true)
+      setCheckOutDate(newDateOut)
+      onChange2(newDateOut.format('DD/MM/YYYY'))
+      onClose();
+    }
+  }
+
   return (
     <div className="inset-20 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg shadow-lg p-7">
@@ -43,21 +72,14 @@ export const CheckInCheckOutPopup: React.FC<{
         <div className='flex flex-row p-1'>
           <div className='border'>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateCalendar value={checkInDate} onChange={(newDateIn)=>{
-                  setIsSubmittedCheckIn(true)
-                  setCheckInDate(newDateIn)
-                  onChange1(newDateIn.format('DD/MM/YYYY'))
-                  }}/>
+                <DateCalendar value={checkInDate} 
+                  onChange={(newDateIn)=>checkCheckInDate(newDateIn)}/>
               </LocalizationProvider>
             </div>
             <div className='border'>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateCalendar value={checkOutDate} onChange={(newDateOut)=>{
-                  setCheckOutDate(newDateOut)
-                  setIsSubmittedCheckOut(true)
-                  onChange2(newDateOut.format('DD/MM/YYYY'))
-                  onClose()
-                  }}/>
+                <DateCalendar value={checkOutDate} 
+                  onChange={(newDateOut)=>checkCheckOutDate(newDateOut)}/>
               </LocalizationProvider>
             </div>
         </div>
