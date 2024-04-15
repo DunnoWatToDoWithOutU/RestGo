@@ -3,12 +3,12 @@ import mongoose from 'mongoose';
 const appointmentSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
+        ref: 'User',
         required: true,
     },
     hotel: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'hotels',
+        ref: 'Hotel',
         required: true,
     },
     startDate: {

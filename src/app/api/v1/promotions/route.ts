@@ -6,7 +6,10 @@ import { NextRequest, NextResponse } from "next/server";
 export const GET = async ()=>{
     try{
         await connectDB();
-        const promotions = await Promotion.find();
+        const promotions = await Promotion.find().populate({
+            path: "hotel",
+            model: 'Hotel',
+        });
         return NextResponse.json(promotions, {status: 200});
     }
     catch(error){

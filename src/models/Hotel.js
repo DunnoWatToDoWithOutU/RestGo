@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import User from './User';
 
 const hotelSchema = new mongoose.Schema({
     name: {
@@ -26,12 +27,17 @@ const hotelSchema = new mongoose.Schema({
         type: [String],
         required: [true, 'Please enter the tag'],
     },
-    review: {
-        type: [{
-            rating: Number, 
-            reviewText: String
-        }],
-    },
+    review: [
+        {
+            rating: Number,
+            reviewText: String,
+            user: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User',
+                required: true,
+            },
+        },
+    ],
     pic:{
         type:[String],
         required: [true, 'Please enter the picture'],

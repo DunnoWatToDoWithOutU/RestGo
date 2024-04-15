@@ -1,5 +1,6 @@
 import exp from "constants";
 import mongoose from "mongoose";
+import Hotel from "./Hotel";
 
 const promotionSchema = new mongoose.Schema({
     name: {
