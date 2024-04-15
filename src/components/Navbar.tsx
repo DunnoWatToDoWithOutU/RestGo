@@ -6,6 +6,7 @@ import { signOut } from "next-auth/react";
 import { Logout } from "./Logout";
 import ProButton from "./Promotion/ProButton";
 import PromotionData from "./Promotion/PromotionData";
+import UserDropDown from "./UserDropDown";
 
 export async function NavBar() {
   const session = await getServerSession(authOptions);
@@ -32,14 +33,12 @@ export async function NavBar() {
         </Link>
       </div>
       {session?.user ? (
-        <div className="flex space-x-3">
+        <div className="flex space-x-3 items-center">
           <PromotionData></PromotionData>
-          <button
-            className="self-center w-7 hover:scale-110  transition-all duration-200 h-7 rounded-full bg-contain bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(/img/user.png)` }}
-          ></button>
-          <p className="text-primary self-center mr-2">{session.user?.name}</p>
-          <Logout></Logout>
+          <UserDropDown
+            name={session.user.name}
+            email={session.user.email}
+          ></UserDropDown>
         </div>
       ) : (
         <div className="flex space-x-1">

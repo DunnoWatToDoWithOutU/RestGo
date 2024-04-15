@@ -17,6 +17,7 @@
     "@mui/material": "^5.15.15",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "@mui/x-date-pickers": "^7.2.0",
+    "avvvatars-react": "^0.4.2",
     "bcrypt": "^5.1.1",
     "dayjs": "^1.11.10",
     "framer-motion": "^11.0.28",
