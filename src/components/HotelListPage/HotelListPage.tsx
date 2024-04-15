@@ -67,7 +67,7 @@ export function HotelListPage(props: { hotels: HotelProps[] }) {
 
   useEffect(() => {
     const results = props.hotels.filter((hotel) =>
-      hotel.name.toLowerCase().includes(search)
+      hotel.name.toLowerCase().includes(search.toLowerCase())
     );
     setSearchResults(results);
   }, [search, props.hotels]);
