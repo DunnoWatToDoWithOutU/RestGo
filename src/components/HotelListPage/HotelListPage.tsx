@@ -8,6 +8,7 @@ import dayjs from "dayjs";
 import { AddPeoplePopup } from "../HomePage/MenuBox/AddPeoplePopup";
 import { CheckInCheckOutPopup2 } from "@/components/HotelListPage/HotelListCheckInOut";
 import { set } from "mongoose";
+import getHotels from "@/libs/getHotels";
 
 const filterData = [
   { value: "name", label: "Name" },
@@ -15,16 +16,24 @@ const filterData = [
   { value: "rating", label: "Rating" },
 ];
 
-export function HotelListPage(props: { hotels: HotelProps[] }) {
+export function HotelListPage() {
+  const [hotelData, setHotelData] = useState<HotelProps[]>([]);
+  const [MaxtoMin, setMaxtoMin] = useState(false);
+  const getHotelData = async () => {
+    const hotels = await getHotels();
+    setHotelData(hotels);
+  };
+  useEffect(() => {
+    getHotelData();
+  }, []);
+
   const [showAddPeople, setShowAddPeople] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState("name");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const addPeopleButtonRef = useRef(null);
 
   const [search, setSearch] = useState("");
-  const [searchResults, setSearchResults] = useState<HotelProps[]>(
-    props.hotels
-  );
+  const [searchResults, setSearchResults] = useState<HotelProps[]>(hotelData);
 
   const [showCheckInCheckOutPopup, setShowCheckInCheckOutPopup] =
     useState(false);
@@ -72,21 +81,44 @@ export function HotelListPage(props: { hotels: HotelProps[] }) {
   };
 
   useEffect(() => {
-    const results = props.hotels.filter((hotel) =>
+    const results = hotelData.filter((hotel) =>
       hotel.name.toLowerCase().includes(search.toLowerCase())
     );
-    const resultsFiltering = results.filter((hotel) => {
-      if (selectedFilter === "price") {
-        return hotel.price;
-      } else if (selectedFilter === "name") {
-        return hotel.name;
-      } else {
-        return hotel.name;
-      }
-    });
+    console.log(selectedFilter);
+    let resultsFiltering = results;
+    if (MaxtoMin == false) {
+      results.sort((a, b) => {
+        if (selectedFilter === "price") {
+          return a.price - b.price;
+        } else if (selectedFilter === "name") {
+          if (a.name < b.name) {
+            return -1;
+          }
+          if (a.name > b.name) {
+            return 1;
+          }
+        }
+        return 0;
+      });
+    } else {
+      results.sort((a, b) => {
+        if (selectedFilter === "price") {
+          return b.price - a.price;
+        } else if (selectedFilter === "name") {
+          if (a.name > b.name) {
+            return -1;
+          }
+          if (a.name < b.name) {
+            return 1;
+          }
+        }
+        return 0;
+      });
+    }
+    console.log(resultsFiltering);
     setSearchResults(resultsFiltering);
-  }, [search, props.hotels, selectedFilter]);
-
+  }, [search, hotelData, MaxtoMin, selectedFilter]);
+  console.log(selectedFilter);
   return (
     <main className="w-full flex flex-col justify-start items-center ">
       <div className="  w-[40%] mt-10 text-center ">
@@ -197,7 +229,11 @@ export function HotelListPage(props: { hotels: HotelProps[] }) {
         ></input>
       </div>
       <TagContainer></TagContainer>
-      <SortFilter setFiltering={setSelectedFilter}></SortFilter>
+      <SortFilter
+        setFiltering={setSelectedFilter}
+        setMaxtoMin={setMaxtoMin}
+        MaxtoMin={MaxtoMin}
+      ></SortFilter>
       <div className="w-full px-[10%]">
         <HotelList HotelData={searchResults}></HotelList>
       </div>

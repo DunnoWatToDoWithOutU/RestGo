@@ -23,12 +23,15 @@ const SortItem = [
 
 export default function SortFilter(props: {
   setFiltering: (value: string) => void;
+  setMaxtoMin: (value: boolean) => void;
+  MaxtoMin: boolean;
 }) {
   const [selectedButtonIndexes, setSelectedButtonIndexes] = useState<number[]>(
     []
   );
 
   const handleSortClick = (index: number) => {
+    props.setFiltering(SortItem[index].name.toLowerCase());
     if (selectedButtonIndexes.includes(index)) {
       setSelectedButtonIndexes(
         selectedButtonIndexes.filter((i) => i !== index)
@@ -42,14 +45,19 @@ export default function SortFilter(props: {
     <div className=" mx-auto flex mt-1 text-sm text-[#15439C] rounded-md border-2 border-[#2465E2] items-center font-bold">
       <div className="flex px-3 space-x-2 ">
         <p className="text-xl ml-2">Sort By</p>
-        <div className="h-6 w-6 bg-[#D9D9D980] rounded-md flex items-center justify-center mt-0.5 ">
+        <button
+          onClick={() => {
+            props.setMaxtoMin(!props.MaxtoMin);
+          }}
+          className="h-6 w-6 bg-[#D9D9D980] rounded-md flex items-center justify-center mt-0.5 "
+        >
           <Image
             src={"/sortingIcon/sortByIcon.png"}
             alt="Sort By Icon"
             width={20}
             height={20}
           />
-        </div>
+        </button>
       </div>
       {SortItem.map((item, index) => {
         return (
