@@ -27,7 +27,9 @@ export function PromotionDropDown(props: {
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative mt-1">
           <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-            <span className="block truncate">{selected.name}</span>
+            <span className="block truncate">
+              {selected.name} (discount {selected.discount}%)
+            </span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <ChevronUpDownIcon
                 className="h-5 w-5 text-gray-400"
@@ -45,7 +47,7 @@ export function PromotionDropDown(props: {
               <Listbox.Option
                 className={({ active }) =>
                   `relative cursor-default select-none  px-1 py-1 ${
-                    active ? "bg-cyan-100 text-cyan-900" : "text-gray-900"
+                    active ? "bg-zinc-100 text-zinc-900" : "text-gray-900"
                   }`
                 }
                 value={promotionDefault}
@@ -56,11 +58,6 @@ export function PromotionDropDown(props: {
                       hotel={props.hotel}
                       promotion={promotionDefault}
                     ></OptionCard>
-                    {selected ? (
-                      <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-                        <CheckIcon className="h-5 w-5" aria-hidden="true" />
-                      </span>
-                    ) : null}
                   </>
                 )}
               </Listbox.Option>
@@ -69,7 +66,7 @@ export function PromotionDropDown(props: {
                   key={personIdx}
                   className={({ active }) =>
                     `relative cursor-default select-none  px-1 py-1 ${
-                      active ? "bg-cyan-100 text-cyan-900" : "text-gray-900"
+                      active ? "bg-zinc-100 text-zinc-900" : "text-gray-900"
                     }`
                   }
                   value={promotion}
@@ -80,11 +77,6 @@ export function PromotionDropDown(props: {
                         hotel={props.hotel}
                         promotion={promotion}
                       ></OptionCard>
-                      {selected ? (
-                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-                          <CheckIcon className="h-5 w-5" aria-hidden="true" />
-                        </span>
-                      ) : null}
                     </>
                   )}
                 </Listbox.Option>
