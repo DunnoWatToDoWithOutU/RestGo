@@ -81,16 +81,15 @@ export function HotelInfo(props: HotelProps) {
             </div>
             <button
               onClick={async () => {
-                const response = await craeteAppointment(
-                  props.id,
-                  startDate,
-                  endDate,
-                  session ? session.user.token : ""
-                );
-                if (response == 201) {
-                  toast.success("Booking Success!");
-                } else {
-                  toast.error("Booking Fail");
+                try {
+                  await craeteAppointment(
+                    props.id,
+                    startDate,
+                    endDate,
+                    session ? session.user.token : ""
+                  );
+                } catch (error) {
+                  toast.error("Error Booking");
                 }
               }}
               className=" w-[80%] mx-10  text-3xl text-center  rounded-lg py-3 hover:bg-primary_dark mt-10 text-white bg-primary"
