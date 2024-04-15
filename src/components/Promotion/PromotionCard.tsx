@@ -12,7 +12,7 @@ export default function PromotionCard(props: {
       onClick={() => {
         router.push(`/hotel/${props.hotel.id}`);
       }}
-      className=" flex space-x-2 h-20 w-full my-5  items-center hover:bg-zinc-100 transition-all duration-200 bg-white rounded-lg"
+      className=" flex space-x-2 h-24 py-2 w-full items-center hover:bg-zinc-100 transition-all duration-200 bg-white rounded-lg"
     >
       <div className="h-full w-20 relative rounded-lg overflow-hidden ">
         <Image
