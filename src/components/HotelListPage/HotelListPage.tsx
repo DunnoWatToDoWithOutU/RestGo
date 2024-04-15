@@ -9,9 +9,15 @@ import { AddPeoplePopup } from "../HomePage/MenuBox/AddPeoplePopup";
 import { CheckInCheckOutPopup2 } from "@/components/HotelListPage/HotelListCheckInOut";
 import { set } from "mongoose";
 
+const filterData = [
+  { value: "name", label: "Name" },
+  { value: "price", label: "Price" },
+  { value: "rating", label: "Rating" },
+];
+
 export function HotelListPage(props: { hotels: HotelProps[] }) {
   const [showAddPeople, setShowAddPeople] = useState(false);
-  const [selectedFilter, setSelectedFilter] = useState(null);
+  const [selectedFilter, setSelectedFilter] = useState("name");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const addPeopleButtonRef = useRef(null);
 
@@ -69,8 +75,17 @@ export function HotelListPage(props: { hotels: HotelProps[] }) {
     const results = props.hotels.filter((hotel) =>
       hotel.name.toLowerCase().includes(search.toLowerCase())
     );
-    setSearchResults(results);
-  }, [search, props.hotels]);
+    const resultsFiltering = results.filter((hotel) => {
+      if (selectedFilter === "price") {
+        return hotel.price;
+      } else if (selectedFilter === "name") {
+        return hotel.name;
+      } else {
+        return hotel.name;
+      }
+    });
+    setSearchResults(resultsFiltering);
+  }, [search, props.hotels, selectedFilter]);
 
   return (
     <main className="w-full flex flex-col justify-start items-center ">
@@ -182,7 +197,7 @@ export function HotelListPage(props: { hotels: HotelProps[] }) {
         ></input>
       </div>
       <TagContainer></TagContainer>
-      <SortFilter></SortFilter>
+      <SortFilter setFiltering={setSelectedFilter}></SortFilter>
       <div className="w-full px-[10%]">
         <HotelList HotelData={searchResults}></HotelList>
       </div>

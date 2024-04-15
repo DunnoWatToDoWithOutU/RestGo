@@ -6,6 +6,7 @@ import Image from "next/image";
 
 export async function HomePage() {
   const hotels = await getHotels();
+  console.log(hotels);
   return (
     <div>
       <div className="px-[10%] mt-20  relative z-10 text-center ">
@@ -17,7 +18,7 @@ export async function HomePage() {
         <HotelList HotelData={hotels}></HotelList>
       </div>
       <div className=" overflow-hidden h-96 w-full bg-black z-0 absolute left-0 top-0">
-      <div className="absolute inset-0 bg-black opacity-15 z-10"></div>
+        <div className="absolute inset-0 bg-black opacity-15 z-10"></div>
         <Image
           src={"/img/homepage.png"}
           alt="hotelhomepage"
