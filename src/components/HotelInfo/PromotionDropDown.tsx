@@ -9,8 +9,6 @@ export function PromotionDropDown(props: {
   promoion: PromotionProps[];
   hotel: HotelProps;
 }) {
-  const [selected, setSelected] = useState<PromotionProps>(props.promoion[0]);
-  props.setDiscount(selected.discount);
   const promotionDefault: PromotionProps = {
     _id: "",
     description: "",
@@ -22,6 +20,9 @@ export function PromotionDropDown(props: {
     discount: 0,
     coupon: "No Coupon",
   };
+  const [selected, setSelected] = useState<PromotionProps>(promotionDefault);
+  props.setDiscount(selected.discount);
+
   return (
     <div className=" mt-5 border-2 border-primary rounded-lg">
       <Listbox value={selected} onChange={setSelected}>
