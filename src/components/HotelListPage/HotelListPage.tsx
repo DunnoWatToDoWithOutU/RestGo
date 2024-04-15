@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { HotelProps } from "../../../@types/type";
 import { HotelList } from "../HomePage/HotelList";
 import SortFilter from "./SortFilter/SortFilter";
@@ -7,12 +7,18 @@ import { TagContainer } from "./TagFilter/TagContainer";
 import dayjs from "dayjs";
 import { AddPeoplePopup } from "../HomePage/MenuBox/AddPeoplePopup";
 import { CheckInCheckOutPopup2 } from "@/components/HotelListPage/HotelListCheckInOut";
+import { set } from "mongoose";
 
 export function HotelListPage(props: { hotels: HotelProps[] }) {
   const [showAddPeople, setShowAddPeople] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const addPeopleButtonRef = useRef(null);
+
+  const [search, setSearch] = useState("");
+  const [searchResults, setSearchResults] = useState<HotelProps[]>(
+    props.hotels
+  );
 
   const [showCheckInCheckOutPopup, setShowCheckInCheckOutPopup] =
     useState(false);
@@ -58,6 +64,14 @@ export function HotelListPage(props: { hotels: HotelProps[] }) {
   const handleFilterClick = (filter: any) => {
     setSelectedFilter(filter === selectedFilter ? null : filter);
   };
+
+  useEffect(() => {
+    const results = props.hotels.filter((hotel) =>
+      hotel.name.toLowerCase().includes(search)
+    );
+    setSearchResults(results);
+  }, [search, props.hotels]);
+
   return (
     <main className="w-full flex flex-col justify-start items-center ">
       <div className="  w-[40%] mt-10 text-center ">
@@ -159,6 +173,9 @@ export function HotelListPage(props: { hotels: HotelProps[] }) {
           </div>
         </div>
         <input
+          onChange={(event) => {
+            setSearch(event.target.value);
+          }}
           type="text"
           placeholder="Search Hotel"
           className="h-12 text-[#15439C] my-auto w-[60rem] py-2 px-3 bg-white rounded-full focus:outline-none border-primary border-2 "
@@ -167,7 +184,7 @@ export function HotelListPage(props: { hotels: HotelProps[] }) {
       <TagContainer></TagContainer>
       <SortFilter></SortFilter>
       <div className="w-full px-[10%]">
-        <HotelList HotelData={props.hotels}></HotelList>
+        <HotelList HotelData={searchResults}></HotelList>
       </div>
     </main>
   );
