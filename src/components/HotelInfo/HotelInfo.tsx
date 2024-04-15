@@ -1,18 +1,22 @@
 "use client";
 import craeteAppointment from "@/libs/createAppointment";
-import { HotelProps } from "../../../@types/type";
+import { HotelProps, PromotionProps } from "../../../@types/type";
 import { ReviewCard } from "./ReviewCard";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { set } from "mongoose";
+import { PromotionDropDown } from "./PromotionDropDown";
 
-export function HotelInfo(props: HotelProps) {
+export function HotelInfo(props: {
+  hotel: HotelProps;
+  promotion: PromotionProps[];
+}) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const { data: session } = useSession();
-  const [coupon, setCoupon] = useState("");
+  const [discount, setDiscount] = useState(0);
   let bookingday =
     (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24);
   if (bookingday < 0 || bookingday > 3) {
@@ -20,10 +24,10 @@ export function HotelInfo(props: HotelProps) {
   }
   return (
     <div className=" px-[10%] mt-10   text-[#15439C]">
-      <ImageHotel pic={props.pic} id={props.id}></ImageHotel>
+      <ImageHotel pic={props.hotel.pic} id={props.hotel.id}></ImageHotel>
       <div className="  my-10 flex w-full space-x-4">
         <div className="w-2/3 space-y-4 ">
-          <BasicInfo {...props}></BasicInfo>
+          <BasicInfo {...props.hotel}></BasicInfo>
           <div className="bg-white py-4 w-full border-[#15439C] border-[3px] rounded-2xl p-2 px-4">
             <p className="text-3xl font-semibold ml-2">Reviews</p>
             <div className="w-full h-[0.125rem] bg-[#15439C] my-5"></div>
@@ -43,18 +47,32 @@ export function HotelInfo(props: HotelProps) {
               <span className="text-[2.5rem]">
                 {bookingday == -1
                   ? `Error Booking`
-                  : `${props.price * bookingday}฿`}
+                  : `${
+                      (props.hotel.price * bookingday * (100 - discount)) / 100
+                    }฿ `}
+                <span className="text-2xl">{`${
+                  discount > 0 ? ` (discount ${discount}%)` : ``
+                }`}</span>
               </span>
             </p>
             <div className="w-full h-[0.125rem] bg-[#15439C] my-5"></div>
             <p className="  text-2xl font-bold">
-              Total : <span className="text-4xl">{props.price} ฿ </span>{" "}
-              <span className="text-lg font-normal">/ night</span>
+              Total :{" "}
+              <span className="text-4xl">
+                {(props.hotel.price * bookingday * (100 - discount)) / 100} ฿{" "}
+              </span>{" "}
+              <span className="text-lg font-normal">
+                / night{" "}
+                <span className="text-sm">{`${
+                  discount > 0 ? ` (discount ${discount}%)` : ``
+                }`}</span>
+              </span>
             </p>
             <div className="w-full py-2  border-2 border-[#15439C] px-5 relative mt-10 rounded-lg text-center">
               <p className="text-2xl font-bold">Data Reserve :</p>
               <div className="flex mt-4 space-x-2 justify-start items-center">
                 <p className=" text-lg min-w-20 font-bold">From : </p>
+
                 <input
                   type="date"
                   onChange={(e) => {
@@ -80,18 +98,17 @@ export function HotelInfo(props: HotelProps) {
                 </span>
               </p>
             </div>
-            <div className="flex items-center justify-center mt-5 ">
-              <p className=" font-bold">Coupon : </p>
-              <input
-                type="text"
-                className="h-9 w-64 border-2 border-primary focus:outline-none px-2 rounded-lg ml-2"
-              ></input>
-            </div>
+            <PromotionDropDown
+              promoion={props.promotion}
+              hotel={props.hotel}
+              setDiscount={setDiscount}
+            ></PromotionDropDown>
+            {/* <p>Discount : {discount}</p> */}
             <button
               onClick={async () => {
                 try {
                   await craeteAppointment(
-                    props.id,
+                    props.hotel.id,
                     startDate,
                     endDate,
                     session ? session.user.token : ""
