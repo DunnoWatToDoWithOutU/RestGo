@@ -33,6 +33,10 @@ const promotionSchema = new mongoose.Schema({
         type: Date,
         required: [true, 'Please enter the promotion end date'],
     },
+    coupon:{
+        type: String,
+        required: [true, 'Please enter the promotion coupon'],
+    },
     createdAt: {
         type: Date,
         default: Date.now,

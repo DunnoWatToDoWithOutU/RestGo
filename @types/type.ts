@@ -28,5 +28,6 @@ export interface PromotionProps{
     discount:number;
     hotel:string;
     pic:string;
+    coupon:string;
     hotelInfo:HotelProps;
 }

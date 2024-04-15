@@ -6,11 +6,17 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { set } from "mongoose";
 
 export function HotelInfo(props: HotelProps) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const { data: session } = useSession();
+  let bookingday =
+    (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24);
+  if (bookingday < 0 || bookingday > 3) {
+    bookingday = -1;
+  }
   return (
     <div className=" px-[10%] mt-10   text-[#15439C]">
       <ImageHotel pic={props.pic} id={props.id}></ImageHotel>
@@ -32,7 +38,12 @@ export function HotelInfo(props: HotelProps) {
         <div className="w-1/3 ">
           <div className="w-full h-full bg-white border-[3px] text-[#15439C] rounded-lg p-4 border-[#15439C]">
             <p className=" text-end text-2xl font-bold">
-              Total : <span className="text-[2.5rem]">{props.price} ฿</span>
+              Total :{" "}
+              <span className="text-[2.5rem]">
+                {bookingday == -1
+                  ? `Error Booking`
+                  : `${props.price * bookingday}฿`}
+              </span>
             </p>
             <div className="w-full h-[0.125rem] bg-[#15439C] my-5"></div>
             <p className="  text-2xl font-bold">
@@ -64,9 +75,7 @@ export function HotelInfo(props: HotelProps) {
               <p className=" mt-5    mb-5 text-start font-bold text-lg">
                 Durations :{" "}
                 <span className=" font-normal">
-                  {(endDate.getTime() - startDate.getTime()) /
-                    (1000 * 60 * 60 * 24)}{" "}
-                  days
+                  {bookingday == -1 ? `Error Booking` : `${bookingday} Days`}
                 </span>
               </p>
             </div>
