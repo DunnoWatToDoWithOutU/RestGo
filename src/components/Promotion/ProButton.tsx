@@ -8,7 +8,6 @@ import { HotelProps, PromotionProps } from "../../../@types/type";
 import PromotionCard from "./PromotionCard";
 
 export default function UserDropDown(props: { promotion: PromotionProps[] }) {
-  const [hover, setHover] = useState(false);
   return (
     <div className=" text-right">
       <Menu
