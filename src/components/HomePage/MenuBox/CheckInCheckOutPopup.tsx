@@ -4,6 +4,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
+import { toast } from 'sonner';
 
 export const CheckInCheckOutPopup: React.FC<{ 
   onClose: () => void; 
@@ -21,7 +22,7 @@ export const CheckInCheckOutPopup: React.FC<{
   const checkCheckInDate = (newDateIn:any) =>{
     var x = (newDateIn.fromNow()).substr(-3);
     if(x==="ago"){
-      alert("Please Choose a Date That Is Not Today.");
+      toast.error("Wrong Date");
     }
     else{
       setIsSubmittedCheckIn(true)
@@ -34,7 +35,7 @@ export const CheckInCheckOutPopup: React.FC<{
     var y = (newDateOut.from(checkInDate)).substr(-3);
 
     if(y==="ago"){
-      alert("Please Choose a Date That Is Not Today.");
+      toast.error("Wrong Date");
     }
     else{
       setIsSubmittedCheckOut(true)
