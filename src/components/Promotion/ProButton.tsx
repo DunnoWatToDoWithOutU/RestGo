@@ -9,7 +9,7 @@ import { PromotionProps } from "../../../@types/type";
 export default function ProButton(props: { promotion: PromotionProps[] }) {
   const [show, setShow] = useState(false);
   return (
-    <div className="flex relative self-center">
+    <div className=" relative">
       <PromoitionPopUp
         promotions={props.promotion}
         show={show}

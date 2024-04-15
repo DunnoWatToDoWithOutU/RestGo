@@ -1,5 +1,6 @@
 import exp from "constants";
 import mongoose from "mongoose";
+import Hotel from "./Hotel";
 
 const promotionSchema = new mongoose.Schema({
     name: {
@@ -32,6 +33,10 @@ const promotionSchema = new mongoose.Schema({
     endDate:{
         type: Date,
         required: [true, 'Please enter the promotion end date'],
+    },
+    coupon:{
+        type: String,
+        required: [true, 'Please enter the promotion coupon'],
     },
     createdAt: {
         type: Date,

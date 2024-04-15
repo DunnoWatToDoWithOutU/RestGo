@@ -26,7 +26,7 @@ export interface PromotionProps{
     startDate:Date;
     endDate:Date;
     discount:number;
-    hotel:string;
+    hotel:HotelProps;
     pic:string;
-    hotelInfo:HotelProps;
+    coupon:string;
 }
