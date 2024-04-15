@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req:NextRequest,{params}: {params: {id: string}}){
     try{
         connectDB();
-        const promotion = await Promotion.findById(params.id);
+        const promotion = await Promotion.find({hotel: params.id});
         return NextResponse.json(promotion, {status: 200});
     }
     catch(error){

@@ -12,6 +12,7 @@ export function HotelInfo(props: HotelProps) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const { data: session } = useSession();
+  const [coupon, setCoupon] = useState("");
   let bookingday =
     (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24);
   if (bookingday < 0 || bookingday > 3) {
@@ -79,6 +80,13 @@ export function HotelInfo(props: HotelProps) {
                 </span>
               </p>
             </div>
+            <div className="flex items-center justify-center mt-5 ">
+              <p className=" font-bold">Coupon : </p>
+              <input
+                type="text"
+                className="h-9 w-64 border-2 border-primary focus:outline-none px-2 rounded-lg ml-2"
+              ></input>
+            </div>
             <button
               onClick={async () => {
                 try {
@@ -92,7 +100,7 @@ export function HotelInfo(props: HotelProps) {
                   toast.error("Error Booking");
                 }
               }}
-              className=" w-[80%] mx-10  text-3xl text-center  rounded-lg py-3 hover:bg-primary_dark mt-10 text-white bg-primary"
+              className=" w-[80%] mx-10  text-3xl text-center  rounded-lg py-3 hover:bg-primary_dark mt-5 text-white bg-primary"
             >
               Reserve
             </button>

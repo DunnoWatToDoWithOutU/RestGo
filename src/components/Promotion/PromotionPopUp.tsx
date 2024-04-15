@@ -18,7 +18,7 @@ export default function PromoitionPopUp(props: {
         return (
           <PromotionCard
             promotion={promotion}
-            hotel={promotion.hotelInfo}
+            hotel={promotion.hotel}
             key={index}
           ></PromotionCard>
         );
