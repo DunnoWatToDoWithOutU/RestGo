@@ -19,6 +19,7 @@ export default function HotelDetailPage({
     tag: [],
     review: [],
     pic: [],
+    rating: 0,
   });
   const [promotionData, setPromotionData] = useState<PromotionProps[]>([]);
   const [reviewCheck, setReviewCheck] = useState(false);

@@ -40,6 +40,10 @@ const hotelSchema = new mongoose.Schema({
     pic:{
         type:[String],
         required: [true, 'Please enter the picture'],
+    },
+    rating:{
+        type:Number,
+        default:0,
     }
 }, { 
     toJSON: { virtuals: true }, 

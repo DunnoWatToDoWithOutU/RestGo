@@ -6,26 +6,8 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-function Max(a: number, b: number) {
-  if (a > b) {
-    return a;
-  } else {
-    return b;
-  }
-}
-
 export function HotelCard(props: { hotel: HotelProps }) {
   const router = useRouter();
-  const sumReview = Max(
-    Math.round(
-      (props.hotel.review.reduce((sum, review) => {
-        return sum + Number(review.rating);
-      }, 0) /
-        props.hotel.review.length) *
-        10
-    ) / 10,
-    0
-  );
   return (
     <motion.button
       whileHover={{ left: 10 }}
@@ -87,9 +69,9 @@ export function HotelCard(props: { hotel: HotelProps }) {
           })}
         </div>
         <div className="flex z-10 space-x-1 px-3 text-xl items-center text-white">
-          <p>{sumReview}</p>
+          <p>{props.hotel.rating}</p>
           <Rating
-            value={sumReview}
+            value={props.hotel.rating}
             precision={0.1}
             readOnly
             className=""
