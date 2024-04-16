@@ -179,6 +179,7 @@ export function HotelInfo(props: {
                 } catch (error) {
                   toast.error("Error Booking");
                 }
+                toast.success("Booking Success");
               }}
               className=" w-[80%] mx-10  text-3xl text-center  rounded-lg py-3 hover:bg-primary_dark mt-5 text-white bg-primary"
             >
