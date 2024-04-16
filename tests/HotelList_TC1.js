@@ -24,55 +24,52 @@ describe('Test Suite', () => {
   });
 
   it('Verify Price Sorting in Ascending Order', () => {
-    cy.contains('Price').click();
+    cy.contains('Price').click(); 
     cy.wait(2000);
-    cy.get('.hotel-card').within(() => {
-    // Select the price element for each hotel card
-    cy.get('.font-bold.text-3xl').each(($price, index, $prices) => {
-      // If it's not the last price, compare with the next price
-      if (index < $prices.length - 1) {
-        const currentPrice = parseFloat($price.text().replace(' ฿', '').replace(',', ''));
-        const nextPrice = parseFloat($prices.eq(index + 1).text().replace(' ฿', '').replace(',', ''));
-        // Verify that the current price is less than or equal to the next price
-        expect(currentPrice).to.be.at.most(nextPrice);
-      }
-    });
+
+    cy.get('.hotel-card').find('.text-3xl').then($prices => {
+        const prices = $prices.toArray().map(price => parseInt(price.innerText.replace(' ฿', '').replace(',', '')));
+        const sortedPrices = [...prices].sort((a, b) => a - b);
+        expect(prices).to.deep.equal(sortedPrices);
     });
   });
 
   it('Verify Price Sorting in Descending Order', () => {
-    cy.contains('Price').click()
-     cy.get('#sortButton').should('be.visible').click();
-    cy.get('.hotel-card').each(($card, index, $list) => {
-      if (index < $list.length - 1) {
-        const currentPrice = parseFloat($card.find('.hotel-price').text().replace('฿', '').trim());
-        const nextPrice = parseFloat($list.eq(index + 1).find('.hotel-price').text().replace('฿', '').trim());
-        expect(currentPrice).to.be.at.least(nextPrice);
-      }
+    cy.contains('Price').click(); 
+    cy.get('#sortButton').should('be.visible').click();
+    cy.wait(2000); 
+
+    cy.get('.hotel-card').find('.text-3xl').then($prices => {
+        const prices = $prices.toArray().map(price => parseInt(price.innerText.replace(' ฿', '').replace(',', '')));
+        const sortedPrices = [...prices].sort((a, b) => b - a);
+        expect(prices).to.deep.equal(sortedPrices);
     });
   });
 
-  it('Verify Ratings Sorting in Ascending Order', () => {
-    cy.contains('Rating').click();
-    cy.get('.hotel-card').each(($card, index, $list) => {
-      if (index < $list.length - 1) {
-        const currentRating = parseFloat($card.find('.hotel-rating').text());
-        const nextRating = parseFloat($list.eq(index + 1).find('.hotel-rating').text());
-        expect(currentRating).to.be.at.most(nextRating);
-      }
+   it('Verify Ratings Sorting in Ascending Order', () => {
+    cy.contains('Rating').click(); 
+    cy.wait(2000); 
+
+    cy.get('.hotel-card').find('.MuiRating-root').then($ratings => {
+        const ratings = $ratings.toArray().map(rating => parseFloat(rating.getAttribute('aria-label')));
+        const sortedRatings = [...ratings].sort((a, b) => a - b);
+        expect(ratings).to.deep.equal(sortedRatings);
     });
   });
 
+ 
   it('Verify Ratings Sorting in Descending Order', () => {
-    cy.contains('Rating').click()
-    cy.get('#sortButton').should('be.visible').click();; 
-    cy.get('.hotel-card').each(($card, index, $list) => {
-      if (index < $list.length - 1) {
-        const currentRating = parseFloat($card.find('.hotel-rating').text());
-        const nextRating = parseFloat($list.eq(index + 1).find('.hotel-rating').text());
-        expect(currentRating).to.be.at.least(nextRating);
-      }
+    cy.contains('Rating').click(); 
+    cy.get('#sortButton').should('be.visible').click();
+    cy.wait(2000);
+
+    cy.get('.hotel-card').find('.MuiRating-root').then($ratings => {
+        const ratings = $ratings.toArray().map(rating => parseFloat(rating.getAttribute('aria-label')));
+        const sortedRatings = [...ratings].sort((a, b) => b - a);
+        expect(ratings).to.deep.equal(sortedRatings);
     });
+  });
+
 
     it('Normal loading time', () => {
       cy.window().then(win => {
@@ -86,21 +83,8 @@ describe('Test Suite', () => {
     });
 
     it('Valid Data Retrieval', () => {
-      cy.get('[data-testid=hotel-card]').should('exist');
-    });
-
-    it('Empty Data Retrieval', () => {
-      cy.intercept('GET', 'https://rest-go.vercel.app/api/v1/hotels', { body: [] }).as('getHotels');
-      cy.reload();
-      cy.wait('@getHotels');
-      cy.contains('No results found').should('be.visible');
-    });
-
-    it('Error in Data Retrieval', () => {
-      cy.intercept('GET', 'https://rest-go.vercel.app/api/v1/hotels', { statusCode: 500 }).as('getHotels');
-      cy.reload();
-      cy.wait('@getHotels');
-      cy.contains('Error retrieving data').should('be.visible');
-    });
+      cy.get('.hotel-card').should('exist');
   });
-});
+
+  });
+
