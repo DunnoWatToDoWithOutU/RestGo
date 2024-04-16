@@ -62,11 +62,6 @@ export function HotelInfo(props: {
 
   const [review, setReview] = useState<string>("");
   const [rating, setRating] = useState<number>(0);
-
-  if (props.hotel.name == "") return (
-    <p className="text-center text-xl font-bold m-20 h-screen">Hotel Data loading...</p>
-  );
-
   return (
     <div className=" px-[10%] mt-10   text-[#15439C]">
       <ImageHotel pic={props.hotel.pic} id={props.hotel.id}></ImageHotel>
@@ -183,6 +178,7 @@ export function HotelInfo(props: {
                   );
                 } catch (error) {
                   toast.error("Error Booking");
+                  return;
                 }
                 toast.success("Booking Success");
               }}
@@ -198,7 +194,6 @@ export function HotelInfo(props: {
 }
 
 function ImageHotel(props: { pic: string[]; id: string }) {
-  
   return (
     <div className="flex h-80  w-full space-x-4">
       <Image
@@ -261,7 +256,6 @@ function ImageHotel(props: { pic: string[]; id: string }) {
 }
 
 function BasicInfo(props: HotelProps) {
-  
   return (
     <div className="bg-white py-4 w-full border-[#15439C] border-[3px] rounded-2xl p-2 px-4">
       <p className="text-3xl font-semibold ml-2">{props.name}</p>
