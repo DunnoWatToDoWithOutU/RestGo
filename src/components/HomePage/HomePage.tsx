@@ -18,7 +18,6 @@ export function HomePage() {
     getHotelData();
   }, []);
 
-  console.log(hotelData);
   return (
     <div>
       <div className="px-[10%] mt-20  relative z-10 text-center ">

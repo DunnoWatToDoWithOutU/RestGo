@@ -13,8 +13,10 @@ export function HotelInfo(props: {
   hotel: HotelProps;
   promotion: PromotionProps[];
 }) {
+  console.log(props.hotel);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  console.log(props.hotel, "hotel");
   const { data: session } = useSession();
   const [discount, setDiscount] = useState(0);
   let bookingday =
@@ -32,11 +34,9 @@ export function HotelInfo(props: {
             <p className="text-3xl font-semibold ml-2">Reviews</p>
             <div className="w-full h-[0.125rem] bg-[#15439C] my-5"></div>
             <div className="space-y-3 w-full h-[17rem] overflow-y-scroll overflow-x-hidden no-scrollbar ">
-              <ReviewCard></ReviewCard>
-              <ReviewCard></ReviewCard>
-              <ReviewCard></ReviewCard>
-              <ReviewCard></ReviewCard>
-              <ReviewCard></ReviewCard>
+              {props.hotel.review.map((review, index) => {
+                return <ReviewCard review={review} key={index}></ReviewCard>;
+              })}
             </div>
           </div>
         </div>

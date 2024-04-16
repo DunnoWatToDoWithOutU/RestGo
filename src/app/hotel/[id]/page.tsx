@@ -1,16 +1,36 @@
+"use client";
 import { HotelCard } from "@/components/HomePage/HotelCard";
 import { HotelInfo } from "@/components/HotelInfo/HotelInfo";
 import getHotel from "@/libs/getHotel";
 import { getPromotion } from "@/libs/getPromotion";
-import { HotelProps } from "../../../../@types/type";
+import { HotelProps, PromotionProps } from "../../../../@types/type";
+import { useEffect, useState } from "react";
 
-export default async function HotelDetailPage({
+export default function HotelDetailPage({
   params,
 }: {
   params: { id: string };
 }) {
-  const hotel: HotelProps = await getHotel(params.id);
-  const hotelPromotion = await getPromotion(hotel.id);
-  console.log(hotelPromotion);
-  return <HotelInfo hotel={hotel} promotion={hotelPromotion}></HotelInfo>;
+  const [hotelData, setHotelData] = useState<HotelProps>({
+    id: "",
+    name: "",
+    address: "",
+    telephone: "",
+    price: 0,
+    tag: [],
+    review: [],
+    pic: [],
+  });
+  const [promotionData, setPromotionData] = useState<PromotionProps[]>([]);
+  const getHotelData = async () => {
+    const hotels = await getHotel(params.id);
+    const hotelPromotion = await getPromotion(hotelData.id);
+    setPromotionData(hotelPromotion);
+    setHotelData(hotels);
+  };
+  useEffect(() => {
+    getHotelData();
+  }, []);
+
+  return <HotelInfo hotel={hotelData} promotion={promotionData}></HotelInfo>;
 }

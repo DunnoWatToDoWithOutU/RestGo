@@ -1,3 +1,4 @@
+import { User } from "next-auth";
 
 
 export interface HotelProps{
@@ -7,7 +8,7 @@ export interface HotelProps{
     telephone:string,
     price:number,
     tag:string[],
-    reviews:string[],
+    review:ReviewProps[],
     pic:string[],
 }
 
@@ -31,4 +32,11 @@ export interface PromotionProps{
     hotel:HotelProps;
     pic:string;
     coupon:string;
+}
+
+export interface ReviewProps{
+    rating:Number;
+    reviewText:String;
+    user:User;
+    _id:string;
 }

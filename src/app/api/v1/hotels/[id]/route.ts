@@ -8,7 +8,14 @@ export async function GET(
 ) {
     try {
         await connectDB()
-        const hotel = await Hotel.findById(params.id)
+        const hotel = await Hotel.findById(params.id).populate({
+            path: "review",
+            populate: {
+                path: "user",
+                model: 'User',
+                select: "name",
+            },
+        });
         return NextResponse.json(hotel, {status: 200})
     } catch (err) {
         return NextResponse.json({error: "Internal server error"}, {status: 500})
