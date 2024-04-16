@@ -17,7 +17,7 @@ export function HotelCard(props: { hotel: HotelProps }) {
       // style={{
       //   backgroundImage: `url(img/hotel/${props.hotel.id}/${props.hotel.pic[0]})`,
       // }}
-      className="w-[100%]   relative  bg-cover bg-center  h-48 mx-auto text-white p-3 shadow-lg text-start hover:bg-zinc-100 rounded-2xl flex overflow-hidden"
+      className="w-[100%]   relative  bg-cover bg-center  h-48 mx-auto text-white p-3 shadow-lg text-start hover:bg-zinc-100 rounded-2xl flex overflow-hidden hotel-card"
     >
       <div className="absolute inset-0 bg-black rounded-2xl opacity-40 z-10"></div>
       <Image
