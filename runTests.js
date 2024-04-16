@@ -3,9 +3,9 @@ const cypress = require('cypress');
 async function runTests() {
   try {
     await cypress.run({
-      spec: './tests/SearchTest.js',
+      spec: './tests/HotelList_TC1.js',
       e2e: {
-        specPattern: 'SearchTest.js'
+        specPattern: 'HotelList_TC1.js'
       }
     });
   } catch (error) {
