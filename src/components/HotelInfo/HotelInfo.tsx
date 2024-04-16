@@ -59,7 +59,7 @@ export function HotelInfo(props: {
             <p className="  text-2xl font-bold">
               Total :{" "}
               <span className="text-4xl">
-                {(props.hotel.price * bookingday * (100 - discount)) / 100} ฿{" "}
+                {(props.hotel.price * (100 - discount)) / 100} ฿{" "}
               </span>{" "}
               <span className="text-lg font-normal">
                 / night{" "}
@@ -206,7 +206,7 @@ function BasicInfo(props: HotelProps) {
         <p className="text-2xl font-semibold">
           Tags :
           <span className="font-normal text-xl">
-            {props.tags?.map((tag, index) => {
+            {props.tag.map((tag, index) => {
               return (
                 <span key={index} className="mx-1">
                   {tag}

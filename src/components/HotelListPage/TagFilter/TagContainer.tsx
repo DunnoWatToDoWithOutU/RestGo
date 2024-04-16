@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { TagPiece } from "./TagPiece";
 
 const mockTags = [
@@ -12,6 +13,16 @@ const mockTags = [
 ];
 
 export function TagContainer() {
+
+  //selectedTags is the Array of boolean that refers which Tags is selected or not. Use it for search...
+  const [selectedTags, setSelectedTags] = useState(new Array(mockTags.length).fill(false));
+
+  const handleTagClick = (index : number) => {
+    const newSelectedTags = [...selectedTags];
+    newSelectedTags[index] = !newSelectedTags[index];
+    setSelectedTags(newSelectedTags);
+  };
+
   return (
     <div className="flex flex-row items-center border-[#2465E2] rounded-xl p-2 my-3 mx-12 border-2">
       <span className="font-bold text-[9pt] sm:text-[11pt] md:text-[14pt] text-[#15439C] whitespace-nowrap mr-3">
@@ -19,7 +30,13 @@ export function TagContainer() {
       </span>
       <div className="flex flex-row justify-evenly">
         {mockTags.map((tag, index) => (
-          <TagPiece key={index} image={`/Tags/${tag[0]}`} type={tag[1]} />
+          <TagPiece
+            key={index}
+            image={`/Tags/${tag[0]}`}
+            type={tag[1]}
+            selected={selectedTags[index]}
+            onClick={() => handleTagClick(index)}
+          />
         ))}
       </div>
     </div>
