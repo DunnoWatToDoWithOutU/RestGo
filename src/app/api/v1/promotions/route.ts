@@ -6,7 +6,8 @@ import { NextRequest, NextResponse } from "next/server";
 export const GET = async ()=>{
     try{
         await connectDB();
-        const promotions = await Promotion.find().populate({
+        const currentDate = new Date();
+        const promotions = await Promotion.find({endDate: { $gte: currentDate }}).populate({
             path: "hotel",
             model: 'Hotel',
         });
