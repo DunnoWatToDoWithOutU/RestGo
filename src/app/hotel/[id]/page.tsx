@@ -25,12 +25,20 @@ export default function HotelDetailPage({
   const [reviewCheck, setReviewCheck] = useState(false);
   const getHotelData = async () => {
     const hotels = await getHotel(params.id);
-    const hotelPromotion = await getPromotion(hotelData.id);
-    setPromotionData(hotelPromotion);
     setHotelData(hotels);
+    console.log(hotelData, "hotel");
   };
+
+  const getPromotionData = async () => {
+    const hotelPromotion = await getPromotion(params.id);
+    setPromotionData(hotelPromotion);
+    console.log(promotionData, "promotion");
+  };
+
   useEffect(() => {
     getHotelData();
+    //make delay
+    getPromotionData();
   }, [reviewCheck]);
 
   return (
