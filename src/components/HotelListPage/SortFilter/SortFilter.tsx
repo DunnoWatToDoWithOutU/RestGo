@@ -12,7 +12,7 @@ const SortItem = [
     img: "/sortingIcon/ratingIcon.png",
   },
   {
-    name: "Distance",
+    name: "Location",
     img: "/sortingIcon/distanceIcon.png",
   },
   {

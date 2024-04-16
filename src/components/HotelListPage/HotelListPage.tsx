@@ -99,6 +99,13 @@ export function HotelListPage() {
           }
         } else if (selectedFilter === "rating") {
           return b.rating - a.rating;
+        } else if (selectedFilter === "location") {
+          if (a.address < b.address) {
+            return -1;
+          }
+          if (a.address > b.address) {
+            return 1;
+          }
         }
         return 0;
       });
@@ -115,6 +122,13 @@ export function HotelListPage() {
           }
         } else if (selectedFilter === "rating") {
           return a.rating - b.rating;
+        } else if (selectedFilter === "location") {
+          if (a.address > b.address) {
+            return -1;
+          }
+          if (a.address < b.address) {
+            return 1;
+          }
         }
         return 0;
       });
