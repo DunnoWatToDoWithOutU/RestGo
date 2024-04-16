@@ -1,7 +1,7 @@
 import craeteAppointment from "@/libs/createAppointment";
 import { HotelProps, PromotionProps } from "../../../@types/type";
 import { ReviewCard } from "./ReviewCard";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -22,13 +22,25 @@ export function HotelInfo(props: {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [discount, setDiscount] = useState(0);
+  const chatMessagesRef = useRef<HTMLDivElement>(null);
   let bookingday =
     (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24);
   if (bookingday < 0 || bookingday > 3) {
     bookingday = -1;
   }
+  useEffect(() => {
+    scrollToBottom();
+  }, [props.hotel.review]);
 
+  const scrollToBottom = () => {
+    if (chatMessagesRef.current) {
+      chatMessagesRef.current.scrollTop = chatMessagesRef.current.scrollHeight;
+    }
+  };
   const handleOnSent = async () => {
+    // clear input
+    setReview("");
+    setRating(0);
     try {
       if (session) {
         await createReviews(rating, review, props.hotel.id, session.user._id);
@@ -37,6 +49,7 @@ export function HotelInfo(props: {
       }
     } catch (error) {
       toast.error("Error Booking");
+      scrollToBottom();
       console.log(error);
     }
     toast.success("Review Sent");
@@ -54,12 +67,16 @@ export function HotelInfo(props: {
           <div className="bg-white py-4 w-full border-[#15439C] border-[3px] rounded-2xl p-2 px-4">
             <p className="text-3xl font-semibold ml-2">Reviews</p>
             <div className="w-full h-[0.125rem] bg-[#15439C] my-5"></div>
-            <div className="space-y-3 w-full h-[17rem] overflow-y-scroll overflow-x-hidden no-scrollbar ">
+            <div
+              ref={chatMessagesRef}
+              className="space-y-3 w-full h-[17rem]  overflow-y-scroll overflow-x-hidden no-scrollbar "
+            >
               {props.hotel.review.map((review, index) => {
                 return <ReviewCard review={review} key={index}></ReviewCard>;
               })}
             </div>
             <InputPanel
+              review={review}
               handleOnSent={handleOnSent}
               Rating={rating}
               setRating={setRating}
@@ -249,6 +266,7 @@ function BasicInfo(props: HotelProps) {
 
 function InputPanel(props: {
   Rating: number;
+  review: string;
   setReview: (review: string) => void;
   setRating: (rating: number) => void;
   handleOnSent: () => void;
@@ -256,6 +274,7 @@ function InputPanel(props: {
   return (
     <div className="h-20 rounded-lg w-full px-3 py-2  space-x-3  items-center overflow-hidden bg-[#15429c71] flex mt-3">
       <textarea
+        value={props.review}
         onChange={(event) => {
           props.setReview(event.target.value);
         }}
