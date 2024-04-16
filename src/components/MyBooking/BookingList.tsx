@@ -5,12 +5,14 @@ import { BookingCard } from "./BookingCard";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/libs/authOptions";
 
+
 export async function BookingList() {
   const session = await getServerSession(authOptions);
 
   const bookingDatas: AppointmnetProps[] = await getAppointments(
     session ? session?.user.token : ""
   );
+
   if (bookingDatas.length === 0) {
     return <div></div>;
   }
@@ -23,7 +25,7 @@ export async function BookingList() {
             key={index}
             hotel={hotel}
             appointment={bookingData}
-          ></BookingCard>
+            ></BookingCard>
         );
       })}
     </div>
