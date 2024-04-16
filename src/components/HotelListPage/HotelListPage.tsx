@@ -232,11 +232,20 @@ export function HotelListPage() {
         ></input>
       </div>
       <TagContainer></TagContainer>
-      <SortFilter
-        setFiltering={setSelectedFilter}
-        setMaxtoMin={setMaxtoMin}
-        MaxtoMin={MaxtoMin}
-      ></SortFilter>
+      <div className="flex items-center space-x-3">
+        <SortFilter
+          setFiltering={setSelectedFilter}
+          setMaxtoMin={setMaxtoMin}
+          MaxtoMin={MaxtoMin}
+        ></SortFilter>
+        <button className="  w-40 border-2 flex space-x-2 hover:bg-zinc-100 rounded-md border-primary px-2 py-2">
+          <p className=" text-[#15439C] font-bold text-xl">More Filter</p>
+          <div
+            className="h-6 w-6 bg-cover bg-center"
+            style={{ backgroundImage: `url(/img/filter.png)` }}
+          ></div>
+        </button>
+      </div>
       <div className="w-full px-[10%]">
         <HotelList HotelData={searchResults}></HotelList>
       </div>
