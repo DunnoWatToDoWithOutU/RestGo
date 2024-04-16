@@ -28,7 +28,7 @@ export default function SortFilter(props: {
 }) {
   const [selectedButtonIndexes, setSelectedButtonIndexes] = useState<number>(
     0 //default by price
-  )
+  );
   const handleSortClick = (index: number) => {
     props.setFiltering(SortItem[index].name.toLowerCase());
     setSelectedButtonIndexes(index);
@@ -57,7 +57,7 @@ export default function SortFilter(props: {
         return (
           <button
             key={index}
-            className="flex border-l-2 border-zinc-200 space-x-2 hover:bg-slate-100 "
+            className="flex border-l-2 border-zinc-200 space-x-2 hover:bg-slate-100"
             onClick={() => handleSortClick(index)}
           >
             <div
