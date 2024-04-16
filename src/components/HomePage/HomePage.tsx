@@ -17,12 +17,12 @@ export function HomePage() {
   useEffect(() => {
     getHotelData();
   }, []);
-  
+
   return (
     <div>
       <div className="px-[10%] mt-20  relative z-10 text-center ">
         <p className=" text-3xl font-semibold text-white shadow-lg">
-          Welcome to REST GO. We will get you to rest in piece.
+          Welcome to REST GO. We will get you to rest in peace.
         </p>
         <SearchBar></SearchBar>
         <MenuBox></MenuBox>
