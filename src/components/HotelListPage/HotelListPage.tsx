@@ -7,13 +7,17 @@ import { TagContainer } from "./TagFilter/TagContainer";
 import dayjs from "dayjs";
 import { AddPeoplePopup } from "../HomePage/MenuBox/AddPeoplePopup";
 import { CheckInCheckOutPopup2 } from "@/components/HotelListPage/HotelListCheckInOut";
-import { set } from "mongoose";
 import getHotels from "@/libs/getHotels";
 
-const filterData = [
-  { value: "name", label: "Name" },
-  { value: "price", label: "Price" },
-  { value: "rating", label: "Rating" },
+const TagData = [
+  "wifi",
+  "pool",
+  "parking",
+  "aircon",
+  "breakfast",
+  "kitchen",
+  "pets",
+  "fitness",
 ];
 
 export function HotelListPage() {
@@ -44,6 +48,8 @@ export function HotelListPage() {
   const [isSubmittedCheckIn, setIsSubmittedCheckIn] = useState(false);
   const [isSubmittedCheckOut, setIsSubmittedCheckOut] = useState(false);
 
+  const [selectedTags, setSelectedTags] = useState(new Array(8).fill(false));
+
   const [peopleValues, setPeopleValues] = useState({
     adults: 1,
     children: 0,
@@ -62,8 +68,6 @@ export function HotelListPage() {
   };
 
   const handleAddPeople = () => {
-    // console.log("Add people clicked");
-    //setShowCalendar(false);
     setShowAddPeople(true);
     setShowCheckInCheckOutPopup2(false);
   };
@@ -74,10 +78,6 @@ export function HotelListPage() {
 
   const handleCloseCheckInCheckOutPopup2 = () => {
     setShowCheckInCheckOutPopup2(false);
-  };
-
-  const handleFilterClick = (filter: any) => {
-    setSelectedFilter(filter === selectedFilter ? null : filter);
   };
 
   useEffect(() => {
@@ -133,10 +133,21 @@ export function HotelListPage() {
         return 0;
       });
     }
+    const resultTag = resultsFiltering.filter((hotel) => {
+      for (let i = 0; i < selectedTags.length; i++) {
+        if (selectedTags[i] == true) {
+          if (hotel.tag.includes(TagData[i]) == false) {
+            return false;
+          }
+        }
+      }
+      return true;
+    });
     console.log(resultsFiltering);
-    setSearchResults(resultsFiltering);
-  }, [search, hotelData, MaxtoMin, selectedFilter]);
+    setSearchResults(resultTag);
+  }, [search, hotelData, MaxtoMin, selectedFilter, selectedTags]);
   console.log(selectedFilter);
+  console.log(selectedTags);
   return (
     <main className="w-full flex flex-col justify-start items-center ">
       <div className="  w-[40%] mt-10 text-center ">
@@ -231,7 +242,10 @@ export function HotelListPage() {
           className="h-12 text-[#15439C] my-auto w-[60rem] py-2 px-3 bg-white rounded-full focus:outline-none border-primary border-2"
         ></input>
       </div>
-      <TagContainer></TagContainer>
+      <TagContainer
+        selectedTags={selectedTags}
+        setSelectedTags={setSelectedTags}
+      ></TagContainer>
       <div className="flex items-center space-x-3">
         <SortFilter
           setFiltering={setSelectedFilter}

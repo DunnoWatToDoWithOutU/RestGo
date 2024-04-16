@@ -1,8 +1,13 @@
 import Image from "next/image";
 
-export function TagPiece(props: { image: string; type: string; selected: boolean; onClick: () => void }) {
+export function TagPiece(props: {
+  image: string;
+  type: string;
+  selected: boolean;
+  onClick: () => void;
+}) {
   return (
-    <div
+    <button
       className={`flex flex-col items-center border-l-2 transition duration-300 ease-in-out ${
         props.selected ? "bg-gray-100" : ""
       }`}
@@ -17,11 +22,13 @@ export function TagPiece(props: { image: string; type: string; selected: boolean
           props.selected ? "opacity-100" : "opacity-75"
         }`}
       />
-      <span className={`text-[6pt] sm:text-[10pt] md:text-[12pt] font-bold ${
-        props.selected ? "text-[#15439C]" : "text-[#738EC4]"
-      }`}>
+      <span
+        className={`text-[6pt] sm:text-[10pt] md:text-[12pt] font-bold ${
+          props.selected ? "text-[#15439C]" : "text-[#738EC4]"
+        }`}
+      >
         {props.type}
       </span>
-    </div>
+    </button>
   );
 }
