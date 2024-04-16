@@ -26,21 +26,12 @@ export default function SortFilter(props: {
   setMaxtoMin: (value: boolean) => void;
   MaxtoMin: boolean;
 }) {
-  const [selectedButtonIndexes, setSelectedButtonIndexes] = useState<number[]>(
-    [0] //default by price
-  );//there is no need to make it as array. but i dont know will it break the search algorithm so i keep it array
-
+  const [selectedButtonIndexes, setSelectedButtonIndexes] = useState<number>(
+    0 //default by price
+  )
   const handleSortClick = (index: number) => {
     props.setFiltering(SortItem[index].name.toLowerCase());
-    // support more than one type sort
-    // if (selectedButtonIndexes.includes(index)) {
-    //   setSelectedButtonIndexes(
-    //     selectedButtonIndexes.filter((i) => i !== index)
-    //   );
-    // } else {
-    //   setSelectedButtonIndexes([...selectedButtonIndexes, index]);
-    // }
-    setSelectedButtonIndexes([index]);
+    setSelectedButtonIndexes(index);
   };
 
   return (
@@ -71,7 +62,7 @@ export default function SortFilter(props: {
           >
             <div
               className={`${
-                selectedButtonIndexes.includes(index)
+                selectedButtonIndexes == index
                   ? "bg-[#D9D9D980] rounded-md  mx-3 my-2 px-2 py-0.5 "
                   : "mx-5 my-2.5"
               } flex `}
