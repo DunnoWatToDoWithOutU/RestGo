@@ -1,4 +1,4 @@
-// CheckInPopup.tsx
+'use client'
 import React, { useState } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -6,15 +6,17 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { toast } from 'sonner';
 
-export const CheckInCheckOutPopup: React.FC<{ 
+export const CheckInCheckOutPopup: React.FC<{
+  menuCheckInDate:Dayjs
+  menuCheckOutDate:Dayjs
   onClose: () => void; 
   onChange1: (values: any) => void ; 
-  onChange2: (values: any) => void }> = ({ onClose, onChange1, onChange2 }) => {
+  onChange2: (values: any) => void }> = ({ onClose, onChange1, onChange2 ,menuCheckInDate,menuCheckOutDate }) => {
 
   const [isSubmittedCheckIn, setIsSubmittedCheckIn] = useState(false);
   const [isSubmittedCheckOut, setIsSubmittedCheckOut] = useState(false);
-  const [checkInDate, setCheckInDate] = useState(dayjs());
-  const [checkOutDate, setCheckOutDate] = useState(dayjs());
+  const [checkInDate, setCheckInDate] = useState(menuCheckInDate);
+  const [checkOutDate, setCheckOutDate] = useState(menuCheckOutDate);
 
   var relativeTime = require('dayjs/plugin/relativeTime')
   dayjs.extend(relativeTime)
@@ -27,7 +29,7 @@ export const CheckInCheckOutPopup: React.FC<{
     else{
       setIsSubmittedCheckIn(true)
       setCheckInDate(newDateIn)
-      onChange1(newDateIn.format('DD/MM/YYYY'))
+      onChange1(newDateIn)
     }
   }
 
@@ -38,9 +40,28 @@ export const CheckInCheckOutPopup: React.FC<{
       toast.error("Wrong Date");
     }
     else{
-      setIsSubmittedCheckOut(true)
-      setCheckOutDate(newDateOut)
-      onChange2(newDateOut.format('DD/MM/YYYY'))
+      if(isSubmittedCheckIn===false){
+        toast.error("Please Insert Check-In Date");
+      }
+      else{
+        setIsSubmittedCheckOut(true)
+        setCheckOutDate(newDateOut)
+        onChange2(newDateOut)
+        onClose();
+      }
+    }
+  }
+
+  const closeCheck = (newDateIn:any,newDateOut:any) =>{
+    var z = (newDateOut.from(newDateIn)).substr(-3);
+    console.log(z);
+    if(z==="ago"){
+      toast.error("Wrong Date");
+    }
+    else{
+      setIsSubmittedCheckIn(true)
+      setCheckInDate(newDateIn)
+      onChange1(newDateIn)
       onClose();
     }
   }
@@ -50,7 +71,7 @@ export const CheckInCheckOutPopup: React.FC<{
       <div className="bg-white rounded-lg shadow-lg p-7">
         <button
           className="absolute top-2 right-2 text-blue-500 hover:text-[#15439C] focus:outline-none transition-all duration-200"
-          onClick={onClose}
+          onClick={()=>closeCheck(checkInDate,checkOutDate)}
         >
           <svg
             className="h-6 w-6l"
@@ -73,13 +94,13 @@ export const CheckInCheckOutPopup: React.FC<{
         <div className='flex flex-row p-1'>
           <div className='border'>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateCalendar value={checkInDate} 
+                <DateCalendar value={checkInDate}
                   onChange={(newDateIn)=>checkCheckInDate(newDateIn)}/>
               </LocalizationProvider>
             </div>
             <div className='border'>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateCalendar value={checkOutDate} 
+                <DateCalendar value={checkOutDate}
                   onChange={(newDateOut)=>checkCheckOutDate(newDateOut)}/>
               </LocalizationProvider>
             </div>
