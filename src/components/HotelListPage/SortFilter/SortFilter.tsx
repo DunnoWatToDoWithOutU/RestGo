@@ -27,18 +27,20 @@ export default function SortFilter(props: {
   MaxtoMin: boolean;
 }) {
   const [selectedButtonIndexes, setSelectedButtonIndexes] = useState<number[]>(
-    []
-  );
+    [0] //default by price
+  );//there is no need to make it as array. but i dont know will it break the search algorithm so i keep it array
 
   const handleSortClick = (index: number) => {
     props.setFiltering(SortItem[index].name.toLowerCase());
-    if (selectedButtonIndexes.includes(index)) {
-      setSelectedButtonIndexes(
-        selectedButtonIndexes.filter((i) => i !== index)
-      );
-    } else {
-      setSelectedButtonIndexes([...selectedButtonIndexes, index]);
-    }
+    // support more than one type sort
+    // if (selectedButtonIndexes.includes(index)) {
+    //   setSelectedButtonIndexes(
+    //     selectedButtonIndexes.filter((i) => i !== index)
+    //   );
+    // } else {
+    //   setSelectedButtonIndexes([...selectedButtonIndexes, index]);
+    // }
+    setSelectedButtonIndexes([index]);
   };
 
   return (

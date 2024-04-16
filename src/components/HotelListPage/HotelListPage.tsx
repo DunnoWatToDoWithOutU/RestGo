@@ -194,7 +194,7 @@ export function HotelListPage() {
               </p>
             </button>
             {showAddPeople && (
-              <div className="absolute top-[50%] left-[2px] right-[16.1vw] z-50">
+              <div className="absolute top-[50%] left-[50px] right-[20vw] z-50">
                 <AddPeoplePopup
                   onClose={handleCloseAddPeople}
                   onSubmit={handlePeopleSubmit}
