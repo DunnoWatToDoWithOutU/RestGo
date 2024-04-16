@@ -97,6 +97,8 @@ export function HotelListPage() {
           if (a.name > b.name) {
             return 1;
           }
+        } else if (selectedFilter === "rating") {
+          return b.rating - a.rating;
         }
         return 0;
       });
@@ -111,6 +113,8 @@ export function HotelListPage() {
           if (a.name < b.name) {
             return 1;
           }
+        } else if (selectedFilter === "rating") {
+          return a.rating - b.rating;
         }
         return 0;
       });
