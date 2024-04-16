@@ -5,7 +5,6 @@ import getHotel from "@/libs/getHotel";
 import { getPromotion } from "@/libs/getPromotion";
 import { HotelProps, PromotionProps } from "../../../../@types/type";
 import { useEffect, useState } from "react";
-
 export default function HotelDetailPage({
   params,
 }: {
@@ -22,6 +21,7 @@ export default function HotelDetailPage({
     pic: [],
   });
   const [promotionData, setPromotionData] = useState<PromotionProps[]>([]);
+  const [reviewCheck, setReviewCheck] = useState(false);
   const getHotelData = async () => {
     const hotels = await getHotel(params.id);
     const hotelPromotion = await getPromotion(hotelData.id);
@@ -30,7 +30,14 @@ export default function HotelDetailPage({
   };
   useEffect(() => {
     getHotelData();
-  }, []);
+  }, [reviewCheck]);
 
-  return <HotelInfo hotel={hotelData} promotion={promotionData}></HotelInfo>;
+  return (
+    <HotelInfo
+      hotel={hotelData}
+      reviewCheck={reviewCheck}
+      setReviewCheck={setReviewCheck}
+      promotion={promotionData}
+    ></HotelInfo>
+  );
 }

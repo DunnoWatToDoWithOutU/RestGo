@@ -1,4 +1,3 @@
-"use client";
 import craeteAppointment from "@/libs/createAppointment";
 import { HotelProps, PromotionProps } from "../../../@types/type";
 import { ReviewCard } from "./ReviewCard";
@@ -8,22 +7,44 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { set } from "mongoose";
 import { PromotionDropDown } from "./PromotionDropDown";
+import { Rating } from "@mui/material";
+import { createReviews } from "@/libs/createReviews";
+import { authOptions } from "@/libs/authOptions";
 
 export function HotelInfo(props: {
   hotel: HotelProps;
   promotion: PromotionProps[];
+  reviewCheck: boolean;
+  setReviewCheck: (check: boolean) => void;
 }) {
-  console.log(props.hotel);
+  const { data: session } = useSession();
+  console.log(session);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  console.log(props.hotel, "hotel");
-  const { data: session } = useSession();
   const [discount, setDiscount] = useState(0);
   let bookingday =
     (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24);
   if (bookingday < 0 || bookingday > 3) {
     bookingday = -1;
   }
+
+  const handleOnSent = async () => {
+    try {
+      if (session) {
+        await createReviews(rating, review, props.hotel.id, session.user._id);
+      } else {
+        throw new Error("Session is null");
+      }
+    } catch (error) {
+      toast.error("Error Booking");
+      console.log(error);
+    }
+    toast.success("Review Sent");
+    props.setReviewCheck(!props.reviewCheck);
+  };
+
+  const [review, setReview] = useState<string>("");
+  const [rating, setRating] = useState<number>(0);
   return (
     <div className=" px-[10%] mt-10   text-[#15439C]">
       <ImageHotel pic={props.hotel.pic} id={props.hotel.id}></ImageHotel>
@@ -38,6 +59,12 @@ export function HotelInfo(props: {
                 return <ReviewCard review={review} key={index}></ReviewCard>;
               })}
             </div>
+            <InputPanel
+              handleOnSent={handleOnSent}
+              Rating={rating}
+              setRating={setRating}
+              setReview={setReview}
+            ></InputPanel>
           </div>
         </div>
         <div className="w-1/3 ">
@@ -216,6 +243,43 @@ function BasicInfo(props: HotelProps) {
           </span>
         </p>
       </div>
+    </div>
+  );
+}
+
+function InputPanel(props: {
+  Rating: number;
+  setReview: (review: string) => void;
+  setRating: (rating: number) => void;
+  handleOnSent: () => void;
+}) {
+  return (
+    <div className="h-20 rounded-lg w-full px-3 py-2  space-x-3  items-center overflow-hidden bg-[#15429c71] flex mt-3">
+      <textarea
+        onChange={(event) => {
+          props.setReview(event.target.value);
+        }}
+        className="h-full rounded-md px-3 py-2 w-[70%] focus:outline-none  "
+        rows={3}
+        cols={50}
+        placeholder="Write your riview here..."
+      ></textarea>
+      <div className="h-full w-[20%] bg-white justify-center flex flex-col rounded-md text-center ">
+        <p>{props.Rating}</p>
+        <Rating
+          name="simple-controlled"
+          value={props.Rating ?? 0}
+          onChange={(event, newValue) => {
+            props.setRating(newValue ?? 0);
+          }}
+          className="text-[#15439C] mx-auto"
+        />
+      </div>
+      <button
+        onClick={props.handleOnSent}
+        className="h-10 w-10 bg-cover bg-center hover:scale-110 transition-all duration-200 "
+        style={{ backgroundImage: `url(/img/sentbutton.png)` }}
+      ></button>
     </div>
   );
 }

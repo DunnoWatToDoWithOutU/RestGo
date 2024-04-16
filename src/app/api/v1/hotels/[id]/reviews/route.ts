@@ -9,11 +9,7 @@ export const POST = async (
 ) => {
     try {
         await connectDB();
-        const user = await protect(req);
-        if(!user) {
-            return NextResponse.json({error: "Unauthorized"}, {status: 401});
-        }
-        const { rating, reviewText } = await req.json();
+        const { rating, reviewText ,userID} = await req.json();
         const hotel = await Hotel.findById(params.id);
         if (!hotel) {
             return NextResponse.json({ error: "Hotel not found" }, { status: 404 });
@@ -22,7 +18,7 @@ export const POST = async (
         const review = {
             rating: rating,
             reviewText: reviewText,
-            user: user._id,
+            user: userID,
         };
         hotel.review.push(review);
         console.log(hotel.review);
