@@ -220,12 +220,13 @@ export function HotelListPage() {
           </div>
         </div>
         <input
+          id="search-input"
           onChange={(event) => {
             setSearch(event.target.value);
           }}
           type="text"
           placeholder="Search Hotel"
-          className="h-12 text-[#15439C] my-auto w-[60rem] py-2 px-3 bg-white rounded-full focus:outline-none border-primary border-2 "
+          className="h-12 text-[#15439C] my-auto w-[60rem] py-2 px-3 bg-white rounded-full focus:outline-none border-primary border-2"
         ></input>
       </div>
       <TagContainer></TagContainer>
