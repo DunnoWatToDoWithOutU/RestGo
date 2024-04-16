@@ -35,7 +35,7 @@ export function HotelListPage() {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState<HotelProps[]>(hotelData);
 
-  const [showCheckInCheckOutPopup, setShowCheckInCheckOutPopup] =
+  const [showCheckInCheckOutPopup2, setShowCheckInCheckOutPopup2] =
     useState(false);
   const [checkInDate, setCheckInDate] = useState(dayjs().format("DD/MM/YYYY"));
   const [checkOutDate, setCheckOutDate] = useState(
@@ -58,22 +58,22 @@ export function HotelListPage() {
 
   const handleCheckInCheckOut = () => {
     setShowAddPeople(false);
-    setShowCheckInCheckOutPopup(true);
+    setShowCheckInCheckOutPopup2(true);
   };
 
   const handleAddPeople = () => {
     // console.log("Add people clicked");
     //setShowCalendar(false);
     setShowAddPeople(true);
-    setShowCheckInCheckOutPopup(false);
+    setShowCheckInCheckOutPopup2(false);
   };
 
   const handleCloseAddPeople = () => {
     setShowAddPeople(false);
   };
 
-  const handleCloseCheckInCheckOutPopup = () => {
-    setShowCheckInCheckOutPopup(false);
+  const handleCloseCheckInCheckOutPopup2 = () => {
+    setShowCheckInCheckOutPopup2(false);
   };
 
   const handleFilterClick = (filter: any) => {
@@ -145,22 +145,6 @@ export function HotelListPage() {
                 ></div>
               </button>
               <div className="w-[0.105rem] h-[80%] my-auto bg-[#15439C]"></div>
-              {showCheckInCheckOutPopup && (
-                <div className="absolute top-[50%] right-5 z-50">
-                  <CheckInCheckOutPopup2
-                    onClose={handleCloseCheckInCheckOutPopup}
-                    onChange1={(newDateIn: string) => {
-                      setCheckInDate(newDateIn);
-                      setIsSubmittedCheckIn(true);
-                    }}
-                    onChange2={(newDateOut: string) => {
-                      setCheckOutDate(newDateOut);
-                      setIsSubmittedCheckOut(true);
-                    }}
-                  />
-                </div>
-              )}
-
               <button
                 className="h-full hover:bg-zinc-50 w-[50%] text-sm"
                 onClick={handleCheckInCheckOut}
@@ -173,10 +157,10 @@ export function HotelListPage() {
                   style={{ backgroundImage: `url(/img/checkout.png)` }}
                 ></div>
               </button>
-              {showCheckInCheckOutPopup && (
-                <div className="absolute top-[50%] right-5 z-50">
+              {showCheckInCheckOutPopup2 && (
+                <div className="absolute top-[50%] z-50">
                   <CheckInCheckOutPopup2
-                    onClose={handleCloseCheckInCheckOutPopup}
+                    onClose={handleCloseCheckInCheckOutPopup2}
                     onChange1={(newDateIn: string) => {
                       setCheckInDate(newDateIn);
                       setIsSubmittedCheckIn(true);
@@ -210,7 +194,7 @@ export function HotelListPage() {
               </p>
             </button>
             {showAddPeople && (
-              <div className="absolute top-[50%] right-5 z-50">
+              <div className="absolute top-[50%] left-[2px] right-[16.1vw] z-50">
                 <AddPeoplePopup
                   onClose={handleCloseAddPeople}
                   onSubmit={handlePeopleSubmit}
@@ -220,12 +204,13 @@ export function HotelListPage() {
           </div>
         </div>
         <input
+          id="search-input"
           onChange={(event) => {
             setSearch(event.target.value);
           }}
           type="text"
           placeholder="Search Hotel"
-          className="h-12 text-[#15439C] my-auto w-[60rem] py-2 px-3 bg-white rounded-full focus:outline-none border-primary border-2 "
+          className="h-12 text-[#15439C] my-auto w-[60rem] py-2 px-3 bg-white rounded-full focus:outline-none border-primary border-2"
         ></input>
       </div>
       <TagContainer></TagContainer>

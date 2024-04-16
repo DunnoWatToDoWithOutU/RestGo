@@ -46,6 +46,7 @@ export default function SortFilter(props: {
       <div className="flex px-3 space-x-2 ">
         <p className="text-xl ml-2">Sort By</p>
         <button
+          id="sortButton"
           onClick={() => {
             props.setMaxtoMin(!props.MaxtoMin);
           }}

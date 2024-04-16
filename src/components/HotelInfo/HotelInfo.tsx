@@ -206,7 +206,7 @@ function BasicInfo(props: HotelProps) {
         <p className="text-2xl font-semibold">
           Tags :
           <span className="font-normal text-xl">
-            {props.tags?.map((tag, index) => {
+            {props.tag.map((tag, index) => {
               return (
                 <span key={index} className="mx-1">
                   {tag}
