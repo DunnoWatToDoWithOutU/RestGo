@@ -17,6 +17,10 @@ export function HotelInfo(props: {
   reviewCheck: boolean;
   setReviewCheck: (check: boolean) => void;
 }) {
+  const sumReview =
+    props.hotel.review.reduce((sum, review) => {
+      return sum + Number(review.rating);
+    }, 0) / props.hotel.review.length;
   const { data: session } = useSession();
   console.log(session);
   const [startDate, setStartDate] = useState(new Date());
@@ -64,8 +68,23 @@ export function HotelInfo(props: {
       <div className="  my-10 flex w-full space-x-4">
         <div className="w-2/3 space-y-4 ">
           <BasicInfo {...props.hotel}></BasicInfo>
-          <div className="bg-white py-4 w-full border-[#15439C] border-[3px] rounded-2xl p-2 px-4">
-            <p className="text-3xl font-semibold ml-2">Reviews</p>
+          <div className="bg-white  py-4 w-full border-[#15439C] border-[3px] rounded-2xl p-2 px-4">
+            <div className="flex justify-between items-center">
+              <p className="text-3xl font-semibold ml-2">
+                Reviews ({props.hotel.review.length})
+              </p>
+              <div className="flex space-x-2 text-lg items-center">
+                <p className=" font-semibold">
+                  {Math.round(sumReview * 100) / 100}{" "}
+                </p>
+                <Rating
+                  value={sumReview}
+                  readOnly
+                  precision={0.1}
+                  className=" text-[#15439C]"
+                ></Rating>
+              </div>
+            </div>
             <div className="w-full h-[0.125rem] bg-[#15439C] my-5"></div>
             <div
               ref={chatMessagesRef}
