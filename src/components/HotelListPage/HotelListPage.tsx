@@ -261,7 +261,7 @@ export function HotelListPage() {
         </button>
       </div>
       <div className="w-full px-[10%]">
-        <HotelList HotelData={searchResults}></HotelList>
+        <HotelList HotelData={searchResults} checker = {search == "" && selectedTags.every(x => x === false)}></HotelList>
       </div>
     </main>
   );
