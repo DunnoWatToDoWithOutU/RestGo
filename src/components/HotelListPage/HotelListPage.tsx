@@ -7,13 +7,17 @@ import { TagContainer } from "./TagFilter/TagContainer";
 import dayjs from "dayjs";
 import { AddPeoplePopup } from "../HomePage/MenuBox/AddPeoplePopup";
 import { CheckInCheckOutPopup2 } from "@/components/HotelListPage/HotelListCheckInOut";
-import { set } from "mongoose";
 import getHotels from "@/libs/getHotels";
 
-const filterData = [
-  { value: "name", label: "Name" },
-  { value: "price", label: "Price" },
-  { value: "rating", label: "Rating" },
+const TagData = [
+  "wifi",
+  "pool",
+  "parking",
+  "aircon",
+  "breakfast",
+  "kitchen",
+  "pets",
+  "fitness",
 ];
 
 export function HotelListPage() {
@@ -35,7 +39,7 @@ export function HotelListPage() {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState<HotelProps[]>(hotelData);
 
-  const [showCheckInCheckOutPopup, setShowCheckInCheckOutPopup] =
+  const [showCheckInCheckOutPopup2, setShowCheckInCheckOutPopup2] =
     useState(false);
   const [checkInDate, setCheckInDate] = useState(dayjs().format("DD/MM/YYYY"));
   const [checkOutDate, setCheckOutDate] = useState(
@@ -43,6 +47,8 @@ export function HotelListPage() {
   );
   const [isSubmittedCheckIn, setIsSubmittedCheckIn] = useState(false);
   const [isSubmittedCheckOut, setIsSubmittedCheckOut] = useState(false);
+
+  const [selectedTags, setSelectedTags] = useState(new Array(8).fill(false));
 
   const [peopleValues, setPeopleValues] = useState({
     adults: 1,
@@ -58,26 +64,20 @@ export function HotelListPage() {
 
   const handleCheckInCheckOut = () => {
     setShowAddPeople(false);
-    setShowCheckInCheckOutPopup(true);
+    setShowCheckInCheckOutPopup2(true);
   };
 
   const handleAddPeople = () => {
-    // console.log("Add people clicked");
-    //setShowCalendar(false);
     setShowAddPeople(true);
-    setShowCheckInCheckOutPopup(false);
+    setShowCheckInCheckOutPopup2(false);
   };
 
   const handleCloseAddPeople = () => {
     setShowAddPeople(false);
   };
 
-  const handleCloseCheckInCheckOutPopup = () => {
-    setShowCheckInCheckOutPopup(false);
-  };
-
-  const handleFilterClick = (filter: any) => {
-    setSelectedFilter(filter === selectedFilter ? null : filter);
+  const handleCloseCheckInCheckOutPopup2 = () => {
+    setShowCheckInCheckOutPopup2(false);
   };
 
   useEffect(() => {
@@ -97,6 +97,15 @@ export function HotelListPage() {
           if (a.name > b.name) {
             return 1;
           }
+        } else if (selectedFilter === "rating") {
+          return b.rating - a.rating;
+        } else if (selectedFilter === "location") {
+          if (a.address < b.address) {
+            return -1;
+          }
+          if (a.address > b.address) {
+            return 1;
+          }
         }
         return 0;
       });
@@ -111,14 +120,34 @@ export function HotelListPage() {
           if (a.name < b.name) {
             return 1;
           }
+        } else if (selectedFilter === "rating") {
+          return a.rating - b.rating;
+        } else if (selectedFilter === "location") {
+          if (a.address > b.address) {
+            return -1;
+          }
+          if (a.address < b.address) {
+            return 1;
+          }
         }
         return 0;
       });
     }
+    const resultTag = resultsFiltering.filter((hotel) => {
+      for (let i = 0; i < selectedTags.length; i++) {
+        if (selectedTags[i] == true) {
+          if (hotel.tag.includes(TagData[i]) == false) {
+            return false;
+          }
+        }
+      }
+      return true;
+    });
     console.log(resultsFiltering);
-    setSearchResults(resultsFiltering);
-  }, [search, hotelData, MaxtoMin, selectedFilter]);
+    setSearchResults(resultTag);
+  }, [search, hotelData, MaxtoMin, selectedFilter, selectedTags]);
   console.log(selectedFilter);
+  console.log(selectedTags);
   return (
     <main className="w-full flex flex-col justify-start items-center ">
       <div className="  w-[40%] mt-10 text-center ">
@@ -145,22 +174,6 @@ export function HotelListPage() {
                 ></div>
               </button>
               <div className="w-[0.105rem] h-[80%] my-auto bg-[#15439C]"></div>
-              {showCheckInCheckOutPopup && (
-                <div className="absolute top-[50%] right-5 z-50">
-                  <CheckInCheckOutPopup2
-                    onClose={handleCloseCheckInCheckOutPopup}
-                    onChange1={(newDateIn: string) => {
-                      setCheckInDate(newDateIn);
-                      setIsSubmittedCheckIn(true);
-                    }}
-                    onChange2={(newDateOut: string) => {
-                      setCheckOutDate(newDateOut);
-                      setIsSubmittedCheckOut(true);
-                    }}
-                  />
-                </div>
-              )}
-
               <button
                 className="h-full hover:bg-zinc-50 w-[50%] text-sm"
                 onClick={handleCheckInCheckOut}
@@ -173,10 +186,10 @@ export function HotelListPage() {
                   style={{ backgroundImage: `url(/img/checkout.png)` }}
                 ></div>
               </button>
-              {showCheckInCheckOutPopup && (
-                <div className="absolute top-[50%] right-5 z-50">
+              {showCheckInCheckOutPopup2 && (
+                <div className="absolute top-[50%] z-50">
                   <CheckInCheckOutPopup2
-                    onClose={handleCloseCheckInCheckOutPopup}
+                    onClose={handleCloseCheckInCheckOutPopup2}
                     onChange1={(newDateIn: string) => {
                       setCheckInDate(newDateIn);
                       setIsSubmittedCheckIn(true);
@@ -210,7 +223,7 @@ export function HotelListPage() {
               </p>
             </button>
             {showAddPeople && (
-              <div className="absolute top-[50%] right-5 z-50">
+              <div className="absolute top-[50%] left-[50px] right-[20vw] z-50">
                 <AddPeoplePopup
                   onClose={handleCloseAddPeople}
                   onSubmit={handlePeopleSubmit}
@@ -229,14 +242,26 @@ export function HotelListPage() {
           className="h-12 text-[#15439C] my-auto w-[60rem] py-2 px-3 bg-white rounded-full focus:outline-none border-primary border-2"
         ></input>
       </div>
-      <TagContainer></TagContainer>
-      <SortFilter
-        setFiltering={setSelectedFilter}
-        setMaxtoMin={setMaxtoMin}
-        MaxtoMin={MaxtoMin}
-      ></SortFilter>
+      <TagContainer
+        selectedTags={selectedTags}
+        setSelectedTags={setSelectedTags}
+      ></TagContainer>
+      <div className="flex items-center space-x-3">
+        <SortFilter
+          setFiltering={setSelectedFilter}
+          setMaxtoMin={setMaxtoMin}
+          MaxtoMin={MaxtoMin}
+        ></SortFilter>
+        <button className="  w-40 border-2 flex space-x-2 hover:bg-zinc-100 rounded-md border-primary px-2 py-2">
+          <p className=" text-[#15439C] font-bold text-xl">More Filter</p>
+          <div
+            className="h-6 w-6 bg-cover bg-center"
+            style={{ backgroundImage: `url(/img/filter.png)` }}
+          ></div>
+        </button>
+      </div>
       <div className="w-full px-[10%]">
-        <HotelList HotelData={searchResults}></HotelList>
+        <HotelList HotelData={searchResults} checker = {search == "" && selectedTags.every(x => x === false)}></HotelList>
       </div>
     </main>
   );

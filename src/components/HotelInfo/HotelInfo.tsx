@@ -1,43 +1,111 @@
-"use client";
 import craeteAppointment from "@/libs/createAppointment";
 import { HotelProps, PromotionProps } from "../../../@types/type";
 import { ReviewCard } from "./ReviewCard";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { set } from "mongoose";
 import { PromotionDropDown } from "./PromotionDropDown";
+import { Rating } from "@mui/material";
+import { createReviews } from "@/libs/createReviews";
+import { authOptions } from "@/libs/authOptions";
 
 export function HotelInfo(props: {
   hotel: HotelProps;
   promotion: PromotionProps[];
+  reviewCheck: boolean;
+  setReviewCheck: (check: boolean) => void;
 }) {
+  const sumReview =
+    props.hotel.review.reduce((sum, review) => {
+      return sum + Number(review.rating);
+    }, 0) / props.hotel.review.length;
+  const { data: session } = useSession();
+  console.log(session);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const { data: session } = useSession();
   const [discount, setDiscount] = useState(0);
+  const chatMessagesRef = useRef<HTMLDivElement>(null);
   let bookingday =
     (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24);
   if (bookingday < 0 || bookingday > 3) {
     bookingday = -1;
   }
+  useEffect(() => {
+    scrollToBottom();
+  }, [props.hotel.review]);
+
+  const scrollToBottom = () => {
+    if (chatMessagesRef.current) {
+      chatMessagesRef.current.scrollTop = chatMessagesRef.current.scrollHeight;
+    }
+  };
+  const handleOnSent = async () => {
+    // clear input
+    setReview("");
+    setRating(0);
+    try {
+      if (session) {
+        await createReviews(rating, review, props.hotel.id, session.user._id);
+      } else {
+        throw new Error("Session is null");
+      }
+    } catch (error) {
+      toast.error("Error Booking");
+      scrollToBottom();
+      console.log(error);
+    }
+    toast.success("Review Sent");
+    props.setReviewCheck(!props.reviewCheck);
+  };
+
+  const [review, setReview] = useState<string>("");
+  const [rating, setRating] = useState<number>(0);
+
+  if (props.hotel.name == "") return (
+    <p className="text-center text-xl font-bold m-20 h-screen">Hotel Data loading...</p>
+  );
+
   return (
     <div className=" px-[10%] mt-10   text-[#15439C]">
       <ImageHotel pic={props.hotel.pic} id={props.hotel.id}></ImageHotel>
       <div className="  my-10 flex w-full space-x-4">
         <div className="w-2/3 space-y-4 ">
           <BasicInfo {...props.hotel}></BasicInfo>
-          <div className="bg-white py-4 w-full border-[#15439C] border-[3px] rounded-2xl p-2 px-4">
-            <p className="text-3xl font-semibold ml-2">Reviews</p>
-            <div className="w-full h-[0.125rem] bg-[#15439C] my-5"></div>
-            <div className="space-y-3 w-full h-[17rem] overflow-y-scroll overflow-x-hidden no-scrollbar ">
-              <ReviewCard></ReviewCard>
-              <ReviewCard></ReviewCard>
-              <ReviewCard></ReviewCard>
-              <ReviewCard></ReviewCard>
-              <ReviewCard></ReviewCard>
+          <div className="bg-white  py-4 w-full border-[#15439C] border-[3px] rounded-2xl p-2 px-4">
+            <div className="flex justify-between items-center">
+              <p className="text-3xl font-semibold ml-2">
+                Reviews ({props.hotel.review.length})
+              </p>
+              <div className="flex space-x-2 text-lg items-center">
+                <p className=" font-semibold">
+                  {Math.round(sumReview * 100) / 100}{" "}
+                </p>
+                <Rating
+                  value={sumReview}
+                  readOnly
+                  precision={0.1}
+                  className=" text-[#15439C]"
+                ></Rating>
+              </div>
             </div>
+            <div className="w-full h-[0.125rem] bg-[#15439C] my-5"></div>
+            <div
+              ref={chatMessagesRef}
+              className="space-y-3 w-full h-[17rem]  overflow-y-scroll overflow-x-hidden no-scrollbar "
+            >
+              {props.hotel.review.map((review, index) => {
+                return <ReviewCard review={review} key={index}></ReviewCard>;
+              })}
+            </div>
+            <InputPanel
+              review={review}
+              handleOnSent={handleOnSent}
+              Rating={rating}
+              setRating={setRating}
+              setReview={setReview}
+            ></InputPanel>
           </div>
         </div>
         <div className="w-1/3 ">
@@ -115,7 +183,9 @@ export function HotelInfo(props: {
                   );
                 } catch (error) {
                   toast.error("Error Booking");
+                  return;
                 }
+                toast.success("Booking Success");
               }}
               className=" w-[80%] mx-10  text-3xl text-center  rounded-lg py-3 hover:bg-primary_dark mt-5 text-white bg-primary"
             >
@@ -216,6 +286,45 @@ function BasicInfo(props: HotelProps) {
           </span>
         </p>
       </div>
+    </div>
+  );
+}
+
+function InputPanel(props: {
+  Rating: number;
+  review: string;
+  setReview: (review: string) => void;
+  setRating: (rating: number) => void;
+  handleOnSent: () => void;
+}) {
+  return (
+    <div className="h-20 rounded-lg w-full px-3 py-2  space-x-3  items-center overflow-hidden bg-[#15429c71] flex mt-3">
+      <textarea
+        value={props.review}
+        onChange={(event) => {
+          props.setReview(event.target.value);
+        }}
+        className="h-full rounded-md px-3 py-2 w-[70%] focus:outline-none  "
+        rows={3}
+        cols={50}
+        placeholder="Write your riview here..."
+      ></textarea>
+      <div className="h-full w-[20%] bg-white justify-center flex flex-col rounded-md text-center ">
+        <p>{props.Rating}</p>
+        <Rating
+          name="simple-controlled"
+          value={props.Rating ?? 0}
+          onChange={(event, newValue) => {
+            props.setRating(newValue ?? 0);
+          }}
+          className="text-[#15439C] mx-auto"
+        />
+      </div>
+      <button
+        onClick={props.handleOnSent}
+        className="h-10 w-10 bg-cover bg-center hover:scale-110 transition-all duration-200 "
+        style={{ backgroundImage: `url(/img/sentbutton.png)` }}
+      ></button>
     </div>
   );
 }

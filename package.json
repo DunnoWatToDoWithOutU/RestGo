@@ -30,6 +30,7 @@
     "next-auth": "^4.24.7",
     "react": "^18",
     "react-dom": "^18",
+    "rheostat": "^4.1.1",
     "sonner": "^1.4.41",
     "styled-components": "^6.1.8"
   },
@@ -38,6 +39,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/rheostat": "^3.0.6",
     "autoprefixer": "^10.0.1",
     "cypress": "^13.7.3",
     "eslint": "^8",

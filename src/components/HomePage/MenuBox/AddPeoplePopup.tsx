@@ -68,7 +68,7 @@ export const AddPeoplePopup: React.FC<{ onClose: () => void; onSubmit: (values: 
     <div className="inset-0 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg shadow-lg p-8">
         <button
-          className="absolute top-2 right-2 text-blue-500 hover:text-[#15439C] focus:outline-none transition-all duration-200"
+          className="absolute top-2 left-[390px] text-blue-500 hover:text-[#15439C] focus:outline-none transition-all duration-200"
           onClick={onClose}
         >
           <svg

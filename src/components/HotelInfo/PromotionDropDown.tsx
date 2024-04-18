@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { HotelProps, PromotionProps } from "../../../@types/type";
@@ -21,7 +21,9 @@ export function PromotionDropDown(props: {
     coupon: "No Coupon",
   };
   const [selected, setSelected] = useState<PromotionProps>(promotionDefault);
-  props.setDiscount(selected.discount);
+  useEffect(() => {
+    props.setDiscount(selected.discount);
+  }, [props, selected.discount]);
 
   return (
     <div className=" mt-5 border-2 border-primary rounded-lg">

@@ -2,6 +2,8 @@ import Appointment from "@/models/Appointment";
 import {  NextRequest, NextResponse } from "next/server";
 import connectDB from "@/libs/connectDB";
 import protect from "@/libs/protect";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/libs/authOptions";
 
 export async function GET(req: NextRequest, {params}: {params: {id: string}}) {
     const user = await protect(req);
@@ -51,15 +53,15 @@ export async function PUT(req: NextRequest, {params}: {params: {id: string}}) {
 }
 
 export async function DELETE(req: NextRequest, {params}: {params: {id: string}}) {
-    const user = await protect(req);
-    if (!user) {
+    const session = await getServerSession(authOptions);
+    if (!session?.user) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
     try {
         await connectDB();
-        if( user.role !== "admin" ){
+        if( session.user.role !== "admin" ){
             const appointment = await Appointment.findById(params.id);
-            if (appointment.user.toString() !== user._id) {
+            if (appointment.user.toString() !== session.user._id) {
                 return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
             }
         }

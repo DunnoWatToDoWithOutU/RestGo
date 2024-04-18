@@ -51,31 +51,32 @@ export function HotelCard(props: { hotel: HotelProps }) {
                 </div>
                 <p>/ night</p>
               </div>
-              <div className="flex space-x-3 text-lg font-bold">
-                <Rating
-                  precision={0.1}
-                  name="half-rating-read"
-                  //value={5}
-                  readOnly
-                  className="ml-auto text-[#fff]"
-                />
-                {/* <p>{props.stars}</p> */}
-              </div>
             </div>
           </div>
         </div>
       </div>
-      <div className=" space-x-2 z-10 w-full flex p-3">
-        {props.hotel.tag.map((tag, index) => {
-          return (
-            <div
-              className=" px-3 py-1 hover:bg-zinc-200 transition-colors duration-150 bg-zinc-100 rounded-md"
-              key={index}
-            >
-              {tag}
-            </div>
-          );
-        })}
+      <div className="flex justify-between w-full">
+        <div className=" space-x-2 z-10 w-full flex p-3">
+          {props.hotel.tag.map((tag, index) => {
+            return (
+              <div
+                className=" px-3 py-1 hover:bg-zinc-200 transition-colors duration-150 bg-zinc-100 rounded-md"
+                key={index}
+              >
+                {tag}
+              </div>
+            );
+          })}
+        </div>
+        <div className="flex z-10 space-x-1 px-3 text-xl items-center text-white">
+          <p>{props.hotel.rating}</p>
+          <Rating
+            value={props.hotel.rating}
+            precision={0.1}
+            readOnly
+            className=""
+          ></Rating>
+        </div>
       </div>
     </motion.button>
   );

@@ -12,7 +12,7 @@ const SortItem = [
     img: "/sortingIcon/ratingIcon.png",
   },
   {
-    name: "Distance",
+    name: "Location",
     img: "/sortingIcon/distanceIcon.png",
   },
   {
@@ -26,19 +26,12 @@ export default function SortFilter(props: {
   setMaxtoMin: (value: boolean) => void;
   MaxtoMin: boolean;
 }) {
-  const [selectedButtonIndexes, setSelectedButtonIndexes] = useState<number[]>(
-    []
+  const [selectedButtonIndexes, setSelectedButtonIndexes] = useState<number>(
+    0 //default by price
   );
-
   const handleSortClick = (index: number) => {
     props.setFiltering(SortItem[index].name.toLowerCase());
-    if (selectedButtonIndexes.includes(index)) {
-      setSelectedButtonIndexes(
-        selectedButtonIndexes.filter((i) => i !== index)
-      );
-    } else {
-      setSelectedButtonIndexes([...selectedButtonIndexes, index]);
-    }
+    setSelectedButtonIndexes(index);
   };
 
   return (
@@ -64,12 +57,12 @@ export default function SortFilter(props: {
         return (
           <button
             key={index}
-            className="flex border-l-2 border-zinc-200 space-x-2 hover:bg-slate-100 "
+            className="flex border-l-2 border-zinc-200 space-x-2 hover:bg-slate-100"
             onClick={() => handleSortClick(index)}
           >
             <div
               className={`${
-                selectedButtonIndexes.includes(index)
+                selectedButtonIndexes == index
                   ? "bg-[#D9D9D980] rounded-md  mx-3 my-2 px-2 py-0.5 "
                   : "mx-5 my-2.5"
               } flex `}

@@ -2,6 +2,9 @@
 import Link from "next/link";
 import { AppointmnetProps, HotelProps } from "../../../@types/type";
 import { toast } from "sonner";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import deleteBooking from "@/libs/deleteBooking";
 
 function formatDate(dateString: string) {
   const months = [
@@ -36,14 +39,19 @@ export function BookingCard(props: {
   const endDate = formatDate(props.appointment.endDate); // @ts-ignore;
   const createdAt = formatDate(props.appointment.createdAt);
   return (
-    <div
-      style={{
-        backgroundImage: `url(img/hotel/${props.hotel.id}/${props.hotel.pic[0]})`,
-      }}
-      className="flex bg-cover bg-center text-white relative text-lg font-bold p-2 px-4 w-full h-40 border-2 justify-between rounded-2xl border-[#15439C]"
+    <motion.div
+      whileHover={{ left: 10 }}
+      className="flex bg-cover bg-center overflow-hidden text-white relative text-lg font-bold p-2 px-4 w-full h-40 border-2 justify-between rounded-2xl border-[#15439C]"
     >
-      <div className="absolute inset-0 bg-black rounded-2xl opacity-40 z-0"></div>
-      <div className="flex flex-col justify-between relative z-10">
+      <div className="absolute inset-0 bg-black rounded-2xl opacity-40 z-10"></div>
+      <Image
+        alt="hotel"
+        src={`/img/hotel/${props.hotel.id}/${props.hotel.pic[0]}`}
+        objectFit="cover"
+        layout="fill"
+        className="absolute w-full left-0 z-0"
+      />
+      <div className="flex flex-col justify-between relative z-20">
         <div>
           <p>From : {startDate}</p>
           <p>To : {endDate}</p>
@@ -73,6 +81,18 @@ export function BookingCard(props: {
             style={{ backgroundImage: `url(/img/homepage/edit.png)` }}
           ></button>
           <button
+            onClick={async ()=>{
+              try{
+                await deleteBooking(props.hotel.id);
+              }
+              catch(err){
+                console.log(err);
+                toast.error("Error Delete Booking");
+                return;
+              }
+              toast.success("Delete Finsih");
+
+            }}
             className="h-5 w-5 bg-cover bg-center hover:scale-110"
             style={{ backgroundImage: `url(/img/homepage/trash.png)` }}
           ></button>
@@ -87,6 +107,6 @@ export function BookingCard(props: {
           </Link>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
