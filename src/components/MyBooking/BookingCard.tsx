@@ -9,7 +9,7 @@ import EditPopup from "../Editpopup";
 import { useState } from "react";
 import updateBooking from "@/libs/updateBooking";
 
-function formatDate(dateString: string) {
+export function formatDate(dateString: string) {
   const months = [
     "January",
     "February",
@@ -62,7 +62,6 @@ export function BookingCard(props: {
       setShowEditPopup(false);
     }
   };
-  
 
   const handleCancelEdit = () => {
     setShowEditPopup(false);
@@ -74,11 +73,13 @@ export function BookingCard(props: {
       className="flex bg-cover bg-center overflow-hidden text-white relative text-lg font-bold p-2 px-4 w-full h-40 border-2 justify-between rounded-2xl border-[#15439C]"
     >
       {showEditPopup && (
-            <EditPopup
-              Appt={props.appointment}
-              onSave={handleSaveEdit}
-              onCancel={handleCancelEdit} Hotel={undefined}            />
-          )}
+        <EditPopup
+          Appt={props.appointment}
+          onSave={handleSaveEdit}
+          onCancel={handleCancelEdit}
+          Hotel={undefined}
+        />
+      )}
       <div className="absolute inset-0 bg-black rounded-2xl opacity-40 z-10"></div>
       <Image
         alt="hotel"
@@ -117,7 +118,7 @@ export function BookingCard(props: {
             className="h-5 w-5 bg-cover bg-center hover:scale-110"
             style={{ backgroundImage: `url(/img/homepage/edit.png)` }}
           ></button>
-        
+
           <button
             onClick={async () => {
               try {
@@ -136,8 +137,8 @@ export function BookingCard(props: {
         <div className=" text-end flex flex-col space-y-2 ">
           <p className="text-sm">Created At : {createdAt}</p>
           <Link
-            href={`/hotel/${props.hotel.id}`}
-            className="text-xl  py-1  bg-primary text-white font-normal rounded-lg hover:bg-primary_dark"
+            href={`/mybooking/${props.appointment._id}`}
+            className="text-xl py-1 bg-primary text-white font-normal rounded-lg hover:bg-primary_dark"
           >
             <p className=" text-center">View Detail</p>
           </Link>
