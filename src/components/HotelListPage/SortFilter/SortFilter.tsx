@@ -35,7 +35,7 @@ export default function SortFilter(props: {
   };
 
   return (
-    <div className=" mx-auto flex mt-1 text-sm text-[#15439C] rounded-md border-2 border-[#2465E2] items-center font-bold">
+    <div className=" mx-auto flex text-sm text-[#15439C] rounded-md border-2 border-[#2465E2] items-center font-bold">
       <div className="flex px-3 space-x-2 ">
         <p className="text-xl ml-2">Sort By</p>
         <button
