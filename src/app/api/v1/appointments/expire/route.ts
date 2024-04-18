@@ -11,10 +11,10 @@ export async function GET(req: NextRequest) {
     try { 
         await connectDB();
         if( user.role !== "admin" ){
-            const appointments = await Appointment.find({ user:user._id , endDate: { $gte: new Date() }});
+            const appointments = await Appointment.find({ user:user._id , endDate: { $lt: new Date() }});
             return NextResponse.json(appointments, { status: 200 });
         } else {
-            const appointments = await Appointment.find({endDate: { $gte: new Date() }});
+            const appointments = await Appointment.find({endDate: { $lt: new Date() }});
             return NextResponse.json(appointments, { status: 200 });
         }
     } catch (err) {
