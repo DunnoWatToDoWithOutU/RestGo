@@ -1,4 +1,5 @@
 import { BookingList } from "@/components/MyBooking/BookingList";
+import { ExpireBookingList } from "@/components/MyBooking/ExpireBookingList";
 
 export default function Home() {
   return (
@@ -11,7 +12,7 @@ export default function Home() {
         <BookingList></BookingList>
         <div className="h-1 w-full my-8 bg-[#15439C]"></div>
         <p className="text-xl font-bold">History Booking :</p>
-        <BookingList></BookingList>
+        <ExpireBookingList></ExpireBookingList>
       </div>
     </section>
   );
