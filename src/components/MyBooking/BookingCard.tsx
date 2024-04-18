@@ -62,7 +62,7 @@ export function BookingCard(props: {
       setShowEditPopup(false);
     }
   };
-  
+
 
   const handleCancelEdit = () => {
     setShowEditPopup(false);
@@ -117,10 +117,12 @@ export function BookingCard(props: {
             className="h-5 w-5 bg-cover bg-center hover:scale-110"
             style={{ backgroundImage: `url(/img/homepage/edit.png)` }}
           ></button>
-        
+
           <button
             onClick={async () => {
               try {
+                window.location.reload();
+                console.log('refresh')
                 await deleteBooking(props.hotel.id);
               } catch (err) {
                 console.log(err);
