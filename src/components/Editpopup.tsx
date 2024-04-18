@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { format } from 'date-fns';
 import { AppointmnetProps, HotelProps } from "../../@types/type";
 
 interface EditPopupProps {
@@ -25,8 +26,12 @@ export default function EditPopup({ Appt, Hotel, onSave, onCancel }: EditPopupPr
     onSave(editedAppt);
   };
 
-  const formattedStartDate = editedAppt.startDate instanceof Date ? editedAppt.startDate.toISOString().split("T")[0] : "";
-  const formattedEndDate = editedAppt.endDate instanceof Date ? editedAppt.endDate.toISOString().split("T")[0] : "";
+  // const formattedStartDate = editedAppt.startDate instanceof Date ? editedAppt.startDate.toISOString().split("T")[0] : "";
+  // const formattedEndDate = editedAppt.endDate instanceof Date ? editedAppt.endDate.toISOString().split("T")[0] : "";
+  const formattedStartDate = format(new Date(editedAppt.startDate), 'yyyy-MM-dd');
+  const formattedEndDate = format(new Date(editedAppt.endDate), 'yyyy-MM-dd');
+  console.log(formattedEndDate)
+  console.log(formattedStartDate)
 
   return (
     <div className="popup-container fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">

@@ -123,6 +123,8 @@ export function BookingCard(props: {
             onClick={async () => {
               try {
                 await deleteBooking(props.hotel.id);
+                window.location.reload();
+                console.log('refresh')
               } catch (err) {
                 console.log(err);
                 toast.error("Error Delete Booking");
