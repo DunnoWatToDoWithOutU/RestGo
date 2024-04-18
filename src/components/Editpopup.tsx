@@ -2,12 +2,11 @@
 import { useState } from "react";
 import { format } from "date-fns";
 import { AppointmnetProps, HotelProps } from "../../@types/type";
-import updateBooking from "@/libs/updateBooking";
 
 interface EditPopupProps {
   Appt: AppointmnetProps;
   Hotel?: HotelProps;
-  onSave: (updatedAppt: AppointmnetProps) => void;
+  onSave: Function;
   onCancel: () => void;
 }
 
@@ -25,7 +24,7 @@ export default function EditPopup({
   };
 
   const handleSave = async () => {
-    await updateBooking(Appt._id);
+    await onSave(editedAppt);
   };
 
   // const formattedStartDate = editedAppt.startDate instanceof Date ? editedAppt.startDate.toISOString().split("T")[0] : "";
