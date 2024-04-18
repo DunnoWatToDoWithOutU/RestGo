@@ -11,7 +11,7 @@ export default function UserDropDown(props: { name: string; email: string }) {
     <div className=" text-right">
       <Menu
         as="div"
-        className="relative inline-block text-left bg-center self-center bg-cover w-7 h-7"
+        className="relative inline-block text-left bg-center self-center z-50 bg-cover w-7 h-7"
         style={{ backgroundImage: `url(/img/user.png)` }}
       >
         <div>
