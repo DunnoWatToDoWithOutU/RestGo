@@ -11,4 +11,4 @@ export default async function getHotels(){
     }
     const data = await response.json()
     return data;
-}
+} 

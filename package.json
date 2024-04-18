@@ -21,6 +21,7 @@
     "@vercel/static-build": "2.0.1",
     "avvvatars-react": "^0.4.2",
     "bcrypt": "^5.1.1",
+    "date-fns": "^3.6.0",
     "dayjs": "^1.11.10",
     "dotenv": "^16.4.5",
     "framer-motion": "^11.0.28",
