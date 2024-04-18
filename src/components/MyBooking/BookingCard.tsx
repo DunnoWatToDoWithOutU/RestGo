@@ -5,6 +5,9 @@ import { toast } from "sonner";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import deleteBooking from "@/libs/deleteBooking";
+import EditPopup from "../Editpopup";
+import { useState } from "react";
+import updateBooking from "@/libs/updateBooking";
 
 function formatDate(dateString: string) {
   const months = [
@@ -38,11 +41,44 @@ export function BookingCard(props: {
   const startDate = formatDate(props.appointment.startDate); // @ts-ignore;
   const endDate = formatDate(props.appointment.endDate); // @ts-ignore;
   const createdAt = formatDate(props.appointment.createdAt);
+
+  const [showEditPopup, setShowEditPopup] = useState(false);
+
+  const handleEdit = () => {
+    setShowEditPopup(true);
+  };
+
+  const handleSaveEdit = async (updatedAppt: AppointmnetProps) => {
+    // Call your updateBooking function here with the updated appointment details
+    try {
+      await updateBooking(updatedAppt._id);
+      // Assuming you have a function to fetch updated booking data, update it here
+      // fetchBookingData();
+      toast.success("Appointment details updated successfully");
+    } catch (error) {
+      console.error("Error updating Appointment details:", error);
+      toast.error("Failed to update Appointment details");
+    } finally {
+      setShowEditPopup(false);
+    }
+  };
+  
+
+  const handleCancelEdit = () => {
+    setShowEditPopup(false);
+  };
+
   return (
     <motion.div
       whileHover={{ left: 10 }}
       className="flex bg-cover bg-center overflow-hidden text-white relative text-lg font-bold p-2 px-4 w-full h-40 border-2 justify-between rounded-2xl border-[#15439C]"
     >
+      {showEditPopup && (
+            <EditPopup
+              Appt={props.appointment}
+              onSave={handleSaveEdit}
+              onCancel={handleCancelEdit} Hotel={undefined}            />
+          )}
       <div className="absolute inset-0 bg-black rounded-2xl opacity-40 z-10"></div>
       <Image
         alt="hotel"
@@ -77,21 +113,21 @@ export function BookingCard(props: {
             style={{ backgroundImage: `url(/img/homepage/phone.png)` }}
           ></button>
           <button
+            onClick={() => setShowEditPopup(true)}
             className="h-5 w-5 bg-cover bg-center hover:scale-110"
             style={{ backgroundImage: `url(/img/homepage/edit.png)` }}
           ></button>
+        
           <button
-            onClick={async ()=>{
-              try{
+            onClick={async () => {
+              try {
                 await deleteBooking(props.hotel.id);
-              }
-              catch(err){
+              } catch (err) {
                 console.log(err);
                 toast.error("Error Delete Booking");
                 return;
               }
               toast.success("Delete Finsih");
-
             }}
             className="h-5 w-5 bg-cover bg-center hover:scale-110"
             style={{ backgroundImage: `url(/img/homepage/trash.png)` }}
