@@ -14,8 +14,8 @@ export function MenuBox() {
   const addPeopleButtonRef = useRef(null);
 
   const [showCheckInCheckOutPopup, setShowCheckInCheckOutPopup] = useState(false);
-  const [checkInDate, setCheckInDate] = useState(dayjs().format("DD/MM/YYYY"));
-  const [checkOutDate, setCheckOutDate] = useState(dayjs().format("DD/MM/YYYY"));
+  const [checkInDate, setCheckInDate] = useState(dayjs());
+  const [checkOutDate, setCheckOutDate] = useState(dayjs());
   const [isSubmittedCheckIn, setIsSubmittedCheckIn] = useState(false);
   const [isSubmittedCheckOut, setIsSubmittedCheckOut] = useState(false);
 
@@ -41,7 +41,6 @@ export function MenuBox() {
     //setShowCalendar(false);
     setShowAddPeople(true);
     setShowCheckInCheckOutPopup(false);
-
   };
 
   const handleCloseAddPeople = () => {
@@ -65,7 +64,7 @@ export function MenuBox() {
             onClick={handleCheckInCheckOut}
           >
             <p className="mx-auto font-semibold">
-              {isSubmittedCheckIn ? `${checkInDate}` : "Check In"}
+              {isSubmittedCheckIn ? `${checkInDate.format('DD/MM/YYYY')}` : "Check In"}
             </p>
             <div
               className="h-5 w-5 mx-auto mt-1 bg-contain bg-center bg-no-repeat"
@@ -76,15 +75,18 @@ export function MenuBox() {
           {showCheckInCheckOutPopup && (
             <div className="absolute top-[50%] right-5 z-50">
               <CheckInCheckOutPopup
+                menuCheckInDate={checkInDate}
+                menuCheckOutDate={checkOutDate}
                 onClose={handleCloseCheckInCheckOutPopup}
-                onChange1={(newDateIn: string) => {
+                onChange1={(newDateIn: any) => {
                   setCheckInDate(newDateIn);
                   setIsSubmittedCheckIn(true);
                 }}
-                onChange2={(newDateOut: string) => {
+                onChange2={(newDateOut: any) => {
                   setCheckOutDate(newDateOut);
                   setIsSubmittedCheckOut(true);
                 }}
+                
               />
             </div>
           )}
@@ -94,7 +96,7 @@ export function MenuBox() {
             onClick={handleCheckInCheckOut}
           >
             <p className="mx-auto font-semibold">
-              {isSubmittedCheckOut ? `${checkOutDate}` : "Check Out"}
+              {isSubmittedCheckOut ? `${checkOutDate.format('DD/MM/YYYY')}` : "Check Out"}
             </p>
             <div
               className="h-5 w-5 mx-auto mt-1 bg-contain bg-center bg-no-repeat"
@@ -104,12 +106,14 @@ export function MenuBox() {
           {showCheckInCheckOutPopup && (
             <div className="absolute top-[50%] right-5 z-50">
               <CheckInCheckOutPopup
+                menuCheckInDate={checkInDate}
+                menuCheckOutDate={checkOutDate}
                 onClose={handleCloseCheckInCheckOutPopup}
-                onChange1={(newDateIn: string) => {
+                onChange1={(newDateIn: any) => {
                   setCheckInDate(newDateIn);
                   setIsSubmittedCheckIn(true);
                 }}
-                onChange2={(newDateOut: string) => {
+                onChange2={(newDateOut: any) => {
                   setCheckOutDate(newDateOut);
                   setIsSubmittedCheckOut(true);
                 }}
