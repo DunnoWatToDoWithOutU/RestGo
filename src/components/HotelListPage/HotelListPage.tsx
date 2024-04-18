@@ -181,7 +181,7 @@ export function HotelListPage() {
                 ></div>
               </button>
               {showCheckInCheckOutPopup2 && (
-                <div className="absolute top-[50%] z-50">
+                <div className="absolute top-20 z-50">
                   <CheckInCheckOutPopup2
                     onClose={handleCloseCheckInCheckOutPopup2}
                     onChange1={(newDateIn: string) => {
@@ -217,7 +217,7 @@ export function HotelListPage() {
               </p>
             </button>
             {showAddPeople && (
-              <div className="absolute top-[50%] left-[50px] right-[20vw] z-50">
+              <div className="absolute top-[100%] left-[34rem] z-50">
                 <AddPeoplePopup
                   onClose={handleCloseAddPeople}
                   onSubmit={handlePeopleSubmit}
