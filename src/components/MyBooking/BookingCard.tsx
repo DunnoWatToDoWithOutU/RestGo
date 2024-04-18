@@ -6,7 +6,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import deleteBooking from "@/libs/deleteBooking";
 
-function formatDate(dateString: string) {
+export function formatDate(dateString: string) {
   const months = [
     "January",
     "February",
@@ -90,7 +90,7 @@ export function BookingCard(props: {
                 toast.error("Error Delete Booking");
                 return;
               }
-              toast.success("Delete Finsih");
+              toast.success("Delete Finish");
 
             }}
             className="h-5 w-5 bg-cover bg-center hover:scale-110"
@@ -100,8 +100,8 @@ export function BookingCard(props: {
         <div className=" text-end flex flex-col space-y-2 ">
           <p className="text-sm">Created At : {createdAt}</p>
           <Link
-            href={`/hotel/${props.hotel.id}`}
-            className="text-xl  py-1  bg-primary text-white font-normal rounded-lg hover:bg-primary_dark"
+            href={`/mybooking/${props.appointment._id}`}
+            className="text-xl py-1 bg-primary text-white font-normal rounded-lg hover:bg-primary_dark"
           >
             <p className=" text-center">View Detail</p>
           </Link>
