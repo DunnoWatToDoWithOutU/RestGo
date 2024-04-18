@@ -65,27 +65,30 @@ export const AddPeoplePopup: React.FC<{ onClose: () => void; onSubmit: (values: 
   };
 
   return (
-    <div className="inset-0 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg shadow-lg p-8">
-        <button
-          className="absolute top-2 left-[390px] text-blue-500 hover:text-[#15439C] focus:outline-none transition-all duration-200"
-          onClick={onClose}
-        >
-          <svg
-            className="h-6 w-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
+    <div className="inset-0 flex flex-col items-center justify-center z-50 bg-white rounded-lg shadow-lg">
+        <div className="flex self-end pr-2 pt-2 ">
+          <button
+            className=' text-blue-500 hover:text-[#15439C] focus:outline-none transition-all duration-200'
+            onClick={onClose}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
+            <svg
+              className="h-6 w-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+      {/* <div className="bg-white rounded-lg shadow-lg p-8 pt-0"> */}
+        <div className='p-8 pt-0'>
         <h2 className="text-xl font-bold mb-4">
           Add People 
         </h2>
