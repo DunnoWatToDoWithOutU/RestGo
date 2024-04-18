@@ -150,14 +150,8 @@ export function HotelListPage() {
   console.log(selectedTags);
   return (
     <main className="w-full flex flex-col justify-start items-center ">
-      <div className="  w-[40%] mt-10 text-center ">
-        <p className=" text-3xl font-bold mb-5 text-[#15439C]">Hotel List</p>
-
-        {/* <div className="flex justify-between items-center">
-          <SearchBar></SearchBar>
-          </div> */}
-      </div>
-      <div className="py-5 px-[10%]  w-full bg-[#15439C] flex relative">
+      
+      <div className="py-3 px-[10%]  w-full bg-[#15439C] flex fixed mt-6 z-50">
         <div className=" w-full text-[#15439C]   px-5 rounded-md  ">
           <div className="flex">
             <div className="w-[50%] relative h-30  rounded-md flex bg-white border-2 border-primary">
@@ -242,6 +236,14 @@ export function HotelListPage() {
           className="h-12 text-[#15439C] my-auto w-[60rem] py-2 px-3 bg-white rounded-full focus:outline-none border-primary border-2"
         ></input>
       </div>
+      {/* <div className="  w-[40%] mt-10 text-center ">
+        <p className=" text-3xl font-bold mb-5 text-[#15439C]">Hotel List</p>
+
+        <div className="flex justify-between items-center">
+          <SearchBar></SearchBar>
+          </div> 
+      </div> */}
+      <div className="mt-[8rem]"></div>
       <TagContainer
         selectedTags={selectedTags}
         setSelectedTags={setSelectedTags}
