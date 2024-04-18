@@ -150,7 +150,6 @@ export function HotelListPage() {
   console.log(selectedTags);
   return (
     <main className="w-full flex flex-col justify-start items-center ">
-      
       <div className="py-3 px-[10%]  w-full bg-[#15439C] flex fixed mt-6 z-50">
         <div className=" w-full text-[#15439C]   px-5 rounded-md  ">
           <div className="flex">
@@ -254,16 +253,19 @@ export function HotelListPage() {
           setMaxtoMin={setMaxtoMin}
           MaxtoMin={MaxtoMin}
         ></SortFilter>
-        <button className=" w-40 border-2 flex space-x-2 hover:bg-zinc-100 rounded-md border-primary px-2 py-[0.65rem]">
+        {/* <button className=" w-40 border-2 flex space-x-2 hover:bg-zinc-100 rounded-md border-primary px-2 py-[0.65rem]">
           <p className=" text-[#15439C] font-bold text-xl">More Filter</p>
           <div
             className="h-6 w-6 bg-cover bg-center"
             style={{ backgroundImage: `url(/img/filter.png)` }}
           ></div>
-        </button>
+        </button> */}
       </div>
       <div className="w-full px-[10%]">
-        <HotelList HotelData={searchResults} checker = {search == "" && selectedTags.every(x => x === false)}></HotelList>
+        <HotelList
+          HotelData={searchResults}
+          checker={search == "" && selectedTags.every((x) => x === false)}
+        ></HotelList>
       </div>
     </main>
   );

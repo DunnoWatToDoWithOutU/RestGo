@@ -25,9 +25,7 @@ export async function PUT(req: NextRequest, {params}: {params: {id: string}}) {
         if( user.role !== "admin" ){
             const appointment = await Appointment.findById(params.id);
             console.log(appointment.user.type);
-            if (appointment.user.toString() === user._id) {
-                return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-            }
+
         }
         const { startDate, endDate } = await req.json();
         const duration = Math.abs(new Date(endDate).getTime() - new Date(startDate).getTime());
