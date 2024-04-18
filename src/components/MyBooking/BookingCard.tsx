@@ -121,9 +121,9 @@ export function BookingCard(props: {
           <button
             onClick={async () => {
               try {
+                await deleteBooking(props.hotel.id);
                 window.location.reload();
                 console.log('refresh')
-                await deleteBooking(props.hotel.id);
               } catch (err) {
                 console.log(err);
                 toast.error("Error Delete Booking");
