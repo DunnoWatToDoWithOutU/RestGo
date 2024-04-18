@@ -150,14 +150,8 @@ export function HotelListPage() {
   console.log(selectedTags);
   return (
     <main className="w-full flex flex-col justify-start items-center ">
-      <div className="  w-[40%] mt-10 text-center ">
-        <p className=" text-3xl font-bold mb-5 text-[#15439C]">Hotel List</p>
-
-        {/* <div className="flex justify-between items-center">
-          <SearchBar></SearchBar>
-          </div> */}
-      </div>
-      <div className="py-5 px-[10%]  w-full bg-[#15439C] flex relative">
+      
+      <div className="py-3 px-[10%]  w-full bg-[#15439C] flex fixed mt-6 z-50">
         <div className=" w-full text-[#15439C]   px-5 rounded-md  ">
           <div className="flex">
             <div className="w-[50%] relative h-30  rounded-md flex bg-white border-2 border-primary">
@@ -187,7 +181,7 @@ export function HotelListPage() {
                 ></div>
               </button>
               {showCheckInCheckOutPopup2 && (
-                <div className="absolute top-[50%] z-50">
+                <div className="absolute top-20 z-50">
                   <CheckInCheckOutPopup2
                     onClose={handleCloseCheckInCheckOutPopup2}
                     onChange1={(newDateIn: string) => {
@@ -223,7 +217,7 @@ export function HotelListPage() {
               </p>
             </button>
             {showAddPeople && (
-              <div className="absolute top-[50%] left-[50px] right-[20vw] z-50">
+              <div className="absolute top-[100%] left-[34rem] z-50">
                 <AddPeoplePopup
                   onClose={handleCloseAddPeople}
                   onSubmit={handlePeopleSubmit}
@@ -242,6 +236,14 @@ export function HotelListPage() {
           className="h-12 text-[#15439C] my-auto w-[60rem] py-2 px-3 bg-white rounded-full focus:outline-none border-primary border-2"
         ></input>
       </div>
+      {/* <div className="  w-[40%] mt-10 text-center ">
+        <p className=" text-3xl font-bold mb-5 text-[#15439C]">Hotel List</p>
+
+        <div className="flex justify-between items-center">
+          <SearchBar></SearchBar>
+          </div> 
+      </div> */}
+      <div className="mt-[8rem]"></div>
       <TagContainer
         selectedTags={selectedTags}
         setSelectedTags={setSelectedTags}
@@ -252,7 +254,7 @@ export function HotelListPage() {
           setMaxtoMin={setMaxtoMin}
           MaxtoMin={MaxtoMin}
         ></SortFilter>
-        <button className="  w-40 border-2 flex space-x-2 hover:bg-zinc-100 rounded-md border-primary px-2 py-2">
+        <button className=" w-40 border-2 flex space-x-2 hover:bg-zinc-100 rounded-md border-primary px-2 py-[0.65rem]">
           <p className=" text-[#15439C] font-bold text-xl">More Filter</p>
           <div
             className="h-6 w-6 bg-cover bg-center"
