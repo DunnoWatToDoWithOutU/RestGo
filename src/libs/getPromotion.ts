@@ -11,5 +11,4 @@ export async function getPromotion(hospitalID:string){
      }
     const data = await response.json()
     return data;
-
 }
