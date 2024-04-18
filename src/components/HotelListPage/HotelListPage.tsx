@@ -180,7 +180,7 @@ export function HotelListPage() {
                 ></div>
               </button>
               {showCheckInCheckOutPopup2 && (
-                <div className="absolute top-20 z-50">
+                <div className="absolute top-20 z-40">
                   <CheckInCheckOutPopup2
                     onClose={handleCloseCheckInCheckOutPopup2}
                     onChange1={(newDateIn: string) => {
