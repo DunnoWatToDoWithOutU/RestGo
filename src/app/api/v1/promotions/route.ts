@@ -40,3 +40,16 @@ export const POST = async (req :NextRequest)=>{
         return NextResponse.json({error: "Internal server error"}, {status: 500});
     }
 }
+export const DELETE = async () => {
+    try {
+        await connectDB();
+        const currentDate = new Date(); 
+        await Promotion.deleteMany({
+            endDate: { $lt: currentDate } 
+        });
+        return NextResponse.json({ message: "Deleted promotions successfully" }, { status: 200 });
+    } catch (error) {
+        console.log(error);
+        return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    }
+}
