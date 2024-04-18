@@ -1,5 +1,5 @@
 export async function getPromotion(hospitalID:string){
-     const response = await fetch(`http://localhost:3000/api/v1/promotions/${hospitalID}`,{
+     const response = await fetch(`https://rest-go.vercel.app/api/v1/promotions/${hospitalID}`,{
         method: "GET",
         headers: {
             "Content-Type": "application/json"
@@ -11,4 +11,5 @@ export async function getPromotion(hospitalID:string){
      }
     const data = await response.json()
     return data;
+
 }
