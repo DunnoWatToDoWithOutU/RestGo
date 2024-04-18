@@ -1,12 +1,31 @@
-import { formatDate } from "../BookingCard";
+import { AppointmnetProps } from "../../../../@types/type";
+function formatDate(dateString: string) {
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
-export function Detail({
-  startDate,
-  endDate,
-}: {
-  startDate: Date;
-  endDate: Date;
-}) {
+  const date = new Date(dateString);
+  const day = date.getDate();
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
+
+  return `${day} ${month} ${year}`;
+}
+
+export function Detail(props: { bookingData: AppointmnetProps }) {
+  const startDate = new Date(props.bookingData.startDate);
+  const endDate = new Date(props.bookingData.endDate);
   const duration =
     (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24);
 
@@ -16,7 +35,8 @@ export function Detail({
         Booking Detail
       </p>
       <div className="flex flex-row">
-        <span className="font-bold">Dates : </span>{" "}
+        <span className="font-bold">Dates : </span>
+        {"  "}
         {formatDate(startDate.toString())} - {formatDate(endDate.toString())}
       </div>
       <div>

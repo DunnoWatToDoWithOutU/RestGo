@@ -1,9 +1,8 @@
-export default async function getAppointments(token: string, id : string){
-    const response = await fetch(`https://rest-go.vercel.app/api/v1/appointments/${id}`, {
+export default async function getAppointment( id : string){
+    const response = await fetch(`http://localhost:3000/api/v1/appointments/${id}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + token,
         },
         credentials: "include",
     });

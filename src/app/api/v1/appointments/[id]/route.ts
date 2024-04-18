@@ -6,10 +6,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/libs/authOptions";
 
 export async function GET(req: NextRequest, {params}: {params: {id: string}}) {
-    const user = await protect(req);
-    if (!user) {
-        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
     try { 
         await connectDB();
         const appointment = await Appointment.findById(params.id);

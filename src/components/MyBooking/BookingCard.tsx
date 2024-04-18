@@ -9,7 +9,7 @@ import EditPopup from "../Editpopup";
 import { useState } from "react";
 import updateBooking from "@/libs/updateBooking";
 
-export function formatDate(dateString: string) {
+function formatDate(dateString: string) {
   const months = [
     "January",
     "February",
