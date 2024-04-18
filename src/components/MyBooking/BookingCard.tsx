@@ -4,6 +4,7 @@ import { AppointmnetProps, HotelProps } from "../../../@types/type";
 import { toast } from "sonner";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import deleteBooking from "@/libs/deleteBooking";
 
 function formatDate(dateString: string) {
   const months = [
@@ -80,6 +81,18 @@ export function BookingCard(props: {
             style={{ backgroundImage: `url(/img/homepage/edit.png)` }}
           ></button>
           <button
+            onClick={async ()=>{
+              try{
+                await deleteBooking(props.hotel.id);
+              }
+              catch(err){
+                console.log(err);
+                toast.error("Error Delete Booking");
+                return;
+              }
+              toast.success("Delete Finsih");
+
+            }}
             className="h-5 w-5 bg-cover bg-center hover:scale-110"
             style={{ backgroundImage: `url(/img/homepage/trash.png)` }}
           ></button>
