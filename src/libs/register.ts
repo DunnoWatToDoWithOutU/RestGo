@@ -12,7 +12,8 @@ export async function register(name:string, email:string, telephone:string, pass
         }),
         credentials: "include",
     });
-    const data = response.json();
+    const data = await response.json();
+    console.log(data)
     return data;
 }
     
