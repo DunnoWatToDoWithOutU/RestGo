@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
-import { format } from 'date-fns';
+import { format } from "date-fns";
 import { AppointmnetProps, HotelProps } from "../../@types/type";
+import updateBooking from "@/libs/updateBooking";
 
 interface EditPopupProps {
   Appt: AppointmnetProps;
@@ -10,11 +11,12 @@ interface EditPopupProps {
   onCancel: () => void;
 }
 
-export default function EditPopup({ Appt, Hotel, onSave, onCancel }: EditPopupProps) {
-  // Destructure startDate and endDate from Appt
-  const { startDate, endDate, _id, user, hotel, status, createdAt } = Appt;
-
-  // Initialize state with Appt
+export default function EditPopup({
+  Appt,
+  Hotel,
+  onSave,
+  onCancel,
+}: EditPopupProps) {
   const [editedAppt, setEditedAppt] = useState({ ...Appt });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,23 +24,28 @@ export default function EditPopup({ Appt, Hotel, onSave, onCancel }: EditPopupPr
     setEditedAppt((prevAppt) => ({ ...prevAppt, [name]: value }));
   };
 
-  const handleSave = () => {
-    onSave(editedAppt);
+  const handleSave = async () => {
+    await updateBooking(Appt._id);
   };
 
   // const formattedStartDate = editedAppt.startDate instanceof Date ? editedAppt.startDate.toISOString().split("T")[0] : "";
   // const formattedEndDate = editedAppt.endDate instanceof Date ? editedAppt.endDate.toISOString().split("T")[0] : "";
-  const formattedStartDate = format(new Date(editedAppt.startDate), 'yyyy-MM-dd');
-  const formattedEndDate = format(new Date(editedAppt.endDate), 'yyyy-MM-dd');
-  console.log(formattedEndDate)
-  console.log(formattedStartDate)
+  const formattedStartDate = format(
+    new Date(editedAppt.startDate),
+    "yyyy-MM-dd"
+  );
+  const formattedEndDate = format(new Date(editedAppt.endDate), "yyyy-MM-dd");
+  console.log(formattedEndDate);
+  console.log(formattedStartDate);
 
   return (
     <div className="popup-container fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className="popup bg-white rounded-lg p-8 max-w-md w-full relative z-50">
         <h2 className="text-2xl font-bold mb-4">Edit Appointment Details</h2>
         <div className="mb-4">
-          <label htmlFor="startDate" className="block text-gray-700">Start Date:</label>
+          <label htmlFor="startDate" className="block text-gray-700">
+            Start Date:
+          </label>
           <input
             type="date"
             name="startDate"
@@ -48,7 +55,9 @@ export default function EditPopup({ Appt, Hotel, onSave, onCancel }: EditPopupPr
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="endDate" className="block text-gray-700">End Date:</label>
+          <label htmlFor="endDate" className="block text-gray-700">
+            End Date:
+          </label>
           <input
             type="date"
             name="endDate"
@@ -58,8 +67,18 @@ export default function EditPopup({ Appt, Hotel, onSave, onCancel }: EditPopupPr
           />
         </div>
         <div className="flex justify-end">
-          <button onClick={handleSave} className="bg-blue-500 text-white py-2 px-4 rounded-md mr-2">Save</button>
-          <button onClick={onCancel} className="bg-gray-300 text-gray-700 py-2 px-4 rounded-md">Cancel</button>
+          <button
+            onClick={handleSave}
+            className="bg-blue-500 text-white py-2 px-4 rounded-md mr-2"
+          >
+            Save
+          </button>
+          <button
+            onClick={onCancel}
+            className="bg-gray-300 text-gray-700 py-2 px-4 rounded-md"
+          >
+            Cancel
+          </button>
         </div>
       </div>
     </div>
