@@ -67,7 +67,6 @@ export function HotelInfo(props: {
     <p className="text-center text-xl font-bold m-20 h-screen">Hotel Data loading...</p>
   );
 
-  
   return (
     <div className=" px-[10%] mt-10   text-[#15439C]">
       <ImageHotel pic={props.hotel.pic} id={props.hotel.id}></ImageHotel>
