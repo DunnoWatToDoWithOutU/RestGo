@@ -149,7 +149,7 @@ export function HotelListPage() {
   console.log(selectedFilter);
   console.log(selectedTags);
   return (
-    <main className="w-full flex flex-col justify-start items-center ">
+    <main className="w-full flex flex-col justify-start items-center min-h-[600px]">
 
       <div className="py-3 px-[10%]  w-full bg-[#15439C] flex fixed mt-6 z-50">
         <div className=" w-full text-[#15439C]   px-5 rounded-md  ">
