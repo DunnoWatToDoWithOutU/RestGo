@@ -1,3 +1,4 @@
+'use client'
 import { AppointmnetProps } from "../../../../@types/type";
 function formatDate(dateString: string) {
   const months = [
@@ -30,7 +31,7 @@ export function Detail(props: { bookingData: AppointmnetProps }) {
     (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24);
 
   return (
-    <div className="w-full text-[#15439C] border-[3px] rounded-2xl p-7 relative border-[#15439C]">
+    <div className="w-full text-[#15439C] border-[3px] rounded-2xl p-7 relative border-[#15439C] my-5">
       <p className="absolute left-10 -top-5 px-4 bg-white text-2xl text-[#15439C] font-bold">
         Booking Detail
       </p>
