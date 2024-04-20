@@ -1,5 +1,5 @@
 export default async function updateBooking(bookingID: string){
-    const response = await fetch(`https://rest-go.vercel.app/api/v1/appointments/${bookingID}`, {
+    const response = await fetch(`https://rest-go.vercel.app/api/v2/appointments/${bookingID}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
