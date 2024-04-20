@@ -1,7 +1,7 @@
 import { ReviewProps } from "../../@types/type";
 
 export async function createReviews(rating:number,reviewText:string,hotelid:string,id:string) {
-  const response = await fetch(`https://rest-go.vercel.app/api/v1/hotels/${hotelid}/reviews`, {
+  const response = await fetch(`https://rest-go.vercel.app/api/v2/hotels/${hotelid}/reviews`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
