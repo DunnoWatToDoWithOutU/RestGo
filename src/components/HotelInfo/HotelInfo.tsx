@@ -307,7 +307,7 @@ function InputPanel(props: {
         className="h-full rounded-md px-3 py-2 w-[70%] focus:outline-none  "
         rows={3}
         cols={50}
-        placeholder="Write your riview here..."
+        placeholder="Write your review here..."
       ></textarea>
       <div className="h-full w-[20%] bg-white justify-center flex flex-col rounded-md text-center ">
         <p>{props.Rating}</p>
