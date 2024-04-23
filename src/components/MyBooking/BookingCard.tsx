@@ -91,9 +91,9 @@ export function BookingCard(props: {
       )}
    {showQRCode && (
   <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
-    <div className="bg-white p-16 rounded-lg flex flex-col items-center relative w-[600px]">
+    <div className="bg-white p-16 rounded-lg flex flex-col items-center relative w-[600px] h-[530px]">
       
-      <div className="flex justify-between w-full ">
+      <div className="flex justify-between w-full">
         
         <p className="text-2xl text-[#15439C] font-bold">{props.hotel.name}</p>
         <button 
@@ -112,7 +112,7 @@ export function BookingCard(props: {
       <Button className="bg-[#2364E2] mb-4 rounded-lg mt-3">
         <p className="text-xs text-white px-5 py-0.5 font-bold ">Re-Generate QR</p>
       </Button>
-      <p className="text-center text-sm mt-2 text-[#26CBFC] mt-3">Please show this QR code to Reception</p>
+      <p className="text-center text-sm  text-[#26CBFC] mt-3">Please show this QR code to Reception</p>
     </div>
   </div>
 )}
