@@ -1,5 +1,5 @@
 export default async function getPromotions(){
-    const response = await fetch(`http://localhost:3000/api/v2/promotions`,{
+    const response = await fetch(`https://rest-go.vercel.app/api/v2/promotions`,{
         method: "GET",
         headers: {
             "Content-Type": "application/json"
