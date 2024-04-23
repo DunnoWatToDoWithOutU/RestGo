@@ -1,5 +1,5 @@
 export default async function getHotels(){
-    const response = await fetch(`https://rest-go.vercel.app/api/v2/hotels`,{
+    const response = await fetch(`http://rest-go.vercel.app/api/v2/hotels`,{
         method: "GET",
         headers: {
             "Content-Type": "application/json"
@@ -11,4 +11,4 @@ export default async function getHotels(){
     }
     const data = await response.json()
     return data;
-} 
+}
