@@ -27,7 +27,7 @@ export default function SortFilter(props: {
   MaxtoMin: boolean;
 }) {
   const [selectedButtonIndexes, setSelectedButtonIndexes] = useState<number>(
-    0 //default by price
+    3 //default by name
   );
   const handleSortClick = (index: number) => {
     props.setFiltering(SortItem[index].name.toLowerCase());
