@@ -20,6 +20,7 @@ export interface AppointmnetProps{
     startDate:Date;
     endDate:Date;
     status:string;
+    people:number;
     createdAt:Date;
 }
 

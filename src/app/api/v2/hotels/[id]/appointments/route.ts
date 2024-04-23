@@ -9,7 +9,7 @@ export const POST = async (
     try {
         await connectDB();
         const user = await protect(req);
-        const { startDate, endDate } = await req.json();
+        const { startDate, endDate,people } = await req.json();
         const duration = Math.abs(new Date(endDate).getTime() - new Date(startDate).getTime());
         const nights = Math.ceil(duration / (1000 * 60 * 60 * 24));
         if (nights > 3) {
@@ -19,6 +19,7 @@ export const POST = async (
             startDate: startDate,
             endDate: endDate,
             hotel: params.id,
+            people: people,
             user: user._id,
         });
         return NextResponse.json(appointment, { status: 201 });

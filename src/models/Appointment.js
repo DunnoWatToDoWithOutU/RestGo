@@ -28,6 +28,11 @@ const appointmentSchema = new mongoose.Schema({
         enum:['pending', 'checkedIn', 'checkedOut'],
         default:'pending'
     },
+    people:{
+        type:Number,
+        required:[true, 'Please enter the number of people']
+    
+    },
 }, {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
