@@ -109,7 +109,7 @@ export function BookingCard(props: {
       {/* QR Code Image */}
       <Image src={"/img/user.png"} alt="QR Code" className="z-50 mb-4" width={150} height={150} />
       <p className="text-sm text-[#2364E2] mb-4">Created At : {createdAt}</p>
-      <Button className="bg-[#2364E2] mb-4 rounded-lg mt-3">
+      <Button className="bg-[#2364E2] mb-4 rounded-lg mt-3 hover:bg-primary_dark">
         <p className="text-xs text-white px-5 py-0.5 font-bold ">Re-Generate QR</p>
       </Button>
       <p className="text-center text-sm  text-[#26CBFC] mt-3">Please show this QR code to Reception</p>
