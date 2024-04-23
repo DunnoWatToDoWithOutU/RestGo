@@ -142,7 +142,7 @@ export function BookingCard(props: {
             href={`/mybooking/${props.appointment._id}`}
             className="text-xl py-1 bg-primary text-white font-normal rounded-lg hover:bg-primary_dark"
           >
-            <p className=" text-center">View Detail</p>
+            <p className=" text-center">Check in QR</p>
           </Link>
         </div>
       </div>
