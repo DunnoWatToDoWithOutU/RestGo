@@ -16,7 +16,7 @@ const Footer = () => {
             />
           {/* Description */}
           <p className="text-sm"
-            >Rest GO<br/> Welcome to REST GO. We will get you to rest in piece.
+            >Rest GO<br/> Welcome to REST GO. We will get you to rest in peace.
             </p>
         </div>
         <div className="text-sm text-gray-500">
