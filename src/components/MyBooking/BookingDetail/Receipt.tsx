@@ -1,5 +1,7 @@
 import Image from "next/image";
-import { AppointmnetProps, HotelProps } from "../../../../@types/type";
+import { AppointmnetProps, HotelProps} from "../../../../@types/type";
+import { getPromotion } from "@/libs/getPromotion";
+import { useEffect, useState } from "react";
 
 export function Receipt(props: {
   hotel: HotelProps;
@@ -8,8 +10,20 @@ export function Receipt(props: {
   const startDate = new Date(props.bookingData.startDate);
   const endDate = new Date(props.bookingData.endDate);
   const duration =
-    (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24);
-  const total = props.hotel.price * duration;
+  (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24);
+  const base = props.hotel.price * duration;
+  const [discount, setDiscount] = useState<number>(0);
+
+  useEffect(() => {
+    const fetchDiscount = async () => {
+      const discountData = await getPromotion(props.bookingData.promotion);
+      if(discountData){
+        setDiscount(discountData.discount);
+      }
+    };
+
+    fetchDiscount();
+  }, []);
   return (
     <div className="w-full text-[#15439C] text-center border-[3px] rounded-2xl p-6 relative border-[#15439C] mt-5">
       <p className="font-bold text-center text-xl sm:text-2xl">Receipt</p>
@@ -34,11 +48,17 @@ export function Receipt(props: {
         <div className="flex w-full justify-between">
           <p><span className="font-bold">Price : </span> {props.hotel.price} {" ฿ x "} {duration}{" "}</p>
             
-          <p className="font-bold">{total} ฿</p>
+          <p className="font-bold">{base} ฿</p>
         </div>
         <div className="flex w-full justify-between">
-          <p className="font-bold">Total (THB) :</p>
-          <p className="font-bold">{total} ฿</p>
+          <p><span className="font-bold">Discount : </span></p>
+            
+          <p className="font-bold mb-1 text-[#D7263D]">{"- "}{discount*base/100} ฿</p>
+        </div>
+        <hr className="border-t-3 border-[#15439C]"></hr>
+        <div className="bg-blue-200/20 flex w-full justify-between">
+          <p className="text-lg font-bold mt-1">Total (THB) :</p>
+          <p className="text-lg font-bold">{base - discount*base/100} ฿</p>
         </div>
       </div>
     </div>
