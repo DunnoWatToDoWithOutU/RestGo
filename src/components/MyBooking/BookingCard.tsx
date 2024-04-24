@@ -74,7 +74,14 @@ export function BookingCard(props: {
   return (
     <motion.div
       whileHover={{ left: 10 }}
-      className="flex bg-cover bg-center overflow-hidden text-white relative text-lg font-bold p-2 px-4 w-full h-40 border-2 justify-between rounded-2xl border-[#15439C]"
+      className={`flex bg-cover bg-center overflow-hidden text-white relative font-bold p-2 px-4 w-full h-40 border-2 justify-between rounded-2xl 
+      border-${
+        props.appointment.status === "pending"
+          ? "white"
+          : props.appointment.status === "checkedIn"
+          ? "[#4FD274]"
+          : "[#15439C]"
+      }`} //changed by status
     >
       {showEditPopup && (
         <EditPopup
@@ -131,7 +138,7 @@ export function BookingCard(props: {
       )}
 
       <div className="absolute inset-0 bg-black rounded-2xl opacity-40 z-10"></div>
-      <Image
+      <Image //Add BG image
         alt="hotel"
         src={`/img/hotel/${props.hotel.id}/${props.hotel.pic[0]}`}
         objectFit="cover"
@@ -139,18 +146,38 @@ export function BookingCard(props: {
         className="absolute w-full left-0 z-0"
       />
       <div className="flex flex-col justify-between relative z-20">
-        <div>
-          <p>From : {startDate}</p>
-          <p>To : {endDate}</p>
+        <div className="text-[9pt] sm:text-[11pt] md:text-[12pt]">
+          <span className="bg-white/50 px-2 py-1 rounded-md">
+            <span className="hidden sm:inline">Status : </span>
+            <span
+              className={`text-${
+                props.appointment.status === "pending"
+                  ? "white"
+                  : props.appointment.status === "checkedIn"
+                  ? "[#4FD274]"
+                  : "primary"
+              }`}
+            >
+              {props.appointment.status}
+            </span>
+          </span>
+          <p>
+            <span className="hidden sm:inline">From :</span> {startDate}
+          </p>
+          <p>
+            <span className="hidden sm:inline">To :</span> {endDate}
+          </p>
         </div>
-        <div className="space-y-2">
-          <p className="text-2xl">{props.hotel.name}</p>
+        <div>
+          <p className="text-md sm:text-lg md:text-xl">{props.hotel.name}</p>
           <div className="flex space-x-2 items-center">
             <div
               className="h-5 w-5 bg-cover bg-center"
               style={{ backgroundImage: `url(/img/homepage/ping.png)` }}
             ></div>
-            <p className="text-sm">{props.hotel.address}</p>
+            <p className="text-[7pt] sm:text-[9pt] line-clamp-2">
+              {props.hotel.address}
+            </p>
           </div>
         </div>
       </div>
@@ -160,12 +187,12 @@ export function BookingCard(props: {
             onClick={() => {
               toast.info(`Phone : ${props.hotel.telephone}`);
             }}
-            className="h-5 w-5 bg-cover bg-center hover:scale-110"
+            className="h-4 w-4 bg-cover bg-center hover:scale-110 sm:h-5 sm:w-5"
             style={{ backgroundImage: `url(/img/homepage/phone.png)` }}
           ></button>
           <button
             onClick={() => setShowEditPopup(true)}
-            className="h-5 w-5 bg-cover bg-center hover:scale-110"
+            className="h-4 w-4 bg-cover bg-center hover:scale-110 sm:h-5 sm:w-5"
             style={{ backgroundImage: `url(/img/homepage/edit.png)` }}
           ></button>
 
@@ -182,7 +209,7 @@ export function BookingCard(props: {
               }
               toast.success("Delete Finsih");
             }}
-            className="h-5 w-5 bg-cover bg-center hover:scale-110"
+            className="h-4 w-4 bg-cover bg-center hover:scale-110 sm:h-5 sm:w-5"
             style={{ backgroundImage: `url(/img/homepage/trash.png)` }}
           ></button>
         </div>
