@@ -11,10 +11,10 @@ export function Receipt(props: {
     (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24);
   const total = props.hotel.price * duration;
   return (
-    <div className="w-full text-[#15439C] text-center border-[3px] rounded-2xl p-6 relative border-[#15439C]">
-      <p className="font-bold text-center text-xl">Receipt</p>
+    <div className="w-full text-[#15439C] text-center border-[3px] rounded-2xl p-6 relative border-[#15439C] mt-5">
+      <p className="font-bold text-center text-xl sm:text-2xl">Receipt</p>
 
-      <div>
+      <div className="mt-2">
         <Image
           alt="hotel image"
           src={`/img/hotel/${props.hotel.id}/${props.hotel.pic[0]}`}
@@ -24,20 +24,16 @@ export function Receipt(props: {
         ></Image>
       </div>
 
-      <p className="text-lg font-bold my-3">{props.hotel.name}</p>
-      <div
-        className="w-[80%] mx-auto text-start space-y-1 mb-3
-       "
-      >
-        <p> {props.hotel.address}</p>
-        <p>Tel : {props.hotel.telephone}</p>
+      <p className=" text-lg sm:text-xl font-bold my-3">{props.hotel.name}</p>
+      <div className="w-[80%] mx-auto text-start space-y-1 mb-3">
+        <div><span className="font-bold mr-2">Address : </span> <span>{props.hotel.address}</span></div>
+        <p><span className="font-bold mr-2">Tel : </span>{props.hotel.telephone}</p>
       </div>
       <div className="w-[80%] h-[0.125rem] bg-[#15439C] mx-auto mb-3"></div>
       <div className="text-start px-[10%]">
         <div className="flex w-full justify-between">
-          <p className="font-bold">
-            Price :{props.hotel.price} {" ฿ x "} {duration}{" "}
-          </p>
+          <p><span className="font-bold">Price : </span> {props.hotel.price} {" ฿ x "} {duration}{" "}</p>
+            
           <p className="font-bold">{total} ฿</p>
         </div>
         <div className="flex w-full justify-between">

@@ -111,9 +111,8 @@ export default function BookingDetail({ params }: { params: { id: string } }) {
   }
 
   return (
-    <section className="flex flex-row px-[10%] space-x-3 min-h-screen mt-20">
-      <div className="flex flex-col mr-1 w-[60%]">
-        <Detail bookingData={bookingData}></Detail>
+    <section className="w-[100%] flex flex-col px-[10%] min-h-screen mt-20">
+      <div className="flex flex-row place-content-between">
         <Payment hotel={hotelData} appointment={bookingData}></Payment>
         {canUseCheckInCheckOut && (
           <CheckInOutButton
@@ -123,7 +122,8 @@ export default function BookingDetail({ params }: { params: { id: string } }) {
           />
         )}
       </div>
-      <div className="w-[80%]">
+      <div className="mt-5">
+        <Detail bookingData={bookingData}></Detail>
         <Receipt hotel={hotelData} bookingData={bookingData}></Receipt>
       </div>
     </section>

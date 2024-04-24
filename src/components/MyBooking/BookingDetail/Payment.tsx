@@ -39,7 +39,7 @@ export function Payment(props: {
     setShowQRCode(!showQRCode);
   };
   return (
-    <div className="w-full  text-[#15439C] border-[3px] rounded-2xl p-7 relative border-[#15439C] my-5">
+    <div>
       {showQRCode && (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-16 rounded-lg flex flex-col items-center relative w-[600px] h-[530px]">
@@ -85,13 +85,9 @@ export function Payment(props: {
           </div>
         </div>
       )}
-      <p className="absolute left-10 -top-5 px-4 bg-white text-2xl text-[#15439C] font-bold">
-        QR Code
-      </p>
-
       <button
         onClick={handleQRButtonClick}
-        className=" bg-[#2465E2] text-white font-bold rounded-md px-5 py-2 mt-5"
+        className=" bg-[#2465E2] text-white font-bold rounded-md px-5 py-2 drop-shadow-sm"
       >
         Show QR Code
       </button>
