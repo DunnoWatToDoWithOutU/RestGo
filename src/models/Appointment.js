@@ -33,6 +33,10 @@ const appointmentSchema = new mongoose.Schema({
         required:[true, 'Please enter the number of people']
     
     },
+    promotion:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'Promotion',
+    }
 }, {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },

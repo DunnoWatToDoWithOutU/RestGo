@@ -26,6 +26,7 @@ export function HotelInfo(props: {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [discount, setDiscount] = useState(0);
+  const [promotion, setPromotion] = useState("");
   const chatMessagesRef = useRef<HTMLDivElement>(null);
   let bookingday =
     (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24);
@@ -63,9 +64,12 @@ export function HotelInfo(props: {
   const [review, setReview] = useState<string>("");
   const [rating, setRating] = useState<number>(0);
 
-  if (props.hotel.name == "") return (
-    <p className="text-center text-xl font-bold m-20 h-screen">Hotel Data loading...</p>
-  );
+  if (props.hotel.name == "")
+    return (
+      <p className="text-center text-xl font-bold m-20 h-screen">
+        Hotel Data loading...
+      </p>
+    );
 
   return (
     <div className=" px-[10%] mt-10   text-[#15439C]">
@@ -167,6 +171,7 @@ export function HotelInfo(props: {
               </p>
             </div>
             <PromotionDropDown
+              setPromotion={setPromotion}
               promoion={props.promotion}
               hotel={props.hotel}
               setDiscount={setDiscount}
@@ -179,7 +184,9 @@ export function HotelInfo(props: {
                     props.hotel.id,
                     startDate,
                     endDate,
-                    session ? session.user.token : ""
+                    session ? session.user.token : "",
+                    4,
+                    promotion
                   );
                 } catch (error) {
                   toast.error("Error Booking");
