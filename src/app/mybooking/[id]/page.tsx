@@ -14,7 +14,7 @@
 // }: {
 //   params: { id: string };
 // }) {
-  
+
 //   const bookingData = await getAppointment(params.id);
 //   const hotelData = await getHotel(bookingData.hotel);
 
@@ -28,7 +28,7 @@
 //   const handleCheckedIn = () =>{
 //     console.log('use checkin')
 //     checkIn(params.id, token);
-//   } 
+//   }
 
 //   const handleCheckedOut = () =>{
 //     console.log('use checkout')
@@ -40,20 +40,20 @@
 //       <div className="flex flex-col mr-1 w-[60%]">
 //         <Detail bookingData={bookingData}></Detail>
 //         <Payment></Payment>
-//         {canUseCheckInCheckOut && 
-//         <CheckInOutButton status={status} 
-//                           handleCheckedIn={handleCheckedIn} 
-//                           handleCheckedOut={handleCheckedOut} 
+//         {canUseCheckInCheckOut &&
+//         <CheckInOutButton status={status}
+//                           handleCheckedIn={handleCheckedIn}
+//                           handleCheckedOut={handleCheckedOut}
 //         />}
 //       </div>
 //       <div className="w-[80%]">
 //         <Receipt hotel={hotelData} bookingData={bookingData}></Receipt>
 //       </div>
 //     </section>
-//   );  
+//   );
 // }
 
-'use client';
+"use client";
 
 import { Detail } from "@/components/MyBooking/BookingDetail/Detail";
 import { Payment } from "@/components/MyBooking/BookingDetail/Payment";
@@ -70,17 +70,18 @@ export default function BookingDetail({ params }: { params: { id: string } }) {
   const { data: session } = useSession();
   const [bookingData, setBookingData] = useState(null);
   const [hotelData, setHotelData] = useState(null);
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState("");
   const [canUseCheckInCheckOut, setCanUseCheckInCheckOut] = useState(false);
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       const bookingData = await getAppointment(params.id);
       const hotelData = await getHotel(bookingData.hotel);
       const userRole = session?.user?.role;
-      const token = session?.user?.token ?? '';
-      const canUseCheckInCheckOut = userRole === "admin" || userRole === "staff";
+      const token = session?.user?.token ?? "";
+      const canUseCheckInCheckOut =
+        userRole === "admin" || userRole === "staff";
       const status = bookingData.status;
 
       setBookingData(bookingData);
@@ -94,13 +95,13 @@ export default function BookingDetail({ params }: { params: { id: string } }) {
   }, [params.id, session]);
 
   const handleCheckedIn = () => {
-    console.log('use checkin');
+    console.log("use checkin");
     checkIn(params.id, token);
     window.location.reload();
   };
 
   const handleCheckedOut = () => {
-    console.log('use checkout');
+    console.log("use checkout");
     checkOut(params.id, token);
     window.location.reload();
   };
@@ -113,7 +114,7 @@ export default function BookingDetail({ params }: { params: { id: string } }) {
     <section className="flex flex-row px-[10%] space-x-3 min-h-screen mt-20">
       <div className="flex flex-col mr-1 w-[60%]">
         <Detail bookingData={bookingData}></Detail>
-        <Payment></Payment>
+        <Payment hotel={hotelData} appointment={bookingData}></Payment>
         {canUseCheckInCheckOut && (
           <CheckInOutButton
             status={status}

@@ -8,6 +8,7 @@ import deleteBooking from "@/libs/deleteBooking";
 import EditPopup from "../Editpopup";
 import { useState } from "react";
 import updateBooking from "@/libs/updateBooking";
+import { Button } from "@mui/material";
 
 function formatDate(dateString: string) {
   const months = [
@@ -49,11 +50,8 @@ export function BookingCard(props: {
   };
 
   const handleSaveEdit = async (updatedAppt: AppointmnetProps) => {
-    // Call your updateBooking function here with the updated appointment details
     try {
       await updateBooking(updatedAppt._id);
-      // Assuming you have a function to fetch updated booking data, update it here
-      // fetchBookingData();
       toast.success("Appointment details updated successfully");
     } catch (error) {
       console.error("Error updating Appointment details:", error);
@@ -65,6 +63,12 @@ export function BookingCard(props: {
 
   const handleCancelEdit = () => {
     setShowEditPopup(false);
+  };
+
+  const [showQRCode, setShowQRCode] = useState(false);
+
+  const handleQRButtonClick = () => {
+    setShowQRCode(!showQRCode);
   };
 
   return (
@@ -80,6 +84,52 @@ export function BookingCard(props: {
           Hotel={undefined}
         />
       )}
+      {showQRCode && (
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-16 rounded-lg flex flex-col items-center relative w-[600px] h-[530px]">
+            <div className="flex justify-between w-full">
+              <p className="text-2xl text-[#15439C] font-bold">
+                {props.hotel.name}
+              </p>
+              <button
+                className="absolute top-0 right-0 m-2 "
+                onClick={handleQRButtonClick}
+              >
+                <Image
+                  src={"/img/vectorx.png"}
+                  alt="x"
+                  className="mt-3 mr-3"
+                  width={17}
+                  height={17}
+                />
+              </button>
+            </div>
+            <p className="text-xl text-[#15439C] font-bold mb-4 mt-5">
+              Check-In QR Code
+            </p>
+            {/* QR Code Image */}
+            <img
+              src={`https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=https://rest-go.vercel.app/mybooking/${props.appointment._id}`}
+              alt="QR Code"
+              className="z-50 mb-4"
+              width={150}
+              height={150}
+            />
+            <p className="text-sm text-[#2364E2] mb-4">
+              Created At : {createdAt}
+            </p>
+            <Button className="bg-[#2364E2] mb-4 rounded-lg mt-3 hover:bg-primary_dark">
+              <p className="text-xs text-white px-5 py-0.5 font-bold ">
+                Re-Generate QR
+              </p>
+            </Button>
+            <p className="text-center text-sm  text-[#26CBFC] mt-3">
+              Please show this QR code to Reception
+            </p>
+          </div>
+        </div>
+      )}
+
       <div className="absolute inset-0 bg-black rounded-2xl opacity-40 z-10"></div>
       <Image
         alt="hotel"
@@ -124,7 +174,7 @@ export function BookingCard(props: {
               try {
                 await deleteBooking(props.hotel.id);
                 window.location.reload();
-                console.log('refresh')
+                console.log("refresh");
               } catch (err) {
                 console.log(err);
                 toast.error("Error Delete Booking");
@@ -138,12 +188,20 @@ export function BookingCard(props: {
         </div>
         <div className=" text-end flex flex-col space-y-2 ">
           <p className="text-sm">Created At : {createdAt}</p>
-          <Link
-            href={`/mybooking/${props.appointment._id}`}
-            className="text-xl py-1 bg-primary text-white font-normal rounded-lg hover:bg-primary_dark"
-          >
-            <p className=" text-center">View Detail</p>
-          </Link>
+          <div className="flex space-x-2  ">
+            <Button
+              onClick={handleQRButtonClick}
+              className="text-xl py-1 bg-primary text-white font-normal rounded-lg hover:bg-primary_dark"
+            >
+              <p className=" text-center">Check in QR</p>
+            </Button>
+            <Link
+              href={`/mybooking/${props.appointment._id}`}
+              className="text-xl py-1 px-3 bg-primary transition-colors duration-200 text-white font-normal rounded-lg hover:bg-primary_dark"
+            >
+              <p className=" text-center">Booking Info</p>
+            </Link>
+          </div>
         </div>
       </div>
     </motion.div>
