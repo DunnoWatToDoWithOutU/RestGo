@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { AppointmnetProps, HotelProps, PromotionProps} from "../../../../@types/type";
-import { getPromotion } from "@/libs/getPromotion";
+import { getPromotionbyId } from "@/libs/getPromotionbyId";
 import { useEffect, useState } from "react";
+import Promotion from "@/models/Promotion";
 
 export function Receipt(props: {
   hotel: HotelProps;
@@ -12,20 +13,17 @@ export function Receipt(props: {
   const duration =
   (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24);
   const base = props.hotel.price * duration;
-  const [promotionData, setPromotion] = useState<PromotionProps|null>(null);
+  const [promotionName, setPromotionName] = useState<string>("");
   const [discount, setDiscount] = useState<number>(0);
 
   useEffect(() => {
     const fetchDiscount = async () => {
-      const PromotionFetch = await getPromotion(props.bookingData.promotion);
+      const PromotionFetch = await getPromotionbyId(props.bookingData.promotion);
       if(PromotionFetch){
-        setPromotion(PromotionFetch);
+        setDiscount(PromotionFetch[0].discount);
       }
     };
     fetchDiscount();
-    if(promotionData){
-      setDiscount(promotionData?.discount);
-    }
   }, []);
   return (
     <div className="w-full text-[#15439C] text-center border-[3px] rounded-2xl p-6 relative border-[#15439C] mt-5">
@@ -56,7 +54,7 @@ export function Receipt(props: {
         {
           discount > 0 && (
           <div className="flex w-full justify-between">
-            <p><span className="font-bold">Discount : </span> {promotionData?.name}</p>
+            <p><span className="font-bold">Discount : </span> {promotionName}</p>
             <p className="font-bold mb-1 text-[#D7263D]">{"- "}{discount*base/100} ฿</p>
           </div>
         )}
