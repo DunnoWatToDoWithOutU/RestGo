@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { AppointmnetProps, HotelProps} from "../../../../@types/type";
+import { AppointmnetProps, HotelProps, PromotionProps} from "../../../../@types/type";
 import { getPromotion } from "@/libs/getPromotion";
 import { useEffect, useState } from "react";
 
@@ -12,17 +12,20 @@ export function Receipt(props: {
   const duration =
   (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24);
   const base = props.hotel.price * duration;
+  const [promotionData, setPromotion] = useState<PromotionProps|null>(null);
   const [discount, setDiscount] = useState<number>(0);
 
   useEffect(() => {
     const fetchDiscount = async () => {
-      const discountData = await getPromotion(props.bookingData.promotion);
-      if(discountData){
-        setDiscount(discountData.discount);
+      const PromotionFetch = await getPromotion(props.bookingData.promotion);
+      if(PromotionFetch){
+        setPromotion(PromotionFetch);
       }
     };
-
     fetchDiscount();
+    if(promotionData){
+      setDiscount(promotionData?.discount);
+    }
   }, []);
   return (
     <div className="w-full text-[#15439C] text-center border-[3px] rounded-2xl p-6 relative border-[#15439C] mt-5">
@@ -50,11 +53,13 @@ export function Receipt(props: {
             
           <p className="font-bold">{base} ฿</p>
         </div>
-        <div className="flex w-full justify-between">
-          <p><span className="font-bold">Discount : </span></p>
-            
-          <p className="font-bold mb-1 text-[#D7263D]">{"- "}{discount*base/100} ฿</p>
-        </div>
+        {
+          discount > 0 && (
+          <div className="flex w-full justify-between">
+            <p><span className="font-bold">Discount : </span> {promotionData?.name}</p>
+            <p className="font-bold mb-1 text-[#D7263D]">{"- "}{discount*base/100} ฿</p>
+          </div>
+        )}
         <hr className="border-t-3 border-[#15439C]"></hr>
         <div className="bg-blue-200/20 flex w-full justify-between">
           <p className="text-lg font-bold mt-1">Total (THB) :</p>
