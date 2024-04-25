@@ -18,13 +18,16 @@ export function Receipt(props: {
 
   useEffect(() => {
     const fetchDiscount = async () => {
+      if(props.bookingData.promotion === ""){return;}
       const PromotionFetch = await getPromotionbyId(props.bookingData.promotion);
       if(PromotionFetch){
+        setPromotionName(PromotionFetch[0].name)
         setDiscount(PromotionFetch[0].discount);
       }
     };
     fetchDiscount();
   }, []);
+  console.log(props.bookingData.promotion);
   return (
     <div className="w-full text-[#15439C] text-center border-[3px] rounded-2xl p-6 relative border-[#15439C] mt-5">
       <p className="font-bold text-center text-xl sm:text-2xl">Receipt</p>
