@@ -14,7 +14,7 @@ export function HotelCard(props: { hotel: HotelProps }) {
       onClick={() => {
         router.push(`/hotel/${props.hotel.id}`);
       }}
-      className="flex w-full relative flex-col justify-between overflow-hidden rounded-xl"
+      className="hotel-card flex w-full relative flex-col justify-between overflow-hidden rounded-xl"
     >
       <div
         // style={{

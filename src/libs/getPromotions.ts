@@ -5,7 +5,7 @@ export default async function getPromotions() {
       "Content-Type": "application/json",
     },
   });
-  if (!response.ok) {
+  if (!response || !response.ok) {
     console.log(response);
     throw new Error("Error failed to fetch");
   }

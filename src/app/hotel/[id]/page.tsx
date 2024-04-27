@@ -2,7 +2,7 @@
 import { HotelCard } from "@/components/HomePage/HotelCard";
 import { HotelInfo } from "@/components/HotelInfo/HotelInfo";
 import getHotel from "@/libs/getHotel";
-import { getPromotion } from "@/libs/getPromotion";
+import getPromotion from "@/libs/getPromotion";
 import { HotelProps, PromotionProps } from "../../../../@types/type";
 import { useEffect, useState } from "react";
 export default function HotelDetailPage({

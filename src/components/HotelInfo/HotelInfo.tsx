@@ -8,7 +8,7 @@ import Image from "next/image";
 import { set } from "mongoose";
 import { PromotionDropDown } from "./PromotionDropDown";
 import { Rating } from "@mui/material";
-import { createReviews } from "@/libs/createReviews";
+import createReviews from "@/libs/createReviews";
 import { authOptions } from "@/libs/authOptions";
 
 export function HotelInfo(props: {
