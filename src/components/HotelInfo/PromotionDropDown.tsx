@@ -5,6 +5,7 @@ import { HotelProps, PromotionProps } from "../../../@types/type";
 import Image from "next/image";
 
 export function PromotionDropDown(props: {
+  setPromotion: (promotion: string) => void;
   setDiscount: (discount: number) => void;
   promoion: PromotionProps[];
   hotel: HotelProps;
@@ -23,6 +24,7 @@ export function PromotionDropDown(props: {
   const [selected, setSelected] = useState<PromotionProps>(promotionDefault);
   useEffect(() => {
     props.setDiscount(selected.discount);
+    props.setPromotion(selected._id);
   }, [props, selected.discount]);
 
   return (

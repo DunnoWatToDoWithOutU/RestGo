@@ -62,7 +62,7 @@ export default function Home() {
           {error && <div className="text-red-500 text-sm">{error}</div>}
           <div className="flex justify-between items-center">
             <span className="text-sm">Dont have an account?</span>
-            <Link href="/auth/sign-up">
+            <Link href="/auth/SignUp">
               <div className="text-primary">Sign Up</div>
             </Link>
           </div>
