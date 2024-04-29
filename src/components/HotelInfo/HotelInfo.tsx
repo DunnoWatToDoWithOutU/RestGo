@@ -69,7 +69,6 @@ export function HotelInfo(props: {
     }
   };
   const handleOnSent = async () => {
-    // clear input
     setReview("");
     setRating(0);
     try {
@@ -78,13 +77,17 @@ export function HotelInfo(props: {
       } else {
         throw new Error("Session is null");
       }
+      if (review == "") {
+        toast.error("Please Write Review!");
+        scrollToBottom();
+        return;
+      }
+      toast.success("Review Sent");
+      props.setReviewCheck(!props.reviewCheck);
     } catch (error) {
-      toast.error("Error Booking");
+      toast.error("Error Sending Review");
       scrollToBottom();
-      console.log(error);
     }
-    toast.success("Review Sent");
-    props.setReviewCheck(!props.reviewCheck);
   };
 
   const [review, setReview] = useState<string>("");
