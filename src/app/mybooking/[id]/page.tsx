@@ -98,11 +98,17 @@ export default function BookingDetail({ params }: { params: { id: string } }) {
   const handleCheckedIn = async () => {
     console.log("use checkin");
     await checkIn(params.id, token);
+    toast.success("update status success!");
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    window.location.reload();
   };
 
   const handleCheckedOut = async () => {
     console.log("use checkout");
     await checkOut(params.id, token);
+    toast.success("update status success!");
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    window.location.reload();
   };
 
   if (!bookingData || !hotelData) {
