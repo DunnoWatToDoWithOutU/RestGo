@@ -54,7 +54,12 @@ export function BookingCard(props: {
 
   const handleSaveEdit = async (updatedAppt: AppointmnetProps) => {
     try {
-      await updateBooking(updatedAppt._id, session ? session?.user.token : "", startDate, endDate);
+      await updateBooking(
+        updatedAppt._id,
+        session ? session?.user.token : "",
+        startDate,
+        endDate
+      );
       toast.success("Appointment details updated successfully");
     } catch (error) {
       console.error("Error updating Appointment details:", error);
@@ -77,12 +82,12 @@ export function BookingCard(props: {
   return (
     <motion.div
       whileHover={{ left: 10 }}
-      className={`flex bg-cover bg-center overflow-hidden text-white relative font-bold p-2 px-4 w-full h-40 border-2 justify-between rounded-2xl 
+      className={`flex bg-cover bg-center overflow-hidden text-white relative font-bold p-2 px-4 w-full h-48 border-4 justify-between rounded-2xl 
       border-${
         props.appointment.status === "pending"
           ? "white"
           : props.appointment.status === "checkedIn"
-          ? "[#4FD274]"
+          ? "[#15439C]"
           : "[#15439C]"
       }`} //changed by status
     >
@@ -150,20 +155,30 @@ export function BookingCard(props: {
       />
       <div className="flex flex-col justify-between relative z-20">
         <div className="text-[9pt] sm:text-[11pt] md:text-[12pt]">
-          <span className="bg-white/50 px-2 py-1 rounded-md">
-            <span className="hidden sm:inline">Status : </span>
+          <div className="bg-white/50 px-2 w-48  mt-1 mb-2 py-1 rounded-md">
             <span
               className={`text-${
                 props.appointment.status === "pending"
                   ? "white"
                   : props.appointment.status === "checkedIn"
-                  ? "[#4FD274]"
+                  ? "primary"
+                  : "primary"
+              }`}
+            >
+              Status :{" "}
+            </span>
+            <span
+              className={`text-${
+                props.appointment.status === "pending"
+                  ? "white"
+                  : props.appointment.status === "checkedIn"
+                  ? "primary"
                   : "primary"
               }`}
             >
               {props.appointment.status}
             </span>
-          </span>
+          </div>
           <p>
             <span className="hidden sm:inline">From :</span> {startDate}
           </p>
@@ -202,7 +217,10 @@ export function BookingCard(props: {
           <button
             onClick={async () => {
               try {
-                await deleteBooking(props.appointment._id, session ? session.user.token : "");
+                await deleteBooking(
+                  props.appointment._id,
+                  session ? session.user.token : ""
+                );
                 window.location.reload();
                 console.log("refresh");
               } catch (err) {
