@@ -65,6 +65,7 @@ import checkIn from "@/libs/checkIn";
 import checkOut from "@/libs/checkOut";
 import CheckInOutButton from "@/components/MyBooking/BookingDetail/CheckInOutButton";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 export default function BookingDetail({ params }: { params: { id: string } }) {
   const { data: session } = useSession();
@@ -97,13 +98,11 @@ export default function BookingDetail({ params }: { params: { id: string } }) {
   const handleCheckedIn = async () => {
     console.log("use checkin");
     await checkIn(params.id, token);
-    window.location.reload();
   };
 
   const handleCheckedOut = async () => {
     console.log("use checkout");
     await checkOut(params.id, token);
-    window.location.reload();
   };
 
   if (!bookingData || !hotelData) {
