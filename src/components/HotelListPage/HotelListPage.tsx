@@ -150,7 +150,6 @@ export function HotelListPage() {
   console.log(selectedTags);
   return (
     <main className="w-full flex flex-col justify-start items-center min-h-[600px]">
-
       <div className="py-3 px-[10%]  w-full bg-[#15439C] flex fixed mt-6 z-50">
         <div className=" w-full text-[#15439C]   px-5 rounded-md  ">
           <div className="flex">
@@ -198,7 +197,7 @@ export function HotelListPage() {
             </div>
 
             <button
-              className="h-16 w-[50%] flex ml-2 hover:bg-zinc-100 bg-white border-2 relative text-center items-center border-primary rounded-md transition-all duration-300"
+              className="h-16 w-[50%] flex ml-2 hover:bg-zinc-200 bg-white border-2 relative text-center items-center border-primary rounded-md transition-all duration-300"
               onClick={handleAddPeople}
               ref={addPeopleButtonRef}
             >

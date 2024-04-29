@@ -33,6 +33,10 @@ const appointmentSchema = new mongoose.Schema({
         required:[true, 'Please enter the number of people']
     
     },
+    room:{
+        type:Number,
+        required:[true,'Please enter the number of room']
+    },
     promotion:{
         type: mongoose.Schema.Types.ObjectId,
         ref:'Promotion',

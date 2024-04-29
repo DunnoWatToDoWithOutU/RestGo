@@ -9,7 +9,7 @@ export const POST = async (
   try {
     await connectDB();
     const user = await protect(req);
-    const { startDate, endDate, people, promotion } = await req.json();
+    const { startDate, endDate, people, promotion, room } = await req.json();
     const duration = Math.abs(
       new Date(endDate).getTime() - new Date(startDate).getTime()
     );
@@ -24,6 +24,7 @@ export const POST = async (
       startDate: startDate,
       endDate: endDate,
       hotel: params.id,
+      room: room,
       people: people,
       user: user._id,
       promotion: promotion ? promotion : null,

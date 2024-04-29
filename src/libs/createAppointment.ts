@@ -4,6 +4,7 @@ export default async function craeteAppointment(
   endDate: Date,
   token: string,
   people: number,
+  room: number,
   promotionID: string
 ) {
   console.log(id, startDate, endDate);
@@ -19,6 +20,7 @@ export default async function craeteAppointment(
         startDate: startDate,
         endDate: endDate,
         people: people,
+        room: room,
         promotion: promotionID,
       }),
       credentials: "include",

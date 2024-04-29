@@ -10,6 +10,7 @@ import { PromotionDropDown } from "./PromotionDropDown";
 import { Rating } from "@mui/material";
 import createReviews from "@/libs/createReviews";
 import { authOptions } from "@/libs/authOptions";
+import { AddPeoplePopup } from "../HomePage/MenuBox/AddPeoplePopup";
 
 export function HotelInfo(props: {
   hotel: HotelProps;
@@ -23,6 +24,31 @@ export function HotelInfo(props: {
     }, 0) / props.hotel.review.length;
   const { data: session } = useSession();
   console.log(session);
+  const [peopleValues, setPeopleValues] = useState({
+    adults: 1,
+    children: 0,
+    babies: 0,
+    rooms: 1,
+  });
+
+  const [showAddPeople, setShowAddPeople] = useState(false);
+  const [selectedFilter, setSelectedFilter] = useState("name");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const addPeopleButtonRef = useRef(null);
+
+  const handlePeopleSubmit = (values: any) => {
+    setPeopleValues(values);
+    setIsSubmitted(true);
+  };
+
+  const handleAddPeople = () => {
+    setShowAddPeople(true);
+  };
+
+  const handleCloseAddPeople = () => {
+    setShowAddPeople(false);
+  };
+
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [discount, setDiscount] = useState(0);
@@ -43,7 +69,6 @@ export function HotelInfo(props: {
     }
   };
   const handleOnSent = async () => {
-    // clear input
     setReview("");
     setRating(0);
     try {
@@ -52,13 +77,17 @@ export function HotelInfo(props: {
       } else {
         throw new Error("Session is null");
       }
+      if (review == "") {
+        toast.error("Please Write Review!");
+        scrollToBottom();
+        return;
+      }
+      toast.success("Review Sent");
+      props.setReviewCheck(!props.reviewCheck);
     } catch (error) {
-      toast.error("Error Booking");
+      toast.error("Error Sending Review");
       scrollToBottom();
-      console.log(error);
     }
-    toast.success("Review Sent");
-    props.setReviewCheck(!props.reviewCheck);
   };
 
   const [review, setReview] = useState<string>("");
@@ -120,11 +149,13 @@ export function HotelInfo(props: {
                 {bookingday == -1
                   ? `Error Booking`
                   : `${
-                      (props.hotel.price * bookingday * (100 - discount)) / 100
+                      ((props.hotel.price * bookingday * (100 - discount)) /
+                        100) *
+                      peopleValues.rooms
                     }฿ `}
-                <span className="text-2xl">{`${
+                <p className="text-xl">{` ${peopleValues.rooms} rooms ${
                   discount > 0 ? ` (discount ${discount}%)` : ``
-                }`}</span>
+                }`}</p>
               </span>
             </p>
             <div className="w-full h-[0.125rem] bg-[#15439C] my-5"></div>
@@ -170,12 +201,42 @@ export function HotelInfo(props: {
                 </span>
               </p>
             </div>
+            <div className="">
+              <button
+                className="h-10 w-full  my-4 flex  hover:bg-zinc-100 bg-white border-2 relative text-center items-center border-primary rounded-md transition-all duration-300"
+                onClick={handleAddPeople}
+                ref={addPeopleButtonRef}
+              >
+                <div
+                  className="h-7 w-7 bg-contain bg-center bg-no-repeat absolute left-5"
+                  style={{ backgroundImage: `url(/img/addpeople.png)` }}
+                ></div>
+                <p className="mx-auto font-semibold">
+                  {isSubmitted
+                    ? `${
+                        peopleValues.adults +
+                        peopleValues.children +
+                        peopleValues.babies
+                      } People ${peopleValues.rooms} Rooms`
+                    : "Add People"}
+                </p>
+              </button>
+              {showAddPeople && (
+                <div className="z-50 absolute">
+                  <AddPeoplePopup
+                    onClose={handleCloseAddPeople}
+                    onSubmit={handlePeopleSubmit}
+                  />
+                </div>
+              )}
+            </div>
             <PromotionDropDown
               setPromotion={setPromotion}
               promoion={props.promotion}
               hotel={props.hotel}
               setDiscount={setDiscount}
             ></PromotionDropDown>
+
             {/* <p>Discount : {discount}</p> */}
             <button
               onClick={async () => {
@@ -185,7 +246,10 @@ export function HotelInfo(props: {
                     startDate,
                     endDate,
                     session ? session.user.token : "",
-                    4,
+                    peopleValues.adults +
+                      peopleValues.babies +
+                      peopleValues.children,
+                    peopleValues.rooms,
                     promotion
                   );
                 } catch (error) {

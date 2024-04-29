@@ -8,8 +8,8 @@ export function TagPiece(props: {
 }) {
   return (
     <button
-      className={`flex flex-col items-center border-l-2 transition duration-300 ease-in-out ${
-        props.selected ? "bg-gray-100" : ""
+      className={`flex hover:bg-gray-100 flex-col items-center border-l-2 transition duration-300 ease-in-out ${
+        props.selected ? "bg-gray-200" : ""
       }`}
       onClick={props.onClick}
     >
