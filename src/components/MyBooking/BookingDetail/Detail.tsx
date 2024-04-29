@@ -41,10 +41,7 @@ export function Detail(props: { bookingData: AppointmnetProps }) {
       </div>
       <div>
         <span className="font-bold">Duration : </span>{duration} {" day(s)"}
-      </div> 
-      <div>
-        <span className="font-bold">People : </span>{props.bookingData.people} {" people"}
-      </div> 
+      </div>
     </div>
   );
 }
