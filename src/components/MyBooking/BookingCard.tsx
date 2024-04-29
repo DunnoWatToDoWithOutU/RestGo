@@ -199,7 +199,7 @@ export function BookingCard(props: {
           <button
             onClick={async () => {
               try {
-                await deleteBooking(props.hotel.id);
+                await deleteBooking(props.appointment._id);
                 window.location.reload();
                 console.log("refresh");
               } catch (err) {
