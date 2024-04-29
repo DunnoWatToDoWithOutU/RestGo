@@ -150,10 +150,10 @@ export function HotelListPage() {
   console.log(selectedTags);
   return (
     <main className="w-full flex flex-col justify-start items-center min-h-[600px]">
-      <div className="py-3 px-[10%]  w-full bg-[#15439C] flex fixed mt-6 z-50">
-        <div className=" w-full text-[#15439C]   px-5 rounded-md  ">
+      <div className="py-3 md:px-[10%] px-[3%]  w-full bg-[#15439C] flex fixed mt-6 z-50">
+        <div className=" w-full hidden md:block text-[#15439C]   px-5 rounded-md  ">
           <div className="flex">
-            <div className="w-[50%] relative h-30  rounded-md flex bg-white border-2 border-primary">
+            <div className="w-[50%] hidden relative h-30  rounded-md md:flex bg-white border-2 border-primary">
               <button
                 className="h-full w-[50%] rounded-lg hover:bg-zinc-100 text-sm transition-all duration-300 "
                 onClick={handleCheckInCheckOut}
@@ -197,7 +197,7 @@ export function HotelListPage() {
             </div>
 
             <button
-              className="h-16 w-[50%] flex ml-2 hover:bg-zinc-200 bg-white border-2 relative text-center items-center border-primary rounded-md transition-all duration-300"
+              className="h-16 hidden w-[50%] md:flex  ml-2 hover:bg-zinc-200 bg-white border-2 relative text-center items-center border-primary rounded-md transition-all duration-300"
               onClick={handleAddPeople}
               ref={addPeopleButtonRef}
             >
@@ -232,7 +232,7 @@ export function HotelListPage() {
           }}
           type="text"
           placeholder="Search Hotel"
-          className="h-12 text-[#15439C] my-auto w-[60rem] py-2 px-3 bg-white rounded-full focus:outline-none border-primary border-2"
+          className="md:h-12 h-10 text-[#15439C] my-auto md:w-[60rem] w-full py-2 px-3 bg-white rounded-full focus:outline-none border-primary border-2"
         ></input>
       </div>
       {/* <div className="  w-[40%] mt-10 text-center ">
@@ -242,7 +242,7 @@ export function HotelListPage() {
           <SearchBar></SearchBar>
           </div> 
       </div> */}
-      <div className="mt-[8rem]"></div>
+      <div className="md:mt-[8rem] mt-[6rem]"></div>
       <TagContainer
         selectedTags={selectedTags}
         setSelectedTags={setSelectedTags}
@@ -261,7 +261,7 @@ export function HotelListPage() {
           ></div>
         </button> */}
       </div>
-      <div className="w-full px-[10%]">
+      <div className="w-full px-[3%] md:mt-0 -mt-8 md:px-[10%]">
         <HotelList
           HotelData={searchResults}
           checker={search == "" && selectedTags.every((x) => x === false)}

@@ -38,7 +38,7 @@ export function HotelCard(props: { hotel: HotelProps }) {
                 className="h-7 w-7 bg-cover md:block hidden bg-center bg-no-repeat"
                 style={{ backgroundImage: `url(/img/homepage/ping.png)` }}
               ></div>
-              <p className="mt-1 font-bold ml-1  md:text-lg">
+              <p className="mt-1 font-bold ml-1 text-sm  md:text-lg">
                 {props.hotel.address}
               </p>
             </div>
