@@ -20,7 +20,7 @@ export function HotelCard(props: { hotel: HotelProps }) {
         // style={{
         //   backgroundImage: `url(img/hotel/${props.hotel.id}/${props.hotel.pic[0]})`,
         // }}
-        className="w-[100%]    bg-cover bg-center  h-40 mx-auto text-white p-3 shadow-lg text-start hover:bg-zinc-100 rounded-2xl flex overflow-hidden"
+        className="w-[100%]    bg-cover bg-center  h-28 md:h-40 mx-auto text-white p-3 shadow-lg text-start hover:bg-zinc-100 rounded-2xl flex overflow-hidden"
       >
         <div className="absolute inset-0 bg-black rounded-2xl opacity-40 z-10"></div>
         <Image
@@ -31,22 +31,22 @@ export function HotelCard(props: { hotel: HotelProps }) {
           className="absolute w-full left-0"
         />
         <div className="w-full flex justify-between z-10">
-          <div className="min-w-[50%]  ">
-            <p className=" text-2xl font-bold">{props.hotel.name}</p>
+          <div className="max-w-[75%]  ">
+            <p className=" text-lg md:text-2xl font-bold">{props.hotel.name}</p>
             <div className="flex mt-2 -ml-1">
               <div
-                className="h-7 w-7 bg-cover bg-center bg-no-repeat"
+                className="h-7 w-7 bg-cover md:block hidden bg-center bg-no-repeat"
                 style={{ backgroundImage: `url(/img/homepage/ping.png)` }}
               ></div>
-              <p className="mt-1 font-bold ml-1 text-lg">
+              <p className="mt-1 font-bold ml-1  md:text-lg">
                 {props.hotel.address}
               </p>
             </div>
           </div>
-          <div className="w-full text-end">
+          <div className=" min-w-[20%]  text-end">
             <div className="flex h-40 flex-col justify-between">
               <div>
-                <div className=" font-bold text-3xl ">
+                <div className=" font-bold text-xl md:text-3xl ">
                   {props.hotel.price} ฿
                 </div>
                 <p>/ night</p>
@@ -60,7 +60,7 @@ export function HotelCard(props: { hotel: HotelProps }) {
           {props.hotel.tag.map((tag, index) => {
             return (
               <div
-                className=" px-3 py-1 hover:bg-zinc-200 transition-colors duration-150 bg-zinc-100 rounded-md"
+                className=" px-1 md:px-3 py-1 text-sm md:text-base hover:bg-zinc-200 transition-colors duration-150 bg-zinc-100 rounded-md"
                 key={index}
               >
                 {tag}
@@ -68,7 +68,7 @@ export function HotelCard(props: { hotel: HotelProps }) {
             );
           })}
         </div>
-        <div className="flex z-10 space-x-1 px-3 text-xl items-center text-white">
+        <div className="flex z-10 space-x-1 px-3 text-base md:text-xl items-center text-white">
           <p>{props.hotel.rating}</p>
           <Rating
             value={props.hotel.rating}
