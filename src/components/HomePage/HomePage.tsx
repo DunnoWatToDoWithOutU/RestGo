@@ -10,13 +10,18 @@ import { HotelProps } from "../../../@types/type";
 
 export function HomePage() {
   const [hotelData, setHotelData] = useState<HotelProps[]>([]);
+
+  const [search, setSearch] = useState("");
   const getHotelData = async () => {
     const hotels = await getHotels();
-    setHotelData(hotels);
+    const results = hotels.filter((hotel: HotelProps) =>
+      hotel.name.toLowerCase().includes(search.toLowerCase())
+    );
+    setHotelData(results);
   };
   useEffect(() => {
     getHotelData();
-  }, []);
+  }, [search]);
 
   return (
     <div>
@@ -24,9 +29,9 @@ export function HomePage() {
         <p className=" text-3xl font-semibold text-white shadow-lg">
           Welcome to REST GO. We will get you to rest in peace.
         </p>
-        <SearchBar></SearchBar>
+        <SearchBar setSearch={setSearch}></SearchBar>
         <MenuBox></MenuBox>
-        <HotelList HotelData={hotelData} checker = {true}></HotelList>
+        <HotelList HotelData={hotelData} checker={true}></HotelList>
       </div>
       <div className=" overflow-hidden h-96 w-full bg-black z-0 absolute left-0 top-0">
         <div className="absolute inset-0 bg-black opacity-15 z-10"></div>
