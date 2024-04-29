@@ -116,7 +116,7 @@ export default function BookingDetail({ params }: { params: { id: string } }) {
   }
 
   return (
-    <section className="w-[100%] flex flex-col px-[10%] min-h-screen mt-20">
+    <section className="w-[100%] flex flex-col md:px-[10%] px-[3%] min-h-screen mt-20">
       <div className="flex flex-row place-content-between">
         <Payment hotel={hotelData} appointment={bookingData}></Payment>
         {canUseCheckInCheckOut && (
