@@ -200,7 +200,7 @@ export function HotelInfo(props: {
             </div>
             <div className="">
               <button
-                className="h-10 w-full  my-4 flex ml-2 hover:bg-zinc-100 bg-white border-2 relative text-center items-center border-primary rounded-md transition-all duration-300"
+                className="h-10 w-full  my-4 flex  hover:bg-zinc-100 bg-white border-2 relative text-center items-center border-primary rounded-md transition-all duration-300"
                 onClick={handleAddPeople}
                 ref={addPeopleButtonRef}
               >
