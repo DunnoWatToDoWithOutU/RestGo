@@ -4,11 +4,12 @@ export default async function craeteAppointment(
   endDate: Date,
   token: string,
   people: number,
+  room: number,
   promotionID: string
 ) {
   console.log(id, startDate, endDate);
   const response = await fetch(
-    `https://rest-go.vercel.app/api/v2/hotels/${id}/appointments`,
+    `http://localhost:3000/api/v2/hotels/${id}/appointments`,
     {
       method: "POST",
       headers: {
@@ -19,6 +20,7 @@ export default async function craeteAppointment(
         startDate: startDate,
         endDate: endDate,
         people: people,
+        room: room,
         promotion: promotionID,
       }),
       credentials: "include",

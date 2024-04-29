@@ -1,5 +1,9 @@
 import Image from "next/image";
-import { AppointmnetProps, HotelProps, PromotionProps} from "../../../../@types/type";
+import {
+  AppointmnetProps,
+  HotelProps,
+  PromotionProps,
+} from "../../../../@types/type";
 import { getPromotionbyId } from "@/libs/getPromotionbyId";
 import { useEffect, useState } from "react";
 import Promotion from "@/models/Promotion";
@@ -11,17 +15,21 @@ export function Receipt(props: {
   const startDate = new Date(props.bookingData.startDate);
   const endDate = new Date(props.bookingData.endDate);
   const duration =
-  (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24);
-  const base = props.hotel.price * duration;
+    (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24);
+  const base = props.hotel.price * duration * props.bookingData.room;
   const [promotionName, setPromotionName] = useState<string>("");
   const [discount, setDiscount] = useState<number>(0);
 
   useEffect(() => {
     const fetchDiscount = async () => {
-      if(props.bookingData.promotion === ""){return;}
-      const PromotionFetch = await getPromotionbyId(props.bookingData.promotion);
-      if(PromotionFetch){
-        setPromotionName(PromotionFetch[0].name)
+      if (props.bookingData.promotion === "") {
+        return;
+      }
+      const PromotionFetch = await getPromotionbyId(
+        props.bookingData.promotion
+      );
+      if (PromotionFetch) {
+        setPromotionName(PromotionFetch[0].name);
         setDiscount(PromotionFetch[0].discount);
       }
     };
@@ -44,27 +52,44 @@ export function Receipt(props: {
 
       <p className=" text-lg sm:text-xl font-bold my-3">{props.hotel.name}</p>
       <div className="w-[80%] mx-auto text-start space-y-1 mb-3">
-        <div><span className="font-bold mr-2">Address : </span> <span>{props.hotel.address}</span></div>
-        <p><span className="font-bold mr-2">Tel : </span>{props.hotel.telephone}</p>
+        <div>
+          <span className="font-bold mr-2">Address : </span>{" "}
+          <span>{props.hotel.address}</span>
+        </div>
+        <p>
+          <span className="font-bold mr-2">Tel : </span>
+          {props.hotel.telephone}
+        </p>
       </div>
       <div className="w-[80%] h-[0.125rem] bg-[#15439C] mx-auto mb-3"></div>
       <div className="text-start px-[10%]">
         <div className="flex w-full justify-between">
-          <p><span className="font-bold">Price : </span> {props.hotel.price} {" ฿ x "} {duration}{" "}</p>
-            
+          <p>
+            <span className="font-bold">Price : </span> {props.hotel.price}{" "}
+            {" ฿ x "} {duration}
+            {" Days x "} {props.bookingData.room} rooms
+          </p>
+
           <p className="font-bold">{base} ฿</p>
         </div>
-        {
-          discount > 0 && (
+        {discount > 0 && (
           <div className="flex w-full justify-between">
-            <p><span className="font-bold">Discount : </span> {promotionName}</p>
-            <p className="font-bold mb-1 text-[#D7263D]">{"- "}{discount*base/100} ฿</p>
+            <p>
+              <span className="font-bold">Discount : </span> {promotionName}
+              {"  "}({discount}%)
+            </p>
+            <p className="font-bold mb-1 text-[#D7263D]">
+              {"- "}
+              {(discount * base) / 100} ฿
+            </p>
           </div>
         )}
         <hr className="border-t-3 border-[#15439C]"></hr>
         <div className="bg-blue-200/20 flex w-full justify-between">
           <p className="text-lg font-bold mt-1">Total (THB) :</p>
-          <p className="text-lg font-bold">{base - discount*base/100} ฿</p>
+          <p className="text-lg font-bold">
+            {base - (discount * base) / 100} ฿
+          </p>
         </div>
       </div>
     </div>

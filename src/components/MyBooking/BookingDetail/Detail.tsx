@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { AppointmnetProps } from "../../../../@types/type";
 function formatDate(dateString: string) {
   const months = [
@@ -37,10 +37,23 @@ export function Detail(props: { bookingData: AppointmnetProps }) {
       </p>
       <div className="flex flex-row">
         <span className="font-bold">Dates : </span>
-        {formatDate(startDate.toString())} - {formatDate(endDate.toString())}
+        <span className="ml-1">
+          {formatDate(startDate.toString())} - {formatDate(endDate.toString())}
+        </span>
+      </div>
+      <div className="flex flex-row">
+        <span className="font-bold">People : </span>
+        <span className="ml-1">{props.bookingData.people} peoples</span>
+      </div>
+      <div className="flex flex-row">
+        <span className="font-bold">Rooms : </span>
+        <span className="ml-1">{props.bookingData.room} rooms</span>
       </div>
       <div>
-        <span className="font-bold">Duration : </span>{duration} {" day(s)"}
+        <span className="font-bold">Duration : </span>
+        <span className="ml-1">
+          {Math.ceil(duration)} {" day(s)"}
+        </span>
       </div>
     </div>
   );
