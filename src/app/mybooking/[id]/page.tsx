@@ -94,15 +94,15 @@ export default function BookingDetail({ params }: { params: { id: string } }) {
     fetchData();
   }, [params.id, session]);
 
-  const handleCheckedIn = () => {
+  const handleCheckedIn = async () => {
     console.log("use checkin");
-    checkIn(params.id, token);
+    await checkIn(params.id, token);
     window.location.reload();
   };
 
-  const handleCheckedOut = () => {
+  const handleCheckedOut = async () => {
     console.log("use checkout");
-    checkOut(params.id, token);
+    await checkOut(params.id, token);
     window.location.reload();
   };
 
