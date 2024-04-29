@@ -2,8 +2,6 @@ import Appointment from "@/models/Appointment";
 import {  NextRequest, NextResponse } from "next/server";
 import connectDB from "@/libs/connectDB";
 import protect from "@/libs/protect";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/libs/authOptions";
 
 export async function GET(req: NextRequest, {params}: {params: {id: string}}) {
     try { 
@@ -24,7 +22,9 @@ export async function PUT(req: NextRequest, {params}: {params: {id: string}}) {
         await connectDB();
         if( user.role !== "admin" ){
             const appointment = await Appointment.findById(params.id);
-            console.log(appointment.user.type);
+            if( appointment.user.toString() !== user._id.toString() ){
+                return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+            }
         }
         const { startDate, endDate } = await req.json();
         const duration = Math.abs(new Date(endDate).getTime() - new Date(startDate).getTime());
@@ -46,15 +46,15 @@ export async function PUT(req: NextRequest, {params}: {params: {id: string}}) {
 }
 
 export async function DELETE(req: NextRequest, {params}: {params: {id: string}}) {
-    const session = await getServerSession(authOptions);
-    if (!session?.user) {
+    const user = await protect(req);
+    if (!user) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
     try {
         await connectDB();
-        if( session.user.role !== "admin" ){
+        if( user.role !== "admin" ){
             const appointment = await Appointment.findById(params.id);
-            if (appointment.user.toString() !== session.user._id) {
+            if( appointment.user.toString() !== user._id.toString() ){
                 return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
             }
         }

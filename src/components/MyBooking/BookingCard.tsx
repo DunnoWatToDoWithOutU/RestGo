@@ -54,7 +54,7 @@ export function BookingCard(props: {
 
   const handleSaveEdit = async (updatedAppt: AppointmnetProps) => {
     try {
-      await updateBooking(updatedAppt._id, session ? session?.user.token : "");
+      await updateBooking(updatedAppt._id, session ? session?.user.token : "", startDate, endDate);
       toast.success("Appointment details updated successfully");
     } catch (error) {
       console.error("Error updating Appointment details:", error);

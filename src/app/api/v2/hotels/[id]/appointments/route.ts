@@ -26,7 +26,7 @@ export const POST = async (
       hotel: params.id,
       people: people,
       user: user._id,
-      promotion: promotion,
+      promotion: promotion ? promotion : null,
     });
     return NextResponse.json(appointment, { status: 201 });
   } catch (err) {
