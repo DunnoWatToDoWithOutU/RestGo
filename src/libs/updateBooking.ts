@@ -1,8 +1,9 @@
-export default async function updateBooking(bookingID: string){
+export default async function updateBooking(bookingID: string, token: string) {
     const response = await fetch(`https://rest-go.vercel.app/api/v2/appointments/${bookingID}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
         },
         credentials: "include",
     });

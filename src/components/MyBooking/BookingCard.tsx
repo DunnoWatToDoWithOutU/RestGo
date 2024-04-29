@@ -9,6 +9,7 @@ import EditPopup from "../Editpopup";
 import { useState } from "react";
 import updateBooking from "@/libs/updateBooking";
 import { Button } from "@mui/material";
+import { useSession } from "next-auth/react";
 
 function formatDate(dateString: string) {
   const months = [
@@ -49,9 +50,11 @@ export function BookingCard(props: {
     setShowEditPopup(true);
   };
 
+  const { data: session } = useSession();
+
   const handleSaveEdit = async (updatedAppt: AppointmnetProps) => {
     try {
-      await updateBooking(updatedAppt._id);
+      await updateBooking(updatedAppt._id, session ? session?.user.token : "");
       toast.success("Appointment details updated successfully");
     } catch (error) {
       console.error("Error updating Appointment details:", error);
@@ -199,7 +202,7 @@ export function BookingCard(props: {
           <button
             onClick={async () => {
               try {
-                await deleteBooking(props.appointment._id);
+                await deleteBooking(props.appointment._id, session ? session.user.token : "");
                 window.location.reload();
                 console.log("refresh");
               } catch (err) {
