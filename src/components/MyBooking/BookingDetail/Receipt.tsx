@@ -38,59 +38,62 @@ export function Receipt(props: {
   console.log(props.bookingData.promotion);
   return (
     <div className="w-full text-[#15439C] text-center border-[3px] rounded-2xl p-6 relative border-[#15439C] mt-5">
-      <p className="font-bold text-center text-xl sm:text-2xl">Receipt</p>
-
-      <div className="mt-2">
-        <Image
-          alt="hotel image"
-          src={`/img/hotel/${props.hotel.id}/${props.hotel.pic[0]}`}
-          className="  bg-zinc-600 mx-auto rounded-lg bg-cover bg-center"
-          width={300}
-          height={300}
-        ></Image>
-      </div>
-
-      <p className=" text-lg sm:text-xl font-bold my-3">{props.hotel.name}</p>
-      <div className="w-[80%] mx-auto text-start space-y-1 mb-3">
-        <div>
-          <span className="font-bold mr-2">Address : </span>{" "}
-          <span>{props.hotel.address}</span>
+      <div className="flex">
+        <div className="mt-2">
+          <Image
+            alt="hotel image"
+            src={`/img/hotel/${props.hotel.id}/${props.hotel.pic[0]}`}
+            className="  bg-zinc-600 mx-auto rounded-lg bg-cover bg-center"
+            width={400}
+            height={300}
+          ></Image>
         </div>
-        <p>
-          <span className="font-bold mr-2">Tel : </span>
-          {props.hotel.telephone}
-        </p>
-      </div>
-      <div className="w-[80%] h-[0.125rem] bg-[#15439C] mx-auto mb-3"></div>
-      <div className="text-start px-[10%]">
-        <div className="flex w-full justify-between">
-          <p>
-            <span className="font-bold">Price : </span> {props.hotel.price}{" "}
-            {" ฿ x "} {duration}
-            {" Days x "} {props.bookingData.room} rooms
+        <section className="   text-start ml-6">
+          <p className=" text-lg sm:text-2xl  font-bold my-3">
+            {props.hotel.name}
           </p>
-
-          <p className="font-bold">{base} ฿</p>
-        </div>
-        {discount > 0 && (
-          <div className="flex w-full justify-between">
+          <div className=" mx-auto text-start space-y-1 mb-3">
+            <div>
+              <span className="font-bold mr-2">Address : </span>{" "}
+              <span>{props.hotel.address}</span>
+            </div>
             <p>
-              <span className="font-bold">Discount : </span> {promotionName}
-              {"  "}({discount}%)
-            </p>
-            <p className="font-bold mb-1 text-[#D7263D]">
-              {"- "}
-              {(discount * base) / 100} ฿
+              <span className="font-bold mr-2">Tel : </span>
+              {props.hotel.telephone}
             </p>
           </div>
-        )}
-        <hr className="border-t-3 border-[#15439C]"></hr>
-        <div className="bg-blue-200/20 flex w-full justify-between">
-          <p className="text-lg font-bold mt-1">Total (THB) :</p>
-          <p className="text-lg font-bold">
-            {base - (discount * base) / 100} ฿
-          </p>
-        </div>
+          <div className=" h-[0.125rem] bg-[#15439C] mx-auto mb-3"></div>
+          <div className="text-start ">
+            <div className="flex w-full justify-between">
+              <p>
+                <span className="font-bold">Price : </span> {props.hotel.price}{" "}
+                {" ฿ x "} {duration}
+                {" Days x "} {props.bookingData.room} rooms
+              </p>
+
+              <p className="font-bold">{base} ฿</p>
+            </div>
+            {discount > 0 && (
+              <div className="flex w-full justify-between">
+                <p>
+                  <span className="font-bold">Discount : </span> {promotionName}
+                  {"  "}({discount}%)
+                </p>
+                <p className="font-bold mb-1 text-[#D7263D]">
+                  {"- "}
+                  {(discount * base) / 100} ฿
+                </p>
+              </div>
+            )}
+            <hr className="border-t-3 border-[#15439C]"></hr>
+            <div className="bg-blue-200/20 flex w-full justify-between">
+              <p className="text-lg font-bold mt-1">Total (THB) :</p>
+              <p className="text-lg font-bold">
+                {base - (discount * base) / 100} ฿
+              </p>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );
