@@ -1,6 +1,6 @@
 export default async function getAppointments(token: string) {
   const response = await fetch(
-    `http://localhost:3000/api/v2/appointments/expire`,
+    `https://rest-go.vercel.app/api/v2/appointments/expire`,
     {
       method: "GET",
       headers: {

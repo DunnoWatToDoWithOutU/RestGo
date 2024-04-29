@@ -1,6 +1,6 @@
 export async function getPromotionbyId(PromotionId: string) {
   const response = await fetch(
-    `http://localhost:3000/api/v2/promotions/byId/${PromotionId}`,
+    `https://rest-go.vercel.app/api/v2/promotions/byId/${PromotionId}`,
     {
       method: "GET",
       headers: {
