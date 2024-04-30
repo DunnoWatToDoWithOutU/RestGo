@@ -156,7 +156,6 @@ export function HotelInfo(props: {
         <div className="md:w-1/3 w-full mt-3 md:mt-0 ">
           <div className="w-full h-full bg-white border-[3px] text-[#15439C] rounded-lg p-4 border-[#15439C]">
             <p className=" text-end text-lg md:text-2xl font-bold"
-              data-testid="totalPrice"
             >
               Total :{" "}
               <span className="md:text-[2.5rem] text-[1.20rem]">
@@ -173,7 +172,7 @@ export function HotelInfo(props: {
               </span>
             </p>
             <div className="w-full h-[0.125rem] bg-[#15439C] my-5"></div>
-            <p className="  text-lg md:text-2xl font-bold">
+            <p className="  text-lg md:text-2xl font-bold" data-testid="totalPrice">
               Total :{" "}
               <span className="md:text-4xl text-2xl">
                 {(props.hotel.price * (100 - discount)) / 100} ฿{" "}
@@ -247,7 +246,6 @@ export function HotelInfo(props: {
               )}
             </div>
             <PromotionDropDown
-              data-testid="promotiondropdown"
               setPromotion={setPromotion}
               promoion={props.promotion}
               hotel={props.hotel}
