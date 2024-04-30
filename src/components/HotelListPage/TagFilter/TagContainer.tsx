@@ -25,8 +25,8 @@ export function TagContainer(props: {
   };
 
   return (
-    <div className="flex flex-row items-center border-[#2465E2] rounded-xl p-2 my-3 mx-12 border-2">
-      <span className="font-bold text-[9pt] sm:text-[11pt] md:text-[14pt] text-[#15439C] whitespace-nowrap mr-3">
+    <div className="flex flex-row items-center border-[#2465E2] rounded-xl md:p-2 px-0 mx-2 p-1 md:my-3 md:mx-12 border-2">
+      <span className="font-bold text-xs md:block hidden sm:text-[11pt] md:text-lg   text-[#15439C] whitespace-nowrap md:mr-3 mr-1">
         Tag Filter:{" "}
       </span>
       <div className="flex flex-row justify-evenly">

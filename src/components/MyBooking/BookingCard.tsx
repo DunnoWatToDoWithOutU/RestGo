@@ -57,8 +57,8 @@ export function BookingCard(props: {
       await updateBooking(
         updatedAppt._id,
         session ? session?.user.token : "",
-        startDate,
-        endDate
+        props.appointment.startDate,
+        props.appointment.endDate
       );
       toast.success("Appointment details updated successfully");
     } catch (error) {
@@ -103,7 +103,7 @@ export function BookingCard(props: {
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-16 rounded-lg flex flex-col items-center relative w-[600px] h-[530px]">
             <div className="flex justify-between w-full">
-              <p className="text-2xl text-[#15439C] font-bold">
+              <p className="text-lg md:text-2xl text-[#15439C] font-bold">
                 {props.hotel.name}
               </p>
               <button
@@ -179,16 +179,15 @@ export function BookingCard(props: {
               {props.appointment.status}
             </span>
           </div>
-          <p>
-            <span className="hidden sm:inline">From :</span> {startDate}
-          </p>
-          <p>
-            <span className="hidden sm:inline">To :</span> {endDate}
-          </p>
+          <p className="md:hidden text-base mb-1">{props.hotel.name}</p>
+          <p>From : {startDate}</p>
+          <p>To : {endDate}</p>
         </div>
         <div>
-          <p className="text-md sm:text-lg md:text-xl">{props.hotel.name}</p>
-          <div className="flex space-x-2 items-center">
+          <p className="text-md sm:text-lg md:block hidden md:text-xl">
+            {props.hotel.name}
+          </p>
+          <div className="md:flex hidden space-x-2 items-center">
             <div
               className="h-5 w-5 bg-cover bg-center"
               style={{ backgroundImage: `url(/img/homepage/ping.png)` }}
@@ -205,12 +204,12 @@ export function BookingCard(props: {
             onClick={() => {
               toast.info(`Phone : ${props.hotel.telephone}`);
             }}
-            className="h-4 w-4 bg-cover bg-center hover:scale-110 sm:h-5 sm:w-5"
+            className="h-5 w-5 bg-cover bg-center hover:scale-110 sm:h-6 sm:w-6"
             style={{ backgroundImage: `url(/img/homepage/phone.png)` }}
           ></button>
           <button
             onClick={() => setShowEditPopup(true)}
-            className="h-4 w-4 bg-cover bg-center hover:scale-110 sm:h-5 sm:w-5"
+            className="h-5 w-5 bg-cover bg-center hover:scale-110 sm:h-6 sm:w-6"
             style={{ backgroundImage: `url(/img/homepage/edit.png)` }}
           ></button>
 
@@ -230,11 +229,11 @@ export function BookingCard(props: {
               }
               toast.success("Delete Finsih");
             }}
-            className="h-4 w-4 bg-cover bg-center hover:scale-110 sm:h-5 sm:w-5"
+            className="h-5 w-5 bg-cover bg-center hover:scale-110 sm:h-6 sm:w-6"
             style={{ backgroundImage: `url(/img/homepage/trash.png)` }}
           ></button>
         </div>
-        <div className=" text-end flex flex-col space-y-2 ">
+        <div className=" md:flex text-end hidden  flex-col space-y-2 ">
           <p className="text-sm">Created At : {createdAt}</p>
           <div className="flex space-x-2  ">
             <Button
@@ -250,6 +249,29 @@ export function BookingCard(props: {
               <p className=" text-center">Booking Info</p>
             </Link>
           </div>
+        </div>
+      </div>
+      <div className=" md:hidden text-end flex  absolute w-[90%]  flex-col space-y-2  z-20 bottom-4  ">
+        <p className="text-xs md:text-sm">Created At : {createdAt}</p>
+        <div className="flex justify-end space-x-2  ">
+          <Button
+            onClick={handleQRButtonClick}
+            className="md:text-xl text-base py-1 bg-primary text-white font-normal rounded-lg hover:bg-primary_dark"
+          >
+            <p className="text-center">
+              <span className="hidden sm:inline">Check In </span>
+              QR
+            </p>
+          </Button>
+          <Link
+            href={`/mybooking/${props.appointment._id}`}
+            className="text-xl py-1 px-3 bg-primary transition-colors duration-200 text-white font-normal rounded-lg hover:bg-primary_dark"
+          >
+            <p className="text-center">
+              <span className="hidden sm:inline">Booking </span>
+              Info
+            </p>
+          </Link>
         </div>
       </div>
     </motion.div>

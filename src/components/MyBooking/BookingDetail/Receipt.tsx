@@ -37,8 +37,8 @@ export function Receipt(props: {
   }, []);
   console.log(props.bookingData.promotion);
   return (
-    <div className="w-full text-[#15439C] text-center border-[3px] rounded-2xl p-6 relative border-[#15439C] mt-5">
-      <div className="flex">
+    <div className="w-full text-[#15439C] text-center border-[3px] rounded-2xl md:p-6 p-6  relative border-[#15439C] mt-5">
+      <div className="md:flex">
         <div className="mt-2">
           <Image
             alt="hotel image"
@@ -48,7 +48,7 @@ export function Receipt(props: {
             height={300}
           ></Image>
         </div>
-        <section className="   text-start ml-6">
+        <section className="   text-start md:ml-6 md:text-base text-sm">
           <p className=" text-lg sm:text-2xl  font-bold my-3">
             {props.hotel.name}
           </p>

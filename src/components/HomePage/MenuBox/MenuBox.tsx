@@ -4,8 +4,6 @@ import { useState, useRef } from "react";
 import { AddPeoplePopup } from "./AddPeoplePopup";
 import dayjs, { Dayjs } from "dayjs";
 import { CheckInCheckOutPopup } from "./CheckInCheckOutPopup";
-import {googleAuthorize,sendMessage} from "../../../app/api/v2/mailing/mailing";
-
 
 export function MenuBox() {
   //const [showCalendar, setShowCalendar] = useState(false);
@@ -14,7 +12,8 @@ export function MenuBox() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const addPeopleButtonRef = useRef(null);
 
-  const [showCheckInCheckOutPopup, setShowCheckInCheckOutPopup] = useState(false);
+  const [showCheckInCheckOutPopup, setShowCheckInCheckOutPopup] =
+    useState(false);
   const [checkInDate, setCheckInDate] = useState(dayjs());
   const [checkOutDate, setCheckOutDate] = useState(dayjs());
   const [isSubmittedCheckIn, setIsSubmittedCheckIn] = useState(false);
@@ -56,15 +55,8 @@ export function MenuBox() {
     setSelectedFilter(filter === selectedFilter ? null : filter);
   };
 
-  const mailingTest = async () => {
-    await googleAuthorize().then((authResult) => {
-        return sendMessage('restgo.booking@gmail.com', 'nattapon.how@gmail.com', 'Booking Confimration', 'Thankyou for booking with us. This is your confirmation ID : 0111011010. Hope you enjoy your trip an book with us RestGo again.');
-    }).catch(console.error);
-}
-
-
   return (
-    <div className=" w-[42rem] text-[#15439C] relative p-3 px-5 rounded-md mx-auto h-40 bg-white border-2 border-primary shadow-xl transition-all duration-200 ">
+    <div className=" w-[42rem] hidden md:block text-[#15439C] relative p-3 px-5 rounded-md mx-auto h-40 bg-white border-2 border-primary shadow-xl transition-all duration-200 ">
       <div className=" flex">
         <div className="h-16 w-[50%] rounded-md flex bg-white border-2 border-[#26CBFC]">
           <button
@@ -72,7 +64,9 @@ export function MenuBox() {
             onClick={handleCheckInCheckOut}
           >
             <p className="mx-auto font-semibold">
-              {isSubmittedCheckIn ? `${checkInDate.format('DD/MM/YYYY')}` : "Check In"}
+              {isSubmittedCheckIn
+                ? `${checkInDate.format("DD/MM/YYYY")}`
+                : "Check In"}
             </p>
             <div
               className="h-5 w-5 mx-auto mt-1 bg-contain bg-center bg-no-repeat"
@@ -94,7 +88,6 @@ export function MenuBox() {
                   setCheckOutDate(newDateOut);
                   setIsSubmittedCheckOut(true);
                 }}
-
               />
             </div>
           )}
@@ -104,7 +97,9 @@ export function MenuBox() {
             onClick={handleCheckInCheckOut}
           >
             <p className="mx-auto font-semibold">
-              {isSubmittedCheckOut ? `${checkOutDate.format('DD/MM/YYYY')}` : "Check Out"}
+              {isSubmittedCheckOut
+                ? `${checkOutDate.format("DD/MM/YYYY")}`
+                : "Check Out"}
             </p>
             <div
               className="h-5 w-5 mx-auto mt-1 bg-contain bg-center bg-no-repeat"
@@ -200,7 +195,7 @@ export function MenuBox() {
           Private-stay
         </button>
       </div>
-      <button onClick={mailingTest} className=" absolute left-[28%] hover:bg-primary_dark -bottom-5 text-white bg-primary px-24 rounded-lg p-1 text-xl shadow-lg">
+      <button className=" absolute left-[28%] hover:bg-primary_dark -bottom-5 text-white bg-primary px-24 rounded-lg p-1 text-xl shadow-lg">
         Search Here
       </button>
     </div>

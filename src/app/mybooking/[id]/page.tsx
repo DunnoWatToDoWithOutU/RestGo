@@ -65,6 +65,7 @@ import checkIn from "@/libs/checkIn";
 import checkOut from "@/libs/checkOut";
 import CheckInOutButton from "@/components/MyBooking/BookingDetail/CheckInOutButton";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 export default function BookingDetail({ params }: { params: { id: string } }) {
   const { data: session } = useSession();
@@ -94,15 +95,19 @@ export default function BookingDetail({ params }: { params: { id: string } }) {
     fetchData();
   }, [params.id, session]);
 
-  const handleCheckedIn = () => {
+  const handleCheckedIn = async () => {
     console.log("use checkin");
-    checkIn(params.id, token);
+    await checkIn(params.id, token);
+    toast.success("update status success!");
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     window.location.reload();
   };
 
-  const handleCheckedOut = () => {
+  const handleCheckedOut = async () => {
     console.log("use checkout");
-    checkOut(params.id, token);
+    await checkOut(params.id, token);
+    toast.success("update status success!");
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     window.location.reload();
   };
 
@@ -111,7 +116,7 @@ export default function BookingDetail({ params }: { params: { id: string } }) {
   }
 
   return (
-    <section className="w-[100%] flex flex-col px-[10%] min-h-screen mt-20">
+    <section className="w-[100%] flex flex-col md:px-[10%] px-[3%] min-h-screen mt-20">
       <div className="flex flex-row place-content-between">
         <Payment hotel={hotelData} appointment={bookingData}></Payment>
         {canUseCheckInCheckOut && (

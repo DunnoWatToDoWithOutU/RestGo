@@ -35,15 +35,16 @@ export default function SortFilter(props: {
   };
 
   return (
-    <div className=" mx-auto flex text-sm text-[#15439C] rounded-md border-2 border-[#2465E2] items-center font-bold">
-      <div className="flex px-3 space-x-2 ">
-        <p className="text-xl ml-2">Sort By</p>
+    <div className=" mx-auto flex text-sm text-[#15439C] rounded-md border-2 border-[#2465E2] mt-3 md:mt-0 items-center font-bold">
+      <div className="flex md:px-3 px-2 md:space-x-2 ">
+        <p className="text-sm md:block hidden md:text-xl ml-2">Sort By</p>
+        <p className="text-sm md:hidden block md:text-xl  mr-1 md:mr-0">Sort</p>
         <button
           id="sortButton"
           onClick={() => {
             props.setMaxtoMin(!props.MaxtoMin);
           }}
-          className="h-6 w-6 bg-[#D9D9D980] rounded-md flex items-center justify-center mt-0.5 "
+          className="md:h-6 md:w-6 h-4 w-4 bg-[#D9D9D980] rounded-md flex items-center justify-center mt-0.5 "
         >
           <Image
             src={"/sortingIcon/sortByIcon.png"}
@@ -57,18 +58,18 @@ export default function SortFilter(props: {
         return (
           <button
             key={index}
-            className="flex border-l-2 border-zinc-200 space-x-2 hover:bg-slate-100"
+            className="flex border-l-2 border-zinc-200 md:space-x-2 hover:bg-slate-100"
             onClick={() => handleSortClick(index)}
           >
             <div
               className={`${
                 selectedButtonIndexes == index
-                  ? "bg-[#D9D9D980] rounded-md  mx-3 my-2 px-2 py-0.5 "
-                  : "mx-5 my-2.5"
+                  ? "bg-[#D9D9D980] rounded-md  md:mx-3 mx-1 my-1 md:my-2 md:px-2 md:py-0.5 "
+                  : "md:mx-5 md:my-2.5 my-1 mx-1"
               } flex `}
             >
-              <p className="text-xl mx-2">{item.name}</p>
-              <div className="h-6 w-6 ">
+              <p className="md:text-xl text-sm mx-2 md:mx-2">{item.name}</p>
+              <div className="md:h-6 md:w-6 md:block hidden ">
                 <Image
                   src={item.img}
                   alt={`${item.name} Icon`}

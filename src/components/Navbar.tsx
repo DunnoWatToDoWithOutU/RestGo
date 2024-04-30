@@ -21,13 +21,13 @@ export async function NavBar() {
       <div className=" flex space-x-2">
         <Link
           href="/mybooking"
-          className="font-bold text p-2 px-4 transition-colors duration-200 bg-[#fafafa] hover:bg-[#f1f2ff] shadow-md rounded-full text-primary"
+          className="font-bold text-sm md:text-base md:p-2 p-1 md:px-4 px-2 my-auto transition-colors duration-200 bg-[#fafafa] hover:bg-[#f1f2ff] shadow-md rounded-full text-primary"
         >
           My Booking
         </Link>
         <Link
           href="/hotellist"
-          className="font-bold text p-2 px-4 transition-colors duration-200 bg-[#fafafa] hover:bg-[#f1f2ff] shadow-md rounded-full text-primary"
+          className="font-bold text-sm md:text-base md:p-2 p-1 md:px-4 px-2 my-auto transition-colors duration-200 bg-[#fafafa] hover:bg-[#f1f2ff] shadow-md rounded-full text-primary"
         >
           Hotel List
         </Link>

@@ -5,7 +5,6 @@ import { BookingCard } from "./BookingCard";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/libs/authOptions";
 
-
 export async function BookingList() {
   const session = await getServerSession(authOptions);
 
@@ -17,7 +16,7 @@ export async function BookingList() {
     return <div></div>;
   }
   return (
-    <div className="space-y-4 mt-4">
+    <div className="space-y-4 md:mt-4 mt-1">
       {bookingDatas.map(async (bookingData, index) => {
         const hotel = await getHotel(bookingData.hotel);
         return (
@@ -25,7 +24,7 @@ export async function BookingList() {
             key={index}
             hotel={hotel}
             appointment={bookingData}
-            ></BookingCard>
+          ></BookingCard>
         );
       })}
     </div>
