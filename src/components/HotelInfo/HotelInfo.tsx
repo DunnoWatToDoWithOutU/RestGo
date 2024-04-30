@@ -155,7 +155,9 @@ export function HotelInfo(props: {
         </div>
         <div className="md:w-1/3 w-full mt-3 md:mt-0 ">
           <div className="w-full h-full bg-white border-[3px] text-[#15439C] rounded-lg p-4 border-[#15439C]">
-            <p className=" text-end text-lg md:text-2xl font-bold">
+            <p className=" text-end text-lg md:text-2xl font-bold"
+              data-testid="totalPrice"
+            >
               Total :{" "}
               <span className="md:text-[2.5rem] text-[1.20rem]">
                 {bookingday == -1
@@ -189,6 +191,7 @@ export function HotelInfo(props: {
                 <p className=" text-lg min-w-20 font-bold">From : </p>
 
                 <input
+                  data-testid="startDate"
                   type="date"
                   onChange={(e) => {
                     setStartDate(new Date(e.target.value));
@@ -199,6 +202,7 @@ export function HotelInfo(props: {
               <div className="flex mt-4 space-x-2 justify-start items-center">
                 <p className=" text-lg  min-w-20 font-bold">To : </p>
                 <input
+                  data-testid="endDate"
                   onChange={(e) => {
                     setEndDate(new Date(e.target.value));
                   }}
@@ -243,6 +247,7 @@ export function HotelInfo(props: {
               )}
             </div>
             <PromotionDropDown
+              data-testid="promotiondropdown"
               setPromotion={setPromotion}
               promoion={props.promotion}
               hotel={props.hotel}
@@ -365,6 +370,7 @@ export function HotelInfo(props: {
                 toast.success("Booking Success");
               }}
               className=" w-[80%] mx-10  text-3xl text-center  rounded-lg py-3 hover:bg-primary_dark mt-5 text-white bg-primary"
+              data-testid="reserveButton"
             >
               Reserve
             </button>

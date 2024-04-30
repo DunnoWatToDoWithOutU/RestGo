@@ -24,7 +24,9 @@ export default function PromotionCard(props: {
         />
       </div>
       <div className=" text-[0.7rem] text-start">
-        <p className=" text-[1rem] font-bold">{props.hotel.name}</p>
+        <p className=" text-[1rem] font-bold"
+        data-testid={`noti-${props.hotel.name}`}
+        >{props.hotel.name}</p>
         <p className="text-sm">{props.promotion.name}</p>
         <p>Discount :{props.promotion.discount}%</p>
         <p>Code : {props.promotion.coupon}</p>

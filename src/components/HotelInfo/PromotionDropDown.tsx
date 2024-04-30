@@ -109,7 +109,8 @@ function OptionCard(props: { promotion: PromotionProps; hotel: HotelProps }) {
       <div className=" text-[0.7rem] text-start">
         <p className=" text-[1rem] font-bold">{props.hotel.name}</p>
         <p className="text-sm">{props.promotion.name}</p>
-        <p>Discount :{props.promotion.discount}%</p>
+        <p data-testid={`Discount-${props.hotel.name}${props.promotion.discount}`}
+        >Discount :{props.promotion.discount}%</p>
         <p>Code : {props.promotion.coupon}</p>
       </div>
     </button>

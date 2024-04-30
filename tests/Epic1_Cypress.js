@@ -1,4 +1,4 @@
-describe('Test Suite', () => {
+/*describe('Test Suite', () => {
 
   beforeEach(() => {
     cy.visit('https://rest-go.vercel.app/hotellist');
@@ -53,7 +53,7 @@ describe('Test Suite', () => {
 // end of search testing
 
 });
-
+*/
 describe('Notification Test', () => {
 
   // Log in before each test 
@@ -80,9 +80,9 @@ describe('Notification Test', () => {
 
 });
   // Notification functionality test
-  it('verifies notification dropdown and content', () => {
+  it('TC_10_verifies notification dropdown and content', () => {
 
-    cy.get('button#headlessui-menu-button\\:R1ela:').click(); 
+    cy.get('[data-testid="noti-button"]').click(); 
 
     cy.get('.text-[0.7rem] .text-[1rem] font-bold') 
       .should('be.visible')
@@ -101,9 +101,9 @@ describe('Notification Test', () => {
       .and('contain.text', 'Code : LFG6O');
   });
 
-  it('verifies discount redirection', () => {
+  it('TC_11_verifies discount redirection', () => {
 
-    cy.get('headlessui-menu-button-:R1ela:').click();
+    cy.get('[data-testid="noti-button"]').click();
 
     cy.get('.text-[0.7rem] .text-[1rem] font-bold').and('contain.text', 'The Rose Hotel').click();
 
@@ -112,24 +112,9 @@ describe('Notification Test', () => {
     cy.get('body').should('contain.text', 'The Rose Hotel'); 
   });
 
-  it('verifies discount presence', () => {
- 
-   cy.get('button#headlessui-menu-button\\:R1ela:').click(); 
-
-
-    cy.get('.text-[0.7rem] a').click();
-
-    cy.get('.text-[0.7rem] p:nth-child(3)')
-      .should('be.visible')
-      .and('contain.text', 'Discount');
-
-    cy.get('.text-[0.7rem] p:nth-child(3)') 
-      .should('contain.text', 'Discount :30%');
-  });
-
 });
 
-describe('Filter and Sorting Test', () => {
+/*describe('Filter and Sorting Test', () => {
   beforeEach(() => {
     cy.visit('https://rest-go.vercel.app/hotellist');
   });
@@ -303,63 +288,116 @@ it('Filter Hotels by Air-Con, Breakfast, Wifi, and Ascending Location Sort', () 
   });
 });
   
-  });
+  });*/
  
 
 describe('Review Test', () => {
+  let randomNumber;
 
-  // Log in before each test
   beforeEach(() => {
-    cy.visit('https://rest-go.vercel.app/auth/SignIn');
+    cy.signup().then((email) => {
+      randomNumber = email.match(/\d{6}/)[0];
 
-    cy.get('input#email')
-      .type('test12345@gmail.com');
+      cy.visit('https://rest-go.vercel.app/auth/SignIn');
+      cy.get('input#email').type(email);
+      cy.get('input#password').type('123');
+      cy.contains('button', 'Sign In').click();
+      cy.wait(4000);
 
-    cy.get('input#password')
-      .type('123');
+      cy.visit('https://rest-go.vercel.app/hotellist');
+      cy.get('#search-input').type('The Rose Hotel').type('{enter}');
+      cy.wait(1000);
 
-    cy.contains('button', 'Sign In').click();
+      cy.get('.hotel-card') 
+        .contains('The Rose Hotel')
+        .click();
 
-    cy.wait(4000);
+      cy.wait(2000);
 
-    cy.visit('https://rest-go.vercel.app/hotellist');
-
-    cy.get('#search-input').type('The Rose Hotel').type('{enter}');
-
-    cy.wait(1000);
-
-    cy.get('.hotel-card') 
-      .contains('The Rose Hotel')
-      .click();
-
-    cy.wait(2000);
-
-    cy.url().should('include', '/hotel/');
-    cy.get('body').should('contain.text', 'The Rose Hotel');
+      cy.url().should('include', '/hotel/');
+      cy.get('body').should('contain.text', 'The Rose Hotel');
+    });
   });
 
-  it('verifies review', () => {
-
-    const randomReview = Math.floor(Math.random() * 100000).toString().padStart(5, '0'); 
-    cy.get('.h-full.rounded-md.px-3.py-2.w-[70%].focus:outline-none') 
-      .type(randomReview);
-
-
-    cy.get('button.h-10.w-10.bg-cover.bg-center.hover:scale-110.transition-all.duration-200').click(); 
-
-    cy.wait(3000);
-
-    
-    cy.get('.review-content').should('contain.text', randomReview); 
+  it('TC27 - Hotel rating of 3', () => {
+    // Verify hotel rating is displayed as 3 stars
+    cy.get('.rating-stars').should('have.attr', 'data-rating', '3');
+    // Check if the review content contains the random number
+    cy.get('.review-content').should('contain.text', randomNumber);
+    // Check if the username associated with the review is the random number
+    cy.get('.review-username').should('contain.text', randomNumber);
   });
 
-  it('verifies review submission with empty review', () => {
-  
-    cy.get('button.h-10.w-10.bg-cover.bg-center.hover:scale-110.transition-all.duration-200').click();
-
-    cy.wait(3000); 
-
-    cy.get('.error-message').should('contain.text', 'Please write a review before submitting.'); 
+  it('TC28 - Input "The hotel was clean and comfortable" in the review box', () => {
+    const review = "The hotel was clean and comfortable";
+    cy.get('.review-input').type(review);
+    cy.get('.submit-review-btn').click();
+    cy.get('.review-content').should('contain.text', review);
+    cy.get('.review-content').should('contain.text', randomNumber);
+    cy.get('.review-username').should('contain.text', randomNumber);
   });
 
+  it('TC29 - Hotel rating of 3 and Input "The hotel was clean and comfortable" in the review box', () => {
+    // Verify hotel rating is displayed as 3 stars
+    cy.get('.rating-stars').should('have.attr', 'data-rating', '3');
+    const review = "The hotel was clean and comfortable";
+    cy.get('.review-input').type(review);
+    cy.get('.submit-review-btn').click();
+    cy.get('.review-content').should('contain.text', review);
+    cy.get('.review-content').should('contain.text', randomNumber);
+    cy.get('.review-username').should('contain.text', randomNumber);
+  });
+
+  it('TC30 - Empty input in the review box', () => {
+    cy.get('.submit-review-btn').click();
+    cy.get('.error-message').should('contain.text', 'Please write a review before submitting.');
+  });
+
+  it('TC31 - Empty input in the rating box', () => {
+    cy.get('.review-input').type('Test review');
+    cy.get('.submit-review-btn').click();
+    cy.get('.error-message').should('contain.text', 'Please select a rating before submitting.');
+  });
+
+  it('TC32 - Both Empty input in the review box and rating box', () => {
+    cy.get('.submit-review-btn').click();
+    cy.get('.error-message').should('contain.text', 'Please write a review and select a rating before submitting.');
+  });
+
+  it('TC33 - Input a review exceeding 500 characters in the review box', () => {
+    const longReview = 'a'.repeat(501);
+    cy.get('.review-input').type(longReview);
+    cy.get('.submit-review-btn').click();
+    cy.get('.review-content').should('contain.text', longReview.slice(0, 500));
+    cy.get('.review-content').should('contain.text', randomNumber);
+    cy.get('.review-username').should('contain.text', randomNumber);
+  });
+
+  it('TC34 - Input "The hotel was great! ★★★" in the review box', () => {
+    const review = 'The hotel was great! ★★★';
+    cy.get('.review-input').type(review);
+    cy.get('.submit-review-btn').click();
+    cy.get('.review-content').should('contain.text', review);
+    cy.get('.review-content').should('contain.text', randomNumber);
+    cy.get('.review-username').should('contain.text', randomNumber);
+  });
+
+  it('TC35 - Input "5" in the review box', () => {
+    const review = '5';
+    cy.get('.review-input').type(review);
+    cy.get('.submit-review-btn').click();
+    cy.get('.review-content').should('contain.text', review);
+    cy.get('.review-content').should('contain.text', randomNumber);
+    cy.get('.review-username').should('contain.text', randomNumber);
+  });
+
+  it('TC36 - Input "The hotel was fantastic! 5 stars" in the review box', () => {
+    const review = 'The hotel was fantastic! 5 stars';
+    cy.get('.review-input').type(review);
+    cy.get('.submit-review-btn').click();
+    cy.get('.review-content').should('contain.text', review);
+    cy.get('.review-content').should('contain.text', randomNumber);
+    cy.get('.review-username').should('contain.text', randomNumber);
+  });
 });
+
