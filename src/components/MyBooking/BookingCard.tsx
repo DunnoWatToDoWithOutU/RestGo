@@ -204,12 +204,12 @@ export function BookingCard(props: {
             onClick={() => {
               toast.info(`Phone : ${props.hotel.telephone}`);
             }}
-            className="h-4 w-4 bg-cover bg-center hover:scale-110 sm:h-5 sm:w-5"
+            className="h-5 w-5 bg-cover bg-center hover:scale-110 sm:h-6 sm:w-6"
             style={{ backgroundImage: `url(/img/homepage/phone.png)` }}
           ></button>
           <button
             onClick={() => setShowEditPopup(true)}
-            className="h-4 w-4 bg-cover bg-center hover:scale-110 sm:h-5 sm:w-5"
+            className="h-5 w-5 bg-cover bg-center hover:scale-110 sm:h-6 sm:w-6"
             style={{ backgroundImage: `url(/img/homepage/edit.png)` }}
           ></button>
 
@@ -229,7 +229,7 @@ export function BookingCard(props: {
               }
               toast.success("Delete Finsih");
             }}
-            className="h-4 w-4 bg-cover bg-center hover:scale-110 sm:h-5 sm:w-5"
+            className="h-5 w-5 bg-cover bg-center hover:scale-110 sm:h-6 sm:w-6"
             style={{ backgroundImage: `url(/img/homepage/trash.png)` }}
           ></button>
         </div>
@@ -256,15 +256,21 @@ export function BookingCard(props: {
         <div className="flex justify-end space-x-2  ">
           <Button
             onClick={handleQRButtonClick}
-            className="md:text-xl text-base py-1 bg-primary text-white font-normal rounded-lg hover:bg-primary_dark"
+            className="text-xl text-base py-1 bg-primary text-white font-normal rounded-lg hover:bg-primary_dark"
           >
-            <p className=" text-center">Check in QR</p>
+            <p className="text-center">
+              <span className="hidden sm:inline">Check In </span>
+              QR
+            </p>
           </Button>
           <Link
             href={`/mybooking/${props.appointment._id}`}
             className="text-xl py-1 px-3 bg-primary transition-colors duration-200 text-white font-normal rounded-lg hover:bg-primary_dark"
           >
-            <p className=" text-center">Booking Info</p>
+            <p className="text-center">
+              <span className="hidden sm:inline">Booking </span>
+              Info
+            </p>
           </Link>
         </div>
       </div>

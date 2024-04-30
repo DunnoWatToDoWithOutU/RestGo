@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-
+import StarIcon from '@mui/icons-material/Star'
 export function HotelCard(props: { hotel: HotelProps }) {
   const router = useRouter();
   return (
@@ -70,12 +70,17 @@ export function HotelCard(props: { hotel: HotelProps }) {
         </div>
         <div className="flex z-10 space-x-1 px-3 text-base md:text-xl items-center text-white">
           <p>{props.hotel.rating}</p>
-          <Rating
-            value={props.hotel.rating}
-            precision={0.1}
-            readOnly
-            className=""
-          ></Rating>
+          <span className="hidden sm:inline">
+            <Rating
+              value={props.hotel.rating}
+              precision={0.1}
+              readOnly
+              className=""
+            ></Rating>
+          </span>
+          <span className="inline sm:hidden">
+            <StarIcon style={{ color: '#FAAF00' }}/>
+          </span>
         </div>
       </div>
     </motion.button>
