@@ -9,6 +9,7 @@ export async function getPromotionbyId(PromotionId: string) {
       credentials: "include",
     }
   );
+
   if (!response.ok) {
     throw new Error("Error failed to fetch");
   }

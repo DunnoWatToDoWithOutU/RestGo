@@ -1,5 +1,5 @@
 import craeteAppointment from "@/libs/createAppointment";
-import { HotelProps, PromotionProps } from "../../../@types/type";
+import { AppointmnetProps, HotelProps, PromotionProps } from "../../../@types/type";
 import { ReviewCard } from "./ReviewCard";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
@@ -249,7 +249,7 @@ export function HotelInfo(props: {
             <button
               onClick={async () => {
                 try {
-                  await craeteAppointment(
+                  const appointment = await craeteAppointment(
                     props.hotel.id,
                     startDate,
                     endDate,
@@ -264,14 +264,13 @@ export function HotelInfo(props: {
                     sendEmail(
                       session.user.email,
                       session.user.name,
-                      "Your Passkey is <h1>52345</h1>"
+                      appointment.id
                     );
                   }
                 } catch (error) {
                   toast.error("Error Booking");
                   return;
                 }
-
                 toast.success("Booking Success");
               }}
               className=" w-[80%] mx-10  text-3xl text-center  rounded-lg py-3 hover:bg-primary_dark mt-5 text-white bg-primary"
