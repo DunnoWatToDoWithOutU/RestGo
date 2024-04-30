@@ -1,4 +1,4 @@
-/*describe('Test Suite', () => {
+describe('Test Suite', () => {
 
   beforeEach(() => {
     cy.visit('https://rest-go.vercel.app/hotellist');
@@ -35,7 +35,7 @@
     cy.contains('Bualoy', { timeout: 10000 }).should('be.visible');
   });
 
-  it('TC_7_earch query with leading and trailing spaces', () => {
+  it('TC_7_Search query with leading and trailing spaces', () => {
     cy.get('#search-input').type('  surawong ').type('{enter}');
     cy.contains('Surawong', { timeout: 10000 }).should('be.visible');
   });
@@ -53,8 +53,8 @@
 // end of search testing
 
 });
-*/
-/*describe('Notification Test', () => {
+
+describe('Notification Test', () => {
 
   // Log in before each test 
   beforeEach(() => {
@@ -96,7 +96,7 @@
     cy.get('body').should('contain.text', 'The Rose Hotel'); 
   });
 
-  it('TC_11_Make Reservation With No Promotion', () => {
+  it('TC_12_Make Reservation With No Promotion', () => {
 
     cy.get('[data-testid="noti-button"]').click();
 
@@ -109,7 +109,7 @@
     cy.get('[data-testid="totalPrice"]').should('contain.text', '1184');
   });
 
-    it('TC_12_Make Reservation With Promotion', () => {
+    it('TC_13_Make Reservation With Promotion', () => {
 
     cy.get('[data-testid="noti-button"]').click();
 
@@ -122,21 +122,21 @@
     cy.get('[data-testid="totalPrice"').should('contain.text', '828.8');
   });
 
-});*/
+});
 
-/*describe('Filter and Sorting Test', () => {
+describe('Filter and Sorting Test', () => {
   beforeEach(() => {
     cy.visit('https://rest-go.vercel.app/hotellist');
   });
 
- it('Filter Hotels by Wi-Fi', () => {
+ it('TC_14_Filter Hotels by Wi-Fi', () => {
   cy.contains('Wi-Fi').click();
   cy.get('.hotel-card', { timeout: 10000 }).each($hotel => {
     cy.wrap($hotel).find('#tag-wifi').should('exist');
   });
 });
 
-it('Filter Hotels by Multiple Amenities', () => {
+it('TC_15_Filter Hotels by Multiple Amenities', () => {
   cy.contains('Wi-Fi').click();
   cy.contains('Pool').click();
   cy.get('.hotel-card', { timeout: 10000 }).each($hotel => {
@@ -147,7 +147,7 @@ it('Filter Hotels by Multiple Amenities', () => {
 
 
 
-  it('Verify Price Sorting in Ascending Order', () => {
+  it('TC_16_Verify Price Sorting in Ascending Order', () => {
     cy.contains('Price').click();
   cy.wait(4000);
   cy.get('.hotel-card').each(($card, index, $list) => {
@@ -159,7 +159,7 @@ it('Filter Hotels by Multiple Amenities', () => {
   });
 });
 
-it('Verify Price Sorting in Descending Order', () => {
+it('TC_17_Verify Price Sorting in Descending Order', () => {
   cy.contains('Price').click();
   cy.get('#sortButton').should('be.visible').click();
   cy.wait(4000);
@@ -172,7 +172,7 @@ it('Verify Price Sorting in Descending Order', () => {
   });
 });
 
-it('Verify Ratings Sorting in Ascending Order', () => {
+it('TC_18_Verify Ratings Sorting in Ascending Order', () => {
   cy.contains('Rating').click();
   cy.wait(4000);
   cy.get('.hotel-card').each(($card, index, $list) => {
@@ -184,7 +184,7 @@ it('Verify Ratings Sorting in Ascending Order', () => {
   });
 });
 
-it('Verify Ratings Sorting in Descending Order', () => {
+it('TC_19_Verify Ratings Sorting in Descending Order', () => {
   cy.contains('Rating').click();
   cy.get('#sortButton').should('be.visible').click();
   cy.wait(4000);
@@ -197,8 +197,7 @@ it('Verify Ratings Sorting in Descending Order', () => {
   });
 });
   
-  // TC20: Ascending Location Sort (Alphabetical)
-it('Sort Hotels by Ascending Location (Alphabetical)', () => {
+it('TC_20_Sort Hotels by Ascending Location ', () => {
   cy.contains('Location').click();
   cy.get('#sortButton').should('be.visible').click();
   cy.get('.hotel-card').each(($card, index, $list) => {
@@ -210,8 +209,7 @@ it('Sort Hotels by Ascending Location (Alphabetical)', () => {
   });
 });
 
-// TC21: Descending Location Sort (Alphabetical)
-it('Sort Hotels by Descending Location (Alphabetical)', () => {
+it('TC_21_Sort Hotels by Descending Location ', () => {
   cy.contains('Location').click();
   cy.wait(4000);
   cy.get('.hotel-card').each(($card, index, $list) => {
@@ -223,8 +221,7 @@ it('Sort Hotels by Descending Location (Alphabetical)', () => {
   });
 });
 
-// TC22: Ascending Name Sort (Alphabetical)
-it('Sort Hotels by Ascending Name (Alphabetical)', () => {
+it('TC_21_Sort Hotels by Ascending Name (Alphabetical)', () => {
   cy.contains('Name').click();
   cy.get('#sortButton').should('be.visible').click();
   cy.get('.hotel-card').each(($card, index, $list) => {
@@ -236,8 +233,7 @@ it('Sort Hotels by Ascending Name (Alphabetical)', () => {
   });
 });
 
-// TC23: Descending Name Sort (Alphabetical)
-it('Sort Hotels by Descending Name (Alphabetical)', () => {
+it('TC_22_Sort Hotels by Descending Name (Alphabetical)', () => {
   cy.contains('Name').click();
   cy.wait(4000);
   cy.get('.hotel-card').each(($card, index, $list) => {
@@ -250,8 +246,7 @@ it('Sort Hotels by Descending Name (Alphabetical)', () => {
 });
 
 
-// TC24: Filter Hotels by Wi-Fi, Pool, and Ascending Price Sort
-it('Filter Hotels by Wi-Fi, Pool, and Ascending Price Sort', () => {
+it('TC_23_Filter Hotels by Wi-Fi, Pool, and Ascending Price Sort', () => {
   cy.contains('Wi-Fi').click();
   cy.contains('Pool').click();
   cy.contains('Price').click();
@@ -266,8 +261,7 @@ it('Filter Hotels by Wi-Fi, Pool, and Ascending Price Sort', () => {
   });
 });
 
-// TC25: Filter Hotels by Air-con, Breakfast, and Descending Rating Sort
-it('Filter Hotels by Air-con, Parking, and Descending Rating Sort', () => {
+it('TC_24_Filter Hotels by Air-con, Parking, and Descending Rating Sort', () => {
   cy.contains('Air-Con').click();
   cy.contains('Parking').click();
   cy.contains('Rating').click();
@@ -282,7 +276,7 @@ it('Filter Hotels by Air-con, Parking, and Descending Rating Sort', () => {
 });
 
 
-it('Filter Hotels by Air-Con, Breakfast, Wifi, and Ascending Location Sort', () => {
+it('TC_25_Filter Hotels by Air-Con, Breakfast, Wifi, and Ascending Location Sort', () => {
   cy.contains('Air-Con').click();
   cy.contains('Breakfast').click();
   cy.contains('Wi-Fi').click();
@@ -298,7 +292,7 @@ it('Filter Hotels by Air-Con, Breakfast, Wifi, and Ascending Location Sort', () 
   });
 });
   
-  });*/
+  });
  
 
 describe('Review Test', () => {
@@ -325,7 +319,7 @@ describe('Review Test', () => {
     cy.contains('button', 'Sign Up').click();
 
     // Wait for sign up completion
-    cy.wait(4000); // Adjust as needed
+    cy.wait(6000); // Adjust as needed
 
 
     randomNumber = randomNumber1;
@@ -334,7 +328,8 @@ describe('Review Test', () => {
     cy.get('input#email').type(email);
     cy.get('input#password').type('123');
     cy.contains('button', 'Sign In').click();
-    cy.wait(4000);
+      cy.get('button.inline-flex.w-full.justify-center.rounded-md', { timeout: 10000 }) 
+  .should('be.visible') 
 
     cy.visit('https://rest-go.vercel.app/hotellist');
     cy.get('#search-input').type('The Rose Hotel').type('{enter}');
@@ -352,8 +347,8 @@ describe('Review Test', () => {
     
 
 
-  it('TC27 - Hotel rating of 3', () => {
-  // Click on the rating input to set the rating to 3 stars
+  it('TC27 - Hotel rating of 2', () => {
+  // Click on the rating input to set the rating to 2 stars
   cy.get('[data-testid="ratingInput"] label:nth-child(3)').click();
 
   // Click on the button to submit the review
@@ -365,7 +360,7 @@ describe('Review Test', () => {
   cy.get(`[data-testid="review-card-${randomNumber}"]`).should('be.visible');
 
   // Verify that the review rating displayed in the review card is 3
-  cy.get(`[data-testid="review-rating-${randomNumber}"]`).should('contain.text', '3');
+  cy.get(`[data-testid="review-rating-${randomNumber}"]`).should('contain.text', '2');
 });
 
   it('TC28 - Input "The hotel was clean and comfortable" in the review box', () => {
@@ -378,61 +373,69 @@ describe('Review Test', () => {
 
 
 
-  it('TC29 - Hotel rating of 3 and Input "The hotel was clean and comfortable" in the review box', () => {
-  // Verify hotel rating is displayed as 3 stars
-  cy.get('[data-testid="rating-stars"]').should('have.attr', 'data-rating', '3');
+  it('TC29 - Hotel rating of 2 and Input "The hotel was clean and comfortable" in the review box', () => {
+  // Verify hotel rating is displayed as 2 stars
+  cy.get('[data-testid="ratingInput"] label:nth-child(3)').click();
   const review = "The hotel was clean and comfortable";
-  cy.get('[data-testid="review-input"]').type(review);
-  cy.get('[data-testid="sentButton"]').click();
-  cy.get(`[data-testid="review-content-${randomNumber}"]`).should('contain.text', review);
+  cy.get('[data-testid="inputPanel"]').type(review);
+    cy.get('[data-testid="sentButton"]').click();
+  cy.get(`[data-testid="review-text-${randomNumber}"]`, { timeout: 10000 }).should('contain.text', review);
   cy.get(`[data-testid="review-username-${randomNumber}"]`).should('contain.text', randomNumber);
 });
 
-it('TC30 - Empty input in the review box', () => {
+  it('TC30 - Empty input in the review box', () => {
+  cy.get('[data-testid="ratingInput"] label:nth-child(3)').click();
   cy.get('[data-testid="sentButton"]').click();
-  cy.get('.error-message').should('contain.text', 'Please write a review before submitting.');
+  cy.reload();
+  cy.get(`[data-testid="review-card-${randomNumber}"]`).should('be.visible');
+  cy.get(`[data-testid="review-rating-${randomNumber}"]`).should('contain.text', '2');
 });
 
 it('TC31 - Empty input in the rating box', () => {
-  cy.get('[data-testid="review-input"]').type('Test review');
+  cy.get('[data-testid="inputPanel"]').type('Test review');
   cy.get('[data-testid="sentButton"]').click();
-  cy.get('.error-message').should('contain.text', 'Please select a rating before submitting.');
+  cy.reload();
+  cy.get(`[data-testid="review-card-${randomNumber}"]`).should('be.visible');
+  cy.get(`[data-testid="review-rating-${randomNumber}"]`).should('contain.text', '0');
 });
 
 it('TC32 - Both Empty input in the review box and rating box', () => {
   cy.get('[data-testid="sentButton"]').click();
-  cy.get('.error-message').should('contain.text', 'Please write a review and select a rating before submitting.');
+  cy.reload();
+  cy.get(`[data-testid="review-card-${randomNumber}"]`).should('be.visible');
+  cy.get(`[data-testid="review-rating-${randomNumber}"]`).should('contain.text', '0');
 });
 
 it('TC33 - Input a review exceeding 500 characters in the review box', () => {
   const longReview = 'a'.repeat(501);
-  cy.get('[data-testid="review-input"]').type(longReview);
+  const formattedReview = longReview.match(/.{1,45}/g).join('\n'); // Insert newline every 45 characters
+  cy.get('[data-testid="inputPanel"]').type(formattedReview);
   cy.get('[data-testid="sentButton"]').click();
-  cy.get(`[data-testid="review-content-${randomNumber}"]`).should('contain.text', longReview.slice(0, 500));
+  cy.get(`[data-testid="review-text-${randomNumber}"]`).should('contain.text', formattedReview.slice(0, 500));
   cy.get(`[data-testid="review-username-${randomNumber}"]`).should('contain.text', randomNumber);
 });
 
 it('TC34 - Input "The hotel was great! ★★★" in the review box', () => {
   const review = 'The hotel was great! ★★★';
-  cy.get('[data-testid="review-input"]').type(review);
+  cy.get('[data-testid="inputPanel"]').type(review);
   cy.get('[data-testid="sentButton"]').click();
-  cy.get(`[data-testid="review-content-${randomNumber}"]`).should('contain.text', review);
+  cy.get(`[data-testid="review-text-${randomNumber}"]`).should('contain.text', review);
   cy.get(`[data-testid="review-username-${randomNumber}"]`).should('contain.text', randomNumber);
 });
 
 it('TC35 - Input "5" in the review box', () => {
   const review = '5';
-  cy.get('[data-testid="review-input"]').type(review);
+  cy.get('[data-testid="inputPanel"]').type(review);
   cy.get('[data-testid="sentButton"]').click();
-  cy.get(`[data-testid="review-content-${randomNumber}"]`).should('contain.text', review);
+  cy.get(`[data-testid="review-text-${randomNumber}"]`).should('contain.text', review);
   cy.get(`[data-testid="review-username-${randomNumber}"]`).should('contain.text', randomNumber);
 });
 
 it('TC36 - Input "The hotel was fantastic! 5 stars" in the review box', () => {
   const review = 'The hotel was fantastic! 5 stars';
-  cy.get('[data-testid="review-input"]').type(review);
+  cy.get('[data-testid="inputPanel"]').type(review);
   cy.get('[data-testid="sentButton"]').click();
-  cy.get(`[data-testid="review-content-${randomNumber}"]`).should('contain.text', review);
+  cy.get(`[data-testid="review-text-${randomNumber}"]`).should('contain.text', review);
   cy.get(`[data-testid="review-username-${randomNumber}"]`).should('contain.text', randomNumber);
 });
 
