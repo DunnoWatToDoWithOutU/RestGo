@@ -1,5 +1,9 @@
 import craeteAppointment from "@/libs/createAppointment";
-import { AppointmnetProps, HotelProps, PromotionProps } from "../../../@types/type";
+import {
+  AppointmnetProps,
+  HotelProps,
+  PromotionProps,
+} from "../../../@types/type";
 import { ReviewCard } from "./ReviewCard";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
@@ -260,11 +264,89 @@ export function HotelInfo(props: {
                     peopleValues.rooms,
                     promotion
                   );
-                  if(session?.user){
+
+                  const mailTemplate = `
+                  <!DOCTYPE html>
+                  <html lang="en">
+                  <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Your [Hotel Name] Reservation Confirmation</title>
+                    <style>
+                      /* You can add your own styles here */
+                      body {
+                        font-family: sans-serif;
+                        margin: 0;
+                        padding: 0;
+                      }
+                      .container {
+                        padding: 20px;
+                      }
+                      .hotel-logo {
+                        width: 150px;
+                        height: auto;
+                      }
+                      .reservation-details {
+                        border-collapse: collapse;
+                        width: 100%;
+                      }
+                      .reservation-details th, .reservation-details td {
+                        padding: 8px;
+                        border: 1px solid #ddd;
+                      }
+                    </style>
+                  </head>
+                  <body>
+                    <div class="container">
+                      <p>Dear ${session?.user.name},</p>
+                      <p>This email confirms your reservation at ${props.hotel.name} for your upcoming stay.</p>
+                      <table class="reservation-details">
+                        <tr>
+                          <th>Reservation Details</th>
+                          <th>Information</th>
+                        </tr>
+                        <tr>
+                          <td>Confirmation Number</td>
+                          <td>${appointment.id}</td>
+                        </tr>
+                        <tr>
+                          <td>Guest Name</td>
+                          <td>${session?.user.name}</td>
+                        </tr>
+                        <tr>
+                          <td>Check-in Date</td>
+                          <td>${startDate}</td>
+                        </tr>
+                        <tr>
+                          <td>Check-out Date</td>
+                          <td>${endDate}</td>
+                        </tr>
+                        <tr>
+                          <td>Number of Guests</td>
+                          <td>${peopleValues.adults +
+                            peopleValues.babies +
+                            peopleValues.children}</td>
+                        </tr>
+                        <tr>
+                          <td>Hotel Name</td>
+                          <td>${props.hotel.name}</td>
+                        </tr>
+                        </table>
+                      <p>Here is your Checkin QR Code</p>
+                      <img src="https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=https://rest-go.vercel.app/mybooking/${appointment.id}" alt="QR Code" className="z-50 mb-4" width={150} height={150}/>
+                      <p>We look forward to welcoming you to ${props.hotel.name}! If you have any questions, please don't hesitate to contact us at ${props.hotel.telephone}.</p>
+                      <p>Sincerely,</p>
+                      <p>RestGo Team</p>
+                    </div>
+                  </body>
+                  </html>
+                  `;
+
+                  if (session?.user) {
                     sendEmail(
                       session.user.email,
                       session.user.name,
-                        `<img src="https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=https://rest-go.vercel.app/mybooking/${appointment.id}" alt="QR Code" className="z-50 mb-4" width={150} height={150}/>`
+                      mailTemplate
                     );
                   }
                 } catch (error) {
