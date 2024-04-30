@@ -264,7 +264,6 @@ export function HotelInfo(props: {
                     peopleValues.rooms,
                     promotion
                   );
-
                   const mailTemplate = `
                   <!DOCTYPE html>
                   <html lang="en">
@@ -299,7 +298,9 @@ export function HotelInfo(props: {
                   <body>
                     <div class="container">
                       <p>Dear ${session?.user.name},</p>
-                      <p>This email confirms your reservation at ${props.hotel.name} for your upcoming stay.</p>
+                      <p>This email confirms your reservation at ${
+                        props.hotel.name
+                      } for your upcoming stay.</p>
                       <table class="reservation-details">
                         <tr>
                           <th>Reservation Details</th>
@@ -323,9 +324,11 @@ export function HotelInfo(props: {
                         </tr>
                         <tr>
                           <td>Number of Guests</td>
-                          <td>${peopleValues.adults +
+                          <td>${
+                            peopleValues.adults +
                             peopleValues.babies +
-                            peopleValues.children}</td>
+                            peopleValues.children
+                          }</td>
                         </tr>
                         <tr>
                           <td>Hotel Name</td>
@@ -333,8 +336,14 @@ export function HotelInfo(props: {
                         </tr>
                         </table>
                       <p>Here is your Checkin QR Code</p>
-                      <img src="https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=https://rest-go.vercel.app/mybooking/${appointment.id}" alt="QR Code" className="z-50 mb-4" width={150} height={150}/>
-                      <p>We look forward to welcoming you to ${props.hotel.name}! If you have any questions, please don't hesitate to contact us at ${props.hotel.telephone}.</p>
+                      <img src="https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=https://rest-go.vercel.app/mybooking/${
+                        appointment.id
+                      }" alt="QR Code" className="z-50 mb-4" width={150} height={150}/>
+                      <p>We look forward to welcoming you to ${
+                        props.hotel.name
+                      }! If you have any questions, please don't hesitate to contact us at ${
+                    props.hotel.telephone
+                  }.</p>
                       <p>Sincerely,</p>
                       <p>RestGo Team</p>
                     </div>
