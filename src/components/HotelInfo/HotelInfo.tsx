@@ -489,7 +489,9 @@ function InputPanel(props: {
   handleOnSent: () => void;
 }) {
   return (
-    <div className="h-20 rounded-lg w-full px-3 py-2 space-x-3 items-center overflow-hidden bg-[#15429c71] flex mt-3">
+    <div className="h-20 rounded-lg w-full px-3 py-2 space-x-3 items-center overflow-hidden bg-[#15429c71] flex mt-3"
+    data-testid="inputPanel"
+    >
       <textarea
         value={props.review}
         onChange={(event) => {
@@ -503,6 +505,7 @@ function InputPanel(props: {
       <div className="h-full md:w-[20%] w-[40%] bg-white justify-center flex flex-col rounded-md text-center ">
         <p>{props.Rating}</p>
         <Rating
+          data-testid="ratingInput"
           name="simple-controlled"
           value={props.Rating ?? 0}
           onChange={(event, newValue) => {
@@ -512,6 +515,7 @@ function InputPanel(props: {
         />
       </div>
       <button
+        data-testid="sentButton"
         onClick={props.handleOnSent}
         className="h-10 w-10 bg-cover bg-center hover:scale-110 transition-all duration-200 "
         style={{ backgroundImage: `url(/img/sentbutton.png)` }}

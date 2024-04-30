@@ -72,10 +72,7 @@ describe('Notification Test', () => {
   cy.contains('button', 'Sign In').click();
 
 
-  cy.wait(7000);
-
-
-  cy.get('button.inline-flex.w-full.justify-center.rounded-md') 
+  cy.get('button.inline-flex.w-full.justify-center.rounded-md', { timeout: 10000 }) 
   .should('be.visible') 
 
 });
@@ -122,7 +119,7 @@ describe('Notification Test', () => {
 
     cy.get('[data-testid="Discount-The Rose Hotel30"]').click();
 
-    cy.get('[data-testid="totalPrice"]').should('contain.text', '828.8');
+    cy.get('[data-testid="totalPrice"').should('contain.text', '828.8');
   });
 
 });
@@ -308,109 +305,133 @@ describe('Review Test', () => {
   let randomNumber;
 
   beforeEach(() => {
-    cy.signup().then((email) => {
-      randomNumber = email.match(/\d{6}/)[0];
 
-      cy.visit('https://rest-go.vercel.app/auth/SignIn');
-      cy.get('input#email').type(email);
-      cy.get('input#password').type('123');
-      cy.contains('button', 'Sign In').click();
-      cy.wait(4000);
+    cy.visit('https://rest-go.vercel.app/auth/SignUp');
 
-      cy.visit('https://rest-go.vercel.app/hotellist');
-      cy.get('#search-input').type('The Rose Hotel').type('{enter}');
-      cy.wait(1000);
+    // Generate random 6-digit number
+    const randomNumber = Math.floor(100000 + Math.random() * 900000);
 
-      cy.get('.hotel-card') 
-        .contains('The Rose Hotel')
-        .click();
+    // Create email address
+    const email = `${randomNumber}@gmail.com`;
 
-      cy.wait(2000);
+    // Fill sign up form
+    cy.get('input[placeholder=""]').eq(0).type(randomNumber.toString()); // Name
+    cy.get('input[placeholder=""]').eq(1).type(email); // Email
+    cy.get('input[placeholder=""]').eq(2).type('0123456789'); // Telephone
+    cy.get('input[placeholder=""]').eq(3).type('123'); // Password
+    cy.get('input[placeholder=""]').eq(4).type('123'); // Confirm Password
 
-      cy.url().should('include', '/hotel/');
-      cy.get('body').should('contain.text', 'The Rose Hotel');
-    });
+    // Click Sign Up button
+    cy.contains('button', 'Sign Up').click();
+
+    // Wait for sign up completion
+    cy.wait(4000); // Adjust as needed
+
+
+    randomNumber = email.match(/\d{6}/)[0];
+
+    cy.visit('https://rest-go.vercel.app/auth/SignIn');
+    cy.get('input#email').type(email);
+    cy.get('input#password').type('123');
+    cy.contains('button', 'Sign In').click();
+    cy.wait(4000);
+
+    cy.visit('https://rest-go.vercel.app/hotellist');
+    cy.get('#search-input').type('The Rose Hotel').type('{enter}');
+    cy.wait(1000);
+
+    cy.get('.hotel-card')
+      .contains('The Rose Hotel')
+      .click();
+
+    cy.wait(2000);
+
+    cy.url().should('include', '/hotel/');
+    cy.get('body').should('contain.text', 'The Rose Hotel');
   });
+    
+
 
   it('TC27 - Hotel rating of 3', () => {
-    // Verify hotel rating is displayed as 3 stars
-    cy.get('.rating-stars').should('have.attr', 'data-rating', '3');
-    // Check if the review content contains the random number
-    cy.get('.review-content').should('contain.text', randomNumber);
-    // Check if the username associated with the review is the random number
-    cy.get('.review-username').should('contain.text', randomNumber);
-  });
+  // Click on the rating input to set the rating to 3 stars
+  cy.get('[data-testid="ratingInput"]').click({ multiple: true, force: true }).eq(2);
 
-  it('TC28 - Input "The hotel was clean and comfortable" in the review box', () => {
-    const review = "The hotel was clean and comfortable";
-    cy.get('.review-input').type(review);
-    cy.get('.submit-review-btn').click();
-    cy.get('.review-content').should('contain.text', review);
-    cy.get('.review-content').should('contain.text', randomNumber);
-    cy.get('.review-username').should('contain.text', randomNumber);
-  });
+  // Click on the button to submit the review
+  cy.get('[data-testid="sentButton"]').click();
 
-  it('TC29 - Hotel rating of 3 and Input "The hotel was clean and comfortable" in the review box', () => {
-    // Verify hotel rating is displayed as 3 stars
-    cy.get('.rating-stars').should('have.attr', 'data-rating', '3');
-    const review = "The hotel was clean and comfortable";
-    cy.get('.review-input').type(review);
-    cy.get('.submit-review-btn').click();
-    cy.get('.review-content').should('contain.text', review);
-    cy.get('.review-content').should('contain.text', randomNumber);
-    cy.get('.review-username').should('contain.text', randomNumber);
-  });
+  // Verify that the review card with the given random number is visible
+  cy.get(`[data-testid="review-card-${randomNumber}"]`).should('be.visible');
 
-  it('TC30 - Empty input in the review box', () => {
-    cy.get('.submit-review-btn').click();
-    cy.get('.error-message').should('contain.text', 'Please write a review before submitting.');
-  });
-
-  it('TC31 - Empty input in the rating box', () => {
-    cy.get('.review-input').type('Test review');
-    cy.get('.submit-review-btn').click();
-    cy.get('.error-message').should('contain.text', 'Please select a rating before submitting.');
-  });
-
-  it('TC32 - Both Empty input in the review box and rating box', () => {
-    cy.get('.submit-review-btn').click();
-    cy.get('.error-message').should('contain.text', 'Please write a review and select a rating before submitting.');
-  });
-
-  it('TC33 - Input a review exceeding 500 characters in the review box', () => {
-    const longReview = 'a'.repeat(501);
-    cy.get('.review-input').type(longReview);
-    cy.get('.submit-review-btn').click();
-    cy.get('.review-content').should('contain.text', longReview.slice(0, 500));
-    cy.get('.review-content').should('contain.text', randomNumber);
-    cy.get('.review-username').should('contain.text', randomNumber);
-  });
-
-  it('TC34 - Input "The hotel was great! ★★★" in the review box', () => {
-    const review = 'The hotel was great! ★★★';
-    cy.get('.review-input').type(review);
-    cy.get('.submit-review-btn').click();
-    cy.get('.review-content').should('contain.text', review);
-    cy.get('.review-content').should('contain.text', randomNumber);
-    cy.get('.review-username').should('contain.text', randomNumber);
-  });
-
-  it('TC35 - Input "5" in the review box', () => {
-    const review = '5';
-    cy.get('.review-input').type(review);
-    cy.get('.submit-review-btn').click();
-    cy.get('.review-content').should('contain.text', review);
-    cy.get('.review-content').should('contain.text', randomNumber);
-    cy.get('.review-username').should('contain.text', randomNumber);
-  });
-
-  it('TC36 - Input "The hotel was fantastic! 5 stars" in the review box', () => {
-    const review = 'The hotel was fantastic! 5 stars';
-    cy.get('.review-input').type(review);
-    cy.get('.submit-review-btn').click();
-    cy.get('.review-content').should('contain.text', review);
-    cy.get('.review-content').should('contain.text', randomNumber);
-    cy.get('.review-username').should('contain.text', randomNumber);
-  });
+  // Verify that the review rating displayed in the review card is 3
+  cy.get(`[data-testid="review-rating-${randomNumber}"]`).should('contain.text', '3');
 });
 
+  it('TC28 - Input "The hotel was clean and comfortable" in the review box', () => {
+  const review = "The hotel was clean and comfortable";
+  cy.get('[data-testid="inputPanel"]').type(review);
+  cy.get('[data-testid="sentButton"]').click();
+  cy.get(`[data-testid="review-text-${randomNumber}"]`).should('contain.text', review);
+  cy.get(`[data-testid="review-username-${randomNumber}"]`).should('contain.text', randomNumber);
+});
+
+
+
+  it('TC29 - Hotel rating of 3 and Input "The hotel was clean and comfortable" in the review box', () => {
+  // Verify hotel rating is displayed as 3 stars
+  cy.get('[data-testid="rating-stars"]').should('have.attr', 'data-rating', '3');
+  const review = "The hotel was clean and comfortable";
+  cy.get('[data-testid="review-input"]').type(review);
+  cy.get('[data-testid="sentButton"]').click();
+  cy.get(`[data-testid="review-content-${randomNumber}"]`).should('contain.text', review);
+  cy.get(`[data-testid="review-username-${randomNumber}"]`).should('contain.text', randomNumber);
+});
+
+it('TC30 - Empty input in the review box', () => {
+  cy.get('[data-testid="sentButton"]').click();
+  cy.get('.error-message').should('contain.text', 'Please write a review before submitting.');
+});
+
+it('TC31 - Empty input in the rating box', () => {
+  cy.get('[data-testid="review-input"]').type('Test review');
+  cy.get('[data-testid="sentButton"]').click();
+  cy.get('.error-message').should('contain.text', 'Please select a rating before submitting.');
+});
+
+it('TC32 - Both Empty input in the review box and rating box', () => {
+  cy.get('[data-testid="sentButton"]').click();
+  cy.get('.error-message').should('contain.text', 'Please write a review and select a rating before submitting.');
+});
+
+it('TC33 - Input a review exceeding 500 characters in the review box', () => {
+  const longReview = 'a'.repeat(501);
+  cy.get('[data-testid="review-input"]').type(longReview);
+  cy.get('[data-testid="sentButton"]').click();
+  cy.get(`[data-testid="review-content-${randomNumber}"]`).should('contain.text', longReview.slice(0, 500));
+  cy.get(`[data-testid="review-username-${randomNumber}"]`).should('contain.text', randomNumber);
+});
+
+it('TC34 - Input "The hotel was great! ★★★" in the review box', () => {
+  const review = 'The hotel was great! ★★★';
+  cy.get('[data-testid="review-input"]').type(review);
+  cy.get('[data-testid="sentButton"]').click();
+  cy.get(`[data-testid="review-content-${randomNumber}"]`).should('contain.text', review);
+  cy.get(`[data-testid="review-username-${randomNumber}"]`).should('contain.text', randomNumber);
+});
+
+it('TC35 - Input "5" in the review box', () => {
+  const review = '5';
+  cy.get('[data-testid="review-input"]').type(review);
+  cy.get('[data-testid="sentButton"]').click();
+  cy.get(`[data-testid="review-content-${randomNumber}"]`).should('contain.text', review);
+  cy.get(`[data-testid="review-username-${randomNumber}"]`).should('contain.text', randomNumber);
+});
+
+it('TC36 - Input "The hotel was fantastic! 5 stars" in the review box', () => {
+  const review = 'The hotel was fantastic! 5 stars';
+  cy.get('[data-testid="review-input"]').type(review);
+  cy.get('[data-testid="sentButton"]').click();
+  cy.get(`[data-testid="review-content-${randomNumber}"]`).should('contain.text', review);
+  cy.get(`[data-testid="review-username-${randomNumber}"]`).should('contain.text', randomNumber);
+});
+
+});
