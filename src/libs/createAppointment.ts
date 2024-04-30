@@ -9,7 +9,7 @@ export default async function craeteAppointment(
 ) {
   console.log(id, startDate, endDate);
   const response = await fetch(
-    `http://localhost:3000/api/v2/hotels/${id}/appointments`,
+    `https://rest-go.vercel.app/api/v2/hotels/${id}/appointments`,
     {
       method: "POST",
       headers: {
