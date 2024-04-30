@@ -16,7 +16,9 @@ export default function UserDropDown(props: { promotion: PromotionProps[] }) {
         style={{ backgroundImage: `url(/img/bell.png)` }}
       >
         <div>
-          <Menu.Button className="inline-flex w-full justify-center rounded-md ">
+          <Menu.Button
+            data-testid="noti-button"
+            className="inline-flex w-full justify-center rounded-md ">
             <ChevronDownIcon aria-hidden="true" className=" opacity-0" />
           </Menu.Button>
         </div>
