@@ -2,6 +2,23 @@ import connectDB from "@/libs/connectDB";
 import User from "@/models/User";
 import { NextRequest, NextResponse } from "next/server";
 
+/**
+ * @swagger
+ * /api/v2/auth/login:
+ *   post:
+ *     description: Login the session
+ *     tags: [Auth]
+ *     response:
+ *       200:
+ *         description: Login Success
+ *       401:
+ *         description: Invalid Password
+ *       404:
+ *         description: User not found
+ *       500:
+ *         description: Internal server error 
+ */
+
 export async function POST(req: NextRequest) {
     try {
         await connectDB();

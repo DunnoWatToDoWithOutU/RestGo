@@ -3,6 +3,21 @@ import connectDB from "@/libs/connectDB";
 import { NextRequest, NextResponse } from "next/server";
 import protect from "@/libs/protect";
 
+/**
+ * @swagger
+ * /api/v2/hotels/[id]/reviews:
+ *   post:
+ *     description: Create Review to the hotel
+ *     tags: [Hotel]
+ *     response:
+ *       201:
+ *         description: Review is successfully created
+ *       404:
+ *         description: Hotel is not found
+ *       500:
+ *         description: Internal server error 
+ */
+
 export const POST = async (
     req: NextRequest,
     {params}: {params: {id: string}},

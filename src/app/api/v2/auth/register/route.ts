@@ -2,6 +2,19 @@ import connectDB from '@/libs/connectDB';
 import User from '@/models/User'
 import { NextRequest, NextResponse } from 'next/server'
 
+/**
+ * @swagger
+ * /api/v2/auth/register:
+ *   post:
+ *     description: Register the session
+ *     tags: [Auth]
+ *     response:
+ *       201:
+ *         description: Register Success
+ *       400:
+ *         description: Hotel is required for staff
+ */
+
 export async function POST(
     req: NextRequest
 ) {

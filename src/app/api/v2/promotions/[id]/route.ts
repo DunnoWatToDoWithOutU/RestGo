@@ -3,6 +3,19 @@ import Promotion from "@/models/Promotion";
 import { connect } from "http2";
 import { NextRequest, NextResponse } from "next/server";
 
+/**
+ * @swagger
+ * /api/v2/promotions/[id]:
+ *   get:
+ *     description: Fetch promotions by Hotel Id
+ *     tags: [Promotion]
+ *     response:
+ *       200:
+ *         description: Fetching Promotions Successfully
+ *       500:
+ *         description: Internal server error
+ */
+
 export async function GET(req:NextRequest,{params}: {params: {id: string}}){
     try{
         connectDB();

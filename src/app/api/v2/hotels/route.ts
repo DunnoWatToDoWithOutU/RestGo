@@ -8,6 +8,27 @@ function Max(num1: number, num2: number) {
     return num1 > num2 ? num1 : num2;
   }
 
+/**
+ * @swagger
+ * /api/v2/hotels:
+ *   get:
+ *     description: Fetch all Hotels
+ *     tags: [Hotel]
+ *     response:
+ *       200:
+ *         description: Fetching Hotels Successfully
+ *       500:
+ *         description: Internal server error 
+ *   post:
+ *     description: Create the Hotel
+ *     tags: [Hotel]
+ *     response:
+ *       201:
+ *         description: The hotel is successfully created
+ *       500:
+ *         description: Internal server error 
+ */
+
 export async function GET(req: NextRequest) {
     try {
         await connectDB();

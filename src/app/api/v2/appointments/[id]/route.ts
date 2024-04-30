@@ -3,6 +3,41 @@ import {  NextRequest, NextResponse } from "next/server";
 import connectDB from "@/libs/connectDB";
 import protect from "@/libs/protect";
 
+/**
+ * @swagger
+ * /api/v2/appointments/[id]:
+ *  get:
+ *    description: Fetch the Appointment by Id
+ *    tags: [Appointments]
+ *    response:
+ *      200:
+ *        description: Fetching the Appointment Successfully
+ *      500:
+ *        description: Internal server error 
+ *   put:
+ *     description: Update the Appointment by Id
+ *     tags: [Appointments]
+ *     response:
+ *       200:
+ *         description: The Appointment is successfully updated
+ *       400:
+ *         description: Appointment duration cannot be longer than 3 nights
+ *       401:
+ *         description: Unauthorized
+ *       500:
+ *         description: Internal server error
+ *   delete:
+ *     description: Delete the Appointment by Id
+ *     tags: [Appointments]
+ *     response:
+ *       200:
+ *         description: The Appointment is successfully deleted
+ *       401:
+ *         description: Unauthorized
+ *       500:
+ *         description: Internal server error 
+ */
+
 export async function GET(req: NextRequest, {params}: {params: {id: string}}) {
     try { 
         await connectDB();
