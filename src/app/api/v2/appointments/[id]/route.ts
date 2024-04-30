@@ -6,35 +6,66 @@ import protect from "@/libs/protect";
 /**
  * @swagger
  * /api/v2/appointments/[id]:
- *  get:
- *    description: Fetch the Appointment by Id
- *    tags: [Appointments]
- *    response:
- *      200:
+ *   get:
+ *     description: Fetch the Appointment by Id
+ *     tags: [Appointments]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: string
+ *     response:
+ *      '200':
  *        description: Fetching the Appointment Successfully
- *      500:
+ *      '500':
  *        description: Internal server error 
  *   put:
  *     description: Update the Appointment by Id
  *     tags: [Appointments]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: string
+ *               startDate:
+ *                 type: Date
+ *               endDate:
+ *                 type: Date
  *     response:
- *       200:
+ *       '200':
  *         description: The Appointment is successfully updated
- *       400:
+ *       '400':
  *         description: Appointment duration cannot be longer than 3 nights
- *       401:
+ *       '401':
  *         description: Unauthorized
- *       500:
+ *       '500':
  *         description: Internal server error
  *   delete:
  *     description: Delete the Appointment by Id
  *     tags: [Appointments]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: string
  *     response:
- *       200:
+ *       '200':
  *         description: The Appointment is successfully deleted
- *       401:
+ *       '401':
  *         description: Unauthorized
- *       500:
+ *       '500':
  *         description: Internal server error 
  */
 

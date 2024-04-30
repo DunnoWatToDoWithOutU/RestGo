@@ -10,11 +10,11 @@ import protect from "@/libs/protect";
  *    description: Fetch All Appointment which is checkedOut
  *    tags: [Appointments]
  *    response:
- *      200:
+ *      '200':
  *        description: Fetching the Appointment Successfully
- *      401:
+ *      '401':
  *        description: Unauthorized
- *      500:
+ *      '500':
  *        description: Internal server error
  */
 

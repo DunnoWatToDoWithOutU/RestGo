@@ -15,17 +15,40 @@ function Max(num1: number, num2: number) {
  *     description: Fetch all Hotels
  *     tags: [Hotel]
  *     response:
- *       200:
+ *       '200':
  *         description: Fetching Hotels Successfully
- *       500:
+ *       '500':
  *         description: Internal server error 
  *   post:
  *     description: Create the Hotel
  *     tags: [Hotel]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *            schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               address:
+ *                 type: string
+ *               telephone:
+ *                 type: string
+ *               price:
+ *                 type: number
+ *               tag:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *               pic:
+ *                 type: array
+ *                 items:
+ *                   type: string
  *     response:
- *       201:
+ *       '201':
  *         description: The hotel is successfully created
- *       500:
+ *       '500':
  *         description: Internal server error 
  */
 

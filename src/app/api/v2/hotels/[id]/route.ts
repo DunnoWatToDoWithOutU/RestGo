@@ -8,26 +8,69 @@ import { NextRequest, NextResponse } from "next/server";
  *   get:
  *     description: Fetch the Hotel by Id
  *     tags: [Hotel]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *            schema:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: string
  *     response:
- *       200:
+ *       '200':
  *         description: Fetching Hotel Successfully
- *       500:
+ *       '500':
  *         description: Internal server error 
  *   put:
  *     description: Update the Hotel by Id
  *     tags: [Hotel]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *            schema:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: string
+ *               name:
+ *                 type: string
+ *               address:
+ *                 type: string
+ *               telephone:
+ *                 type: string
+ *               price:
+ *                 type: number
+ *               tag:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *               pic:
+ *                 type: array
+ *                 items:
+ *                   type: string
  *     response:
- *       200:
+ *       '200':
  *         description: The hotel is successfully updated
- *       500:
+ *       '500':
  *         description: Internal server error 
  *   delete:
  *     description: Delete the Hotel by Id
  *     tags: [Hotel]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *            schema:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: string
  *     response:
- *       200:
+ *       '200':
  *         description: The hotel is successfully deleted
- *       500:
+ *       '500':
  *         description: Internal server error 
  */
 

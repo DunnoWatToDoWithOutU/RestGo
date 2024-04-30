@@ -5,14 +5,23 @@ import { NextRequest, NextResponse } from "next/server";
 
 /**
  * @swagger
- * /api/v2/promotions:
+ * /api/v2/promotions/byId/[id]:
  *   get:
  *     description: Fetch promotion by promotion Id
  *     tags: [Promotion]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: string
  *     response:
- *       200:
+ *       '200':
  *         description: Fetching Promotion Successfully
- *       500:
+ *       '500':
  *         description: Internal server error
  */
 

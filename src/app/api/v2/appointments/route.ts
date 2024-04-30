@@ -10,9 +10,9 @@ import protect from "@/libs/protect";
  *     description: Shows all Appointment
  *     tags: [Appointments]
  *     response:
- *       200:
+ *       '200':
  *         description: Fetch Appointments Success
- *       500:
+ *       '500':
  *         description: Internal server error 
  */
 

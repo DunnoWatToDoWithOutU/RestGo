@@ -8,14 +8,26 @@ import { NextRequest, NextResponse } from "next/server";
  *   post:
  *     description: Login the session
  *     tags: [Auth]
+ *     requestBody:
+*        required: true
+*        content:
+*          application/json:
+*            schema:
+*              type: object
+*              properties:
+*                email:
+*                  type: string
+*                  format: email
+*                password:
+*                  type: string
  *     response:
- *       200:
+ *       '200':
  *         description: Login Success
- *       401:
+ *       '401':
  *         description: Invalid Password
- *       404:
+ *       '404':
  *         description: User not found
- *       500:
+ *       '500':
  *         description: Internal server error 
  */
 

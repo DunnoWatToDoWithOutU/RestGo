@@ -9,12 +9,29 @@ import protect from "@/libs/protect";
  *   post:
  *     description: Make Appointment
  *     tags: [Appointments]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *            schema:
+ *             type: object
+ *             properties:
+ *               startDate:
+ *                 type: Date
+ *               endDate:
+ *                 type: Date
+ *               people:
+ *                 type: number
+ *               promotion:
+ *                 type: string
+ *               room:
+ *                 type: number
  *     response:
- *       201:
+ *       '201':
  *         description: Appointment is successfully created
- *       400:
+ *       '400':
  *         description: Appointment duration cannot be longer than 3 nights
- *       500:
+ *       '500':
  *         description: Internal server error 
  */
 

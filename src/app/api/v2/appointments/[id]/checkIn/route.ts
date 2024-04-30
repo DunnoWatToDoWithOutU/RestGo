@@ -9,10 +9,19 @@ import protect from "@/libs/protect";
  *   put:
  *     description: CheckIn the booking
  *     tags: [Appointments]
+ *     requestBody:
+*        required: true
+*        content:
+*          application/json:
+*            schema:
+*              type: object
+*              properties:
+*                id:
+*                  type: string
  *     response:
- *       200:
+ *       '200':
  *         description: CheckIn Success
- *       500:
+ *       '500':
  *         description: Internal server error 
  */
 

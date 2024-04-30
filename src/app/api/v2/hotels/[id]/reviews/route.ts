@@ -9,12 +9,25 @@ import protect from "@/libs/protect";
  *   post:
  *     description: Create Review to the hotel
  *     tags: [Hotel]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *            schema:
+ *             type: object
+ *             properties:
+ *               rating:
+ *                 type: number
+ *               reviewText:
+ *                 type: string
+ *               userID:
+ *                 type: string
  *     response:
- *       201:
+ *       '201':
  *         description: Review is successfully created
- *       404:
+ *       '404':
  *         description: Hotel is not found
- *       500:
+ *       '500':
  *         description: Internal server error 
  */
 

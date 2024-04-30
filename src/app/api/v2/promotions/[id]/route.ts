@@ -9,10 +9,19 @@ import { NextRequest, NextResponse } from "next/server";
  *   get:
  *     description: Fetch promotions by Hotel Id
  *     tags: [Promotion]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *            schema:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: string
  *     response:
- *       200:
+ *       '200':
  *         description: Fetching Promotions Successfully
- *       500:
+ *       '500':
  *         description: Internal server error
  */
 

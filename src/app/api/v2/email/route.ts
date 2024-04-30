@@ -9,8 +9,22 @@ require('dotenv').config();
  *   post:
  *     description: Send the response email
  *     tags: [Response Email]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *            schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *               name:
+ *                 type: string
+ *               message:
+ *                 type: string
  *     response:
- *       500:
+ *       '500':
  *         description: Failed to send response email
  */
 

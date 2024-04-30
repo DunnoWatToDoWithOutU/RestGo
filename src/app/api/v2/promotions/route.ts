@@ -6,28 +6,51 @@ import { NextRequest, NextResponse } from "next/server";
  * @swagger
  * /api/v2/promotions:
  *   get:
- *     description: Fetch all promotions
+ *     description: Fetch All Promotions
  *     tags: [Promotion]
  *     response:
- *       200:
+ *       '200':
  *         description: Fetching Promotions Successfully
- *       500:
+ *       '500':
  *         description: Internal server error
  *   post:
  *     description: Create the promotion
  *     tags: [Promotion]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               discount:
+ *                 type: number
+ *               startDate:
+ *                 type: Date
+ *               hotel:
+ *                 type: string
+ *               coupon:
+ *                 type: string
+ *               endDate:
+ *                 type: Date
+ *               pic:
+ *                 type: string
+ *               description:
+ *                 type: string
  *     response:
- *       201:
+ *       '201':
  *         description: The promotion is successfully created
- *       500:
+ *       '500':
  *         description: Internal server error
  *   delete:
- *     description: Delete the promotion
+ *     description: Delete All Promotions
  *     tags: [Promotion]
  *     response:
- *       200:
+ *       '200':
  *         description: The promotion is successfully deleted
- *       500:
+ *       '500':
  *         description: Internal server error
  */
 

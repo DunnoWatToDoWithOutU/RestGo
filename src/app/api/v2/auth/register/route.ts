@@ -8,10 +8,26 @@ import { NextRequest, NextResponse } from 'next/server'
  *   post:
  *     description: Register the session
  *     tags: [Auth]
+ *     requestBody:
+*        required: true
+*        content:
+*          application/json:
+*            schema:
+*              type: object
+*              properties:
+*                name:
+*                  type: string
+*                email:
+*                  type: string
+*                  format: email
+*                password:
+*                  type: string
+*                telephone:
+*                  type: string
  *     response:
- *       201:
+ *       '201':
  *         description: Register Success
- *       400:
+ *       '400':
  *         description: Hotel is required for staff
  */
 
