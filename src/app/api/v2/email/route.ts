@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
     to: email,
     // cc: email, (uncomment this line if you want to send a copy to the sender)
     subject: `Message from ${name} (${email})`,
-    text: message,
+    html: message,
   };
 
   const sendMailPromise = () =>

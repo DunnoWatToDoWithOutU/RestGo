@@ -264,7 +264,7 @@ export function HotelInfo(props: {
                     sendEmail(
                       session.user.email,
                       session.user.name,
-                      appointment.id
+                        `<img src="https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=https://rest-go.vercel.app/mybooking/${appointment.id}" alt="QR Code" className="z-50 mb-4" width={150} height={150}/>`
                     );
                   }
                 } catch (error) {
