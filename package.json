@@ -42,10 +42,6 @@
     "rheostat": "^4.1.1",
     "sonner": "^1.4.41",
     "styled-components": "^6.1.8",
-<<<<<<< HEAD
-    "tls": "^0.0.1",
-=======
->>>>>>> mailingSystem
     "tw-elements-react": "^1.0.0-alpha2"
   },
   "devDependencies": {
