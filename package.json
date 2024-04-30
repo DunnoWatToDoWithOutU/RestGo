@@ -45,8 +45,8 @@
     "rheostat": "^4.1.1",
     "sonner": "^1.4.41",
     "styled-components": "^6.1.8",
-    "tw-elements-react": "^1.0.0-alpha2",
-    "tls": "^0.0.1"
+    "tls": "^0.0.1",
+    "tw-elements-react": "^1.0.0-alpha2"
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",
