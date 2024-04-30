@@ -1,6 +1,6 @@
 export default async function deleteBooking(hotelID: string, token: string) {
   const response = await fetch(
-    `http://localhost:3000/api/v2/appointments/${hotelID}`,
+    `https://rest-go.vercel.app/api/v2/appointments/${hotelID}`,
     {
       method: "DELETE",
       headers: {

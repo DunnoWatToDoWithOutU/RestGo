@@ -5,7 +5,7 @@ export default async function updateBooking(
   endDate: Date
 ) {
   const response = await fetch(
-    `http://localhost:3000/api/v2/appointments/${bookingID}`,
+    `https://rest-go.vercel.app/api/v2/appointments/${bookingID}`,
     {
       method: "PUT",
       headers: {
