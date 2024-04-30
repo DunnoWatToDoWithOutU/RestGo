@@ -12,7 +12,7 @@ import createReviews from "@/libs/createReviews";
 import { authOptions } from "@/libs/authOptions";
 import { AddPeoplePopup } from "../HomePage/MenuBox/AddPeoplePopup";
 import { Carousel } from "flowbite-react";
-import StarIcon from '@mui/icons-material/Star'
+import StarIcon from "@mui/icons-material/Star";
 
 export function HotelInfo(props: {
   hotel: HotelProps;
@@ -126,7 +126,7 @@ export function HotelInfo(props: {
                   ></Rating>
                 </span>
                 <span className="inline sm:hidden">
-                  <StarIcon style={{ color: '#FAAF00' }}/>
+                  <StarIcon style={{ color: "#FAAF00" }} />
                 </span>
               </div>
             </div>
@@ -248,7 +248,7 @@ export function HotelInfo(props: {
             <button
               onClick={async () => {
                 try {
-                  await craeteAppointment(
+                  const appointment = await craeteAppointment(
                     props.hotel.id,
                     startDate,
                     endDate,
@@ -259,11 +259,12 @@ export function HotelInfo(props: {
                     peopleValues.rooms,
                     promotion
                   );
+                  console.log("apointment = ", appointment);
+                  toast.success("Booking Success");
                 } catch (error) {
                   toast.error("Error Booking");
                   return;
                 }
-                toast.success("Booking Success");
               }}
               className=" w-[80%] mx-10  text-3xl text-center  rounded-lg py-3 hover:bg-primary_dark mt-5 text-white bg-primary"
             >

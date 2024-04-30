@@ -29,5 +29,5 @@ export default async function craeteAppointment(
   if (!response.ok) {
     throw new Error("Error failed to fetch");
   }
-  return response.status;
+  return await response.json();
 }
