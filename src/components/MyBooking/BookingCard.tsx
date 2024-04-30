@@ -94,7 +94,9 @@ export function BookingCard(props: {
       {showEditPopup && (
         <EditPopup
           Appt={props.appointment}
-          onSave={handleSaveEdit}
+          onSave={async () => {
+            await handleSaveEdit;
+          }}
           onCancel={handleCancelEdit}
           Hotel={undefined}
         />
