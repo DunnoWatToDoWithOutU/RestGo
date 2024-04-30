@@ -12,7 +12,8 @@ import createReviews from "@/libs/createReviews";
 import { authOptions } from "@/libs/authOptions";
 import { AddPeoplePopup } from "../HomePage/MenuBox/AddPeoplePopup";
 import { Carousel } from "flowbite-react";
-import StarIcon from '@mui/icons-material/Star'
+import StarIcon from "@mui/icons-material/Star";
+import { sendEmail } from "@/libs/sendmail";
 
 export function HotelInfo(props: {
   hotel: HotelProps;
@@ -126,7 +127,7 @@ export function HotelInfo(props: {
                   ></Rating>
                 </span>
                 <span className="inline sm:hidden">
-                  <StarIcon style={{ color: '#FAAF00' }}/>
+                  <StarIcon style={{ color: "#FAAF00" }} />
                 </span>
               </div>
             </div>
@@ -259,10 +260,18 @@ export function HotelInfo(props: {
                     peopleValues.rooms,
                     promotion
                   );
+                  if(session?.user){
+                    sendEmail(
+                      session.user.email,
+                      session.user.name,
+                      "Your Passkey is <h1>52345</h1>"
+                    );
+                  }
                 } catch (error) {
                   toast.error("Error Booking");
                   return;
                 }
+
                 toast.success("Booking Success");
               }}
               className=" w-[80%] mx-10  text-3xl text-center  rounded-lg py-3 hover:bg-primary_dark mt-5 text-white bg-primary"
