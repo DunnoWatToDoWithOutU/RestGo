@@ -1,6 +1,7 @@
 import Avvvatars from "avvvatars-react";
 import { ReviewProps } from "../../../@types/type";
 import { Rating } from "@mui/material";
+import StarIcon from '@mui/icons-material/Star'
 
 export function ReviewCard(props: { review: ReviewProps }) {
   return (
@@ -16,15 +17,20 @@ export function ReviewCard(props: { review: ReviewProps }) {
           {props.review.reviewText}
         </div>
       </div>
-      <div className="h-10 w-32 absolute right-2 top-5 flex items-center">
+      <div className="h-10 absolute right-2 top-5 flex items-center pr-1">
         <p className="md:text-lg text-sm font-bold mr-1">
           {props.review.rating.toString()}
         </p>
-        <Rating
-          value={props.review.rating as number}
-          readOnly
-          className="text-[#15439C] text-[1.2rem]"
-        ></Rating>
+        <span className="hidden sm:inline">
+          <Rating
+            value={props.review.rating as number}
+            readOnly
+            className="text-[#15439C] text-[1.2rem]"
+          ></Rating>
+        </span>
+        <span className="inline sm:hidden">
+          <StarIcon style={{ color: '#FAAF00' }}/>
+        </span>
       </div>
     </div>
   );

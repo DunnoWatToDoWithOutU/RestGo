@@ -12,6 +12,7 @@ import createReviews from "@/libs/createReviews";
 import { authOptions } from "@/libs/authOptions";
 import { AddPeoplePopup } from "../HomePage/MenuBox/AddPeoplePopup";
 import { Carousel } from "flowbite-react";
+import StarIcon from '@mui/icons-material/Star'
 
 export function HotelInfo(props: {
   hotel: HotelProps;
@@ -116,12 +117,17 @@ export function HotelInfo(props: {
                 <p className=" font-semibold">
                   {Math.round(sumReview * 100) / 100}{" "}
                 </p>
-                <Rating
-                  value={sumReview}
-                  readOnly
-                  precision={0.1}
-                  className=" text-[#15439C]"
-                ></Rating>
+                <span className="hidden sm:inline">
+                  <Rating
+                    value={sumReview}
+                    readOnly
+                    precision={0.1}
+                    className=" text-[#15439C]"
+                  ></Rating>
+                </span>
+                <span className="inline sm:hidden">
+                  <StarIcon style={{ color: '#FAAF00' }}/>
+                </span>
               </div>
             </div>
             <div className="w-full h-[0.125rem] bg-[#15439C] md:my-5 my-3"></div>
@@ -380,7 +386,7 @@ function InputPanel(props: {
   handleOnSent: () => void;
 }) {
   return (
-    <div className="h-20 rounded-lg w-full px-3 py-2  space-x-3  items-center overflow-hidden bg-[#15429c71] flex mt-3">
+    <div className="h-20 rounded-lg w-full px-3 py-2 space-x-3 items-center overflow-hidden bg-[#15429c71] flex mt-3">
       <textarea
         value={props.review}
         onChange={(event) => {
@@ -399,7 +405,7 @@ function InputPanel(props: {
           onChange={(event, newValue) => {
             props.setRating(newValue ?? 0);
           }}
-          className="text-[#15439C] mx-auto"
+          className="text-[#15439C] mx-auto "
         />
       </div>
       <button
