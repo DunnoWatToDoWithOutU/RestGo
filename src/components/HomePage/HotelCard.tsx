@@ -43,7 +43,7 @@ export function HotelCard(props: { hotel: HotelProps }) {
               </p>
             </div>
           </div>
-          <div className=" min-w-[20%]  text-end">
+          <div id="hotel-price" className=" min-w-[20%]  text-end">
             <div className="flex h-40 flex-col justify-between">
               <div>
                 <div className=" font-bold text-xl md:text-3xl ">
@@ -60,6 +60,7 @@ export function HotelCard(props: { hotel: HotelProps }) {
           {props.hotel.tag.map((tag, index) => {
             return (
               <div
+                id={`tag-${tag}`}
                 className=" px-1 md:px-3 py-1 text-sm md:text-base hover:bg-zinc-200 transition-colors duration-150 bg-zinc-100 rounded-md"
                 key={index}
               >
@@ -68,7 +69,7 @@ export function HotelCard(props: { hotel: HotelProps }) {
             );
           })}
         </div>
-        <div className="flex z-10 space-x-1 px-3 text-base md:text-xl items-center text-white">
+        <div id="hotel-rating" className="flex z-10 space-x-1 px-3 text-base md:text-xl items-center text-white">
           <p>{props.hotel.rating}</p>
           <span className="hidden sm:inline">
             <Rating
