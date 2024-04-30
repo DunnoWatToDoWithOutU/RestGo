@@ -6,7 +6,7 @@ import { AppointmnetProps, HotelProps } from "../../@types/type";
 interface EditPopupProps {
   Appt: AppointmnetProps;
   Hotel?: HotelProps;
-  onSave: any;
+  onSave: () => void;
   endDate: Date;
   startDate: Date;
   setUpdateEndDate: (endDate: Date) => void;
@@ -57,7 +57,7 @@ export default function EditPopup(props: EditPopupProps) {
         </div>
         <div className="flex justify-end">
           <button
-            onClick={props.onSave()}
+            onClick={props.onSave}
             className="bg-blue-500 text-white py-2 px-4 rounded-md mr-2"
           >
             Save
