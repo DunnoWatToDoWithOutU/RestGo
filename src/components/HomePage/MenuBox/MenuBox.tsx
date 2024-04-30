@@ -4,10 +4,6 @@ import { useState, useRef } from "react";
 import { AddPeoplePopup } from "./AddPeoplePopup";
 import dayjs, { Dayjs } from "dayjs";
 import { CheckInCheckOutPopup } from "./CheckInCheckOutPopup";
-import {
-  googleAuthorize,
-  sendMessage,
-} from "../../../app/api/v2/mailing/mailing";
 
 export function MenuBox() {
   //const [showCalendar, setShowCalendar] = useState(false);
