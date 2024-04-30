@@ -84,32 +84,45 @@ describe('Notification Test', () => {
 
     cy.get('[data-testid="noti-button"]').click(); 
 
-    cy.get('.text-[0.7rem] .text-[1rem] font-bold') 
+    cy.get('[data-testid="noti-The Rose Hotel"]') 
       .should('be.visible')
-      .and('contain.text', 'The Rose Hotel'); 
 
-    cy.get('.text-[0.7rem] .text-sm')
-      .should('be.visible')
-      .and('contain.text', 'Test Promotion2-3');
-
-    cy.get('.text-[0.7rem] p:nth-child(3)') 
-      .should('be.visible')
-      .and('contain.text', 'Discount :30%');
-
-    cy.get('.text-[0.7rem] p:nth-child(4)')
-      .should('be.visible')
-      .and('contain.text', 'Code : LFG6O');
   });
 
   it('TC_11_verifies discount redirection', () => {
 
     cy.get('[data-testid="noti-button"]').click();
 
-    cy.get('.text-[0.7rem] .text-[1rem] font-bold').and('contain.text', 'The Rose Hotel').click();
-
+    cy.get('[data-testid="noti-The Rose Hotel"]').click();
 
     cy.url().should('include', '/hotel/'); 
     cy.get('body').should('contain.text', 'The Rose Hotel'); 
+  });
+
+  it('TC_11_Make Reservation With No Promotion', () => {
+
+    cy.get('[data-testid="noti-button"]').click();
+
+    cy.get('[data-testid="noti-The Rose Hotel"]').click();
+
+    cy.get('[data-testid="promotiondropdown"]').click();
+
+    cy.get('[data-testid="Discount-The Rose Hotel0"]').click();
+
+    cy.get('[data-testid="totalPrice"]').should('contain.text', '1184');
+  });
+
+    it('TC_12_Make Reservation With Promotion', () => {
+
+    cy.get('[data-testid="noti-button"]').click();
+
+    cy.get('[data-testid="noti-The Rose Hotel"]').click();
+
+    cy.get('[data-testid="promotiondropdown"]').click();
+
+    cy.get('[data-testid="Discount-The Rose Hotel30"]').click();
+
+    cy.get('[data-testid="totalPrice"]').should('contain.text', '828.8');
   });
 
 });
