@@ -28,27 +28,31 @@ describe('getPromotions and getPromotion', () => {
   });
 
   it('handles an empty response', async () => {
-    fetch.mockResolvedValueOnce({
-      ok: true,
-      json: async () => [],
-    });
-
-    const data = await getPromotions();
-
-    expect(fetch).toHaveBeenCalledWith('https://rest-go.vercel.app/api/v2/promotions', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    expect(data).toEqual([]);
+  fetch.mockResolvedValueOnce({
+    ok: true,
+    json: async () => [],
   });
+
+  const data = await getPromotions();
+
+  expect(fetch).toHaveBeenCalledWith('https://rest-go.vercel.app/api/v2/promotions', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  expect(data).toEqual([]);
+});
+
 
   it('throws an error when fetching promotions fails', async () => {
-    fetch.mockRejectedValueOnce(new Error('Network Error'));
-    
-    await expect(getPromotions()).rejects.toThrowError('Network Error');
+  fetch.mockResolvedValueOnce({
+    ok: false,
+    status: 500, // Assuming non-OK responses have a status code indicating the error
   });
+
+  await expect(getPromotions()).rejects.toThrowError('Error failed to fetch');
+});
 
   // getPromotion Tests:
 
