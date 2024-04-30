@@ -228,7 +228,7 @@ export function HotelListPage() {
         <input
           id="search-input"
           onChange={(event) => {
-            setSearch(event.target.value);
+            setSearch(event.target.value.trim());
           }}
           type="text"
           placeholder="Search Hotel"
