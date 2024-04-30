@@ -7,7 +7,7 @@ export default async function createReviews(
   id: string
 ) {
   const response = await fetch(
-    `https://rest-go.vercel.app/api/v2/hotels/${hotelid}/reviews`,
+    `http://localhost:3000/api/v2/hotels/${hotelid}/reviews`,
     {
       method: "POST",
       headers: {

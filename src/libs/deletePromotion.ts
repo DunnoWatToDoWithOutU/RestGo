@@ -1,6 +1,6 @@
 export default async function deletePromotion(promotionId: string) {
   const response = await fetch(
-    `https://rest-go.vercel.app/api/v2/promotions/${promotionId}`,
+    `http://localhost:3000/api/v2/promotions/${promotionId}`,
     {
       method: "DELETE",
       headers: {

@@ -43,22 +43,28 @@ export function BookingCard(props: {
   const startDate = formatDate(props.appointment.startDate); // @ts-ignore;
   const endDate = formatDate(props.appointment.endDate); // @ts-ignore;
   const createdAt = formatDate(props.appointment.createdAt);
+  const [updateStartDate, setUpdateStartDate] = useState<Date>(
+    props.appointment.startDate
+  );
+  const [updateEndDate, setUpdateEndDate] = useState(props.appointment.endDate);
 
   const [showEditPopup, setShowEditPopup] = useState(false);
 
+  console.log("startDate :", updateStartDate);
+  console.log("endDate", updateEndDate);
   const handleEdit = () => {
     setShowEditPopup(true);
   };
 
   const { data: session } = useSession();
 
-  const handleSaveEdit = async (updatedAppt: AppointmnetProps) => {
+  const handleSaveEdit = async (startDate: Date, endDate: Date) => {
     try {
       await updateBooking(
-        updatedAppt._id,
+        props.appointment._id,
         session ? session?.user.token : "",
-        props.appointment.startDate,
-        props.appointment.endDate
+        startDate,
+        endDate
       );
       toast.success("Appointment details updated successfully");
     } catch (error) {
@@ -94,7 +100,13 @@ export function BookingCard(props: {
       {showEditPopup && (
         <EditPopup
           Appt={props.appointment}
-          onSave={handleSaveEdit}
+          // onSave={() => {
+          //   handleSaveEdit(updateStartDate, updateEndDate);
+          // }}
+          startDate={updateStartDate}
+          endDate={updateEndDate}
+          setUpdateEndDate={setUpdateEndDate}
+          setUpdateStartDate={setUpdateStartDate}
           onCancel={handleCancelEdit}
           Hotel={undefined}
         />
