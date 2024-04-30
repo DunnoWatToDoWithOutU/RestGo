@@ -6,6 +6,7 @@ import { AppointmnetProps, HotelProps } from "../../@types/type";
 interface EditPopupProps {
   Appt: AppointmnetProps;
   Hotel?: HotelProps;
+  onSave: any;
   endDate: Date;
   startDate: Date;
   setUpdateEndDate: (endDate: Date) => void;
@@ -19,9 +20,6 @@ export default function EditPopup(props: EditPopupProps) {
   };
   const handleStartDateChange = (event: any) => {
     props.setUpdateStartDate(event.target.value);
-  };
-  const handleSave = async () => {
-    //await props.onSave();
   };
 
   // const formattedStartDate = editedAppt.startDate instanceof Date ? editedAppt.startDate.toISOString().split("T")[0] : "";
@@ -59,7 +57,7 @@ export default function EditPopup(props: EditPopupProps) {
         </div>
         <div className="flex justify-end">
           <button
-            onClick={handleSave}
+            onClick={props.onSave()}
             className="bg-blue-500 text-white py-2 px-4 rounded-md mr-2"
           >
             Save

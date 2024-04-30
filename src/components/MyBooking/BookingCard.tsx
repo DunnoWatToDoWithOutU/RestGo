@@ -100,9 +100,9 @@ export function BookingCard(props: {
       {showEditPopup && (
         <EditPopup
           Appt={props.appointment}
-          // onSave={() => {
-          //   handleSaveEdit(updateStartDate, updateEndDate);
-          // }}
+          onSave={() => {
+            handleSaveEdit(updateStartDate, updateEndDate);
+          }}
           startDate={updateStartDate}
           endDate={updateEndDate}
           setUpdateEndDate={setUpdateEndDate}
