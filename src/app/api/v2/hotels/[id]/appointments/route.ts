@@ -8,6 +8,7 @@ import protect from "@/libs/protect";
  * /api/v2/hotels/[id]/appointments:
  *   post:
  *     description: Make Appointment
+ *     tags: [Appointments]
  *     response:
  *       201:
  *         description: Appointment is successfully created

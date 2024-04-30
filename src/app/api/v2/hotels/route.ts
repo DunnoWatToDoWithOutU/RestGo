@@ -13,6 +13,7 @@ function Max(num1: number, num2: number) {
  * /api/v2/hotels:
  *   get:
  *     description: Fetch all Hotels
+ *     tags: [Hotel]
  *     response:
  *       200:
  *         description: Fetching Hotels Successfully
@@ -20,6 +21,7 @@ function Max(num1: number, num2: number) {
  *         description: Internal server error 
  *   post:
  *     description: Create the Hotel
+ *     tags: [Hotel]
  *     response:
  *       201:
  *         description: The hotel is successfully created

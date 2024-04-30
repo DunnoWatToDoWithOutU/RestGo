@@ -8,6 +8,7 @@ import { NextRequest, NextResponse } from "next/server";
  * /api/v2/promotions:
  *   get:
  *     description: Fetch promotion by promotion Id
+ *     tags: [Promotion]
  *     response:
  *       200:
  *         description: Fetching Promotion Successfully

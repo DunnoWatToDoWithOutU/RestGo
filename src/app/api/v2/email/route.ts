@@ -8,6 +8,7 @@ require('dotenv').config();
  * /api/v2/email:
  *   post:
  *     description: Send the response email
+ *     tags: [Response Email]
  *     response:
  *       500:
  *         description: Failed to send response email

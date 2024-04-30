@@ -7,6 +7,7 @@ import { NextRequest, NextResponse } from "next/server";
  * /api/v2/promotions:
  *   get:
  *     description: Fetch all promotions
+ *     tags: [Promotion]
  *     response:
  *       200:
  *         description: Fetching Promotions Successfully
@@ -14,6 +15,7 @@ import { NextRequest, NextResponse } from "next/server";
  *         description: Internal server error
  *   post:
  *     description: Create the promotion
+ *     tags: [Promotion]
  *     response:
  *       201:
  *         description: The promotion is successfully created
@@ -21,6 +23,7 @@ import { NextRequest, NextResponse } from "next/server";
  *         description: Internal server error
  *   delete:
  *     description: Delete the promotion
+ *     tags: [Promotion]
  *     response:
  *       200:
  *         description: The promotion is successfully deleted

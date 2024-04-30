@@ -8,6 +8,7 @@ import protect from "@/libs/protect";
  * /api/v2/appointments:
  *   get:
  *     description: Shows all Appointment
+ *     tags: [Appointments]
  *     response:
  *       200:
  *         description: Fetch Appointments Success

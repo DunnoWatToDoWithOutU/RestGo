@@ -8,6 +8,7 @@ import { NextRequest, NextResponse } from "next/server";
  * /api/v2/promotions/[id]:
  *   get:
  *     description: Fetch promotions by Hotel Id
+ *     tags: [Promotion]
  *     response:
  *       200:
  *         description: Fetching Promotions Successfully

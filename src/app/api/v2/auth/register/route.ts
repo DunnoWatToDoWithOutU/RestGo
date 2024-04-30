@@ -7,6 +7,7 @@ import { NextRequest, NextResponse } from 'next/server'
  * /api/v2/auth/register:
  *   post:
  *     description: Register the session
+ *     tags: [Auth]
  *     response:
  *       201:
  *         description: Register Success

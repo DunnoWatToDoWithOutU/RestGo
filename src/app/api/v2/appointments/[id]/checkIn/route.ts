@@ -8,6 +8,7 @@ import protect from "@/libs/protect";
  * /api/v2/appointments/[id]/checkIn:
  *   put:
  *     description: CheckIn the booking
+ *     tags: [Appointments]
  *     response:
  *       200:
  *         description: CheckIn Success

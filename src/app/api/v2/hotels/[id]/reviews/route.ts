@@ -8,6 +8,7 @@ import protect from "@/libs/protect";
  * /api/v2/hotels/[id]/reviews:
  *   post:
  *     description: Create Review to the hotel
+ *     tags: [Hotel]
  *     response:
  *       201:
  *         description: Review is successfully created

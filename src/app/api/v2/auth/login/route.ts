@@ -7,6 +7,7 @@ import { NextRequest, NextResponse } from "next/server";
  * /api/v2/auth/login:
  *   post:
  *     description: Login the session
+ *     tags: [Auth]
  *     response:
  *       200:
  *         description: Login Success

@@ -2,6 +2,35 @@ import connectDB from "@/libs/connectDB";
 import Hotel from "@/models/Hotel";
 import { NextRequest, NextResponse } from "next/server";
 
+/**
+ * @swagger
+ * /api/v2/hotels/[id]:
+ *   get:
+ *     description: Fetch the Hotel by Id
+ *     tags: [Hotel]
+ *     response:
+ *       200:
+ *         description: Fetching Hotel Successfully
+ *       500:
+ *         description: Internal server error 
+ *   put:
+ *     description: Update the Hotel by Id
+ *     tags: [Hotel]
+ *     response:
+ *       200:
+ *         description: The hotel is successfully updated
+ *       500:
+ *         description: Internal server error 
+ *   delete:
+ *     description: Delete the Hotel by Id
+ *     tags: [Hotel]
+ *     response:
+ *       200:
+ *         description: The hotel is successfully deleted
+ *       500:
+ *         description: Internal server error 
+ */
+
 export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }

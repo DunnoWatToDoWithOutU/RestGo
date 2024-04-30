@@ -2,6 +2,22 @@ import Appointment from "@/models/Appointment";
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/libs/connectDB";
 import protect from "@/libs/protect";
+
+/**
+ * @swagger
+ * /api/v2/appointments/expire:
+ *  get:
+ *    description: Fetch All Appointment which is checkedOut
+ *    tags: [Appointments]
+ *    response:
+ *      200:
+ *        description: Fetching the Appointment Successfully
+ *      401:
+ *        description: Unauthorized
+ *      500:
+ *        description: Internal server error
+ */
+
 export async function GET(req: NextRequest) {
   const user = await protect(req);
   console.log(user);
