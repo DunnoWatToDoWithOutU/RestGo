@@ -4,49 +4,49 @@ describe('Test Suite', () => {
     cy.visit('https://rest-go.vercel.app/hotellist');
   });
   //search testing
-  it('Empty search query', () => {
+  it('TC_1_Empty search query', () => {
     cy.get('#search-input').type('{enter}');
     cy.wait(1000);
     cy.get('.hotel-card').should('not.exist');
   });
 
-  it('Valid search query', () => {
+  it('TC_2_Valid search query', () => {
     cy.get('#search-input').type('Surawong').type('{enter}');
     cy.wait(1000);
     cy.contains('Surawong').should('be.visible');
   });
 
-  it('Search query with no matching results', () => {
+  it('TC_3_Search query with no matching results', () => {
     cy.get('#search-input').type('ChokeDee69 Hotel').type('{enter}');
     cy.get('.hotel-card').should('not.exist');
   });
 
-  it('Search query with special characters', () => {
+  it('TC_4_Search query with special characters', () => {
     cy.get('#search-input').type('Aukoi!').type('{enter}');
     cy.contains('AuKoi').should('be.visible');
   });
 
-  it('Search query with number', () => {
+  it('TC_5_Search query with number', () => {
     cy.get('#search-input').type('56 Surawong').type('{enter}');
     cy.contains('Surawong').should('be.visible');
   });
 
-  it('Search query with mixed case', () => {
+  it('TC_6_Search query with mixed case', () => {
     cy.get('#search-input').type('bUaLOy').type('{enter}');
     cy.contains('Bualoy').should('be.visible');
   });
 
-  it('Search query with leading and trailing spaces', () => {
-    cy.get('#search-input').type('  hotel ').type('{enter}');
-    cy.contains('Hotel').should('be.visible');
+  it('TC_7_earch query with leading and trailing spaces', () => {
+    cy.get('#search-input').type('  surawong ').type('{enter}');
+    cy.contains('Surawong').should('be.visible');
   });
 
-  it('Search query with single character', () => {
+  it('TC_8_Search query with single character', () => {
     cy.get('#search-input').type('H').type('{enter}');
     cy.contains('H').should('be.visible');
   });
 
-  it('Search query matching multiple results', () => {
+  it('TC_9_Search query matching multiple results', () => {
     cy.get('#search-input').type('Surawong').type('{enter}');
     cy.contains('Every Surawong').should('be.visible');
     cy.contains('The Tarntawan').should('be.visible');
@@ -142,6 +142,7 @@ describe('Filter and Sorting Test', () => {
     });
   });
 
+
   it('Filter Hotels by Multiple Amenities', () => {
     cy.contains('Wi-Fi').click();
     cy.contains('Pool').click();
@@ -152,53 +153,57 @@ describe('Filter and Sorting Test', () => {
   });
 
 
-   it('Verify Price Sorting in Ascending Order', () => {
-    cy.contains('Price').click(); 
+  it('Verify Price Sorting in Ascending Order', () => {
+    cy.contains('Price').click();
     cy.wait(2000);
-
-    cy.get('.hotel-card').find('.text-3xl').then($prices => {
-        const prices = $prices.toArray().map(price => parseInt(price.innerText.replace(' ฿', '').replace(',', '')));
-        const sortedPrices = [...prices].sort((a, b) => a - b);
-        expect(prices).to.deep.equal(sortedPrices);
+    cy.get('.hotel-card').each(($card, index, $list) => {
+      if (index < $list.length - 1) {
+        const currentPrice = parseFloat($card.find('.hotel-price').text().replace('฿', '').trim());
+        const nextPrice = parseFloat($list.eq(index + 1).find('.hotel-price').text().replace('฿', '').trim());
+        expect(currentPrice).to.be.at.most(nextPrice);
+      }
     });
   });
 
   it('Verify Price Sorting in Descending Order', () => {
-    cy.contains('Price').click(); 
+    cy.contains('Price').click();
     cy.get('#sortButton').should('be.visible').click();
-    cy.wait(2000); 
-
-    cy.get('.hotel-card').find('.text-3xl').then($prices => {
-        const prices = $prices.toArray().map(price => parseInt(price.innerText.replace(' ฿', '').replace(',', '')));
-        const sortedPrices = [...prices].sort((a, b) => b - a);
-        expect(prices).to.deep.equal(sortedPrices);
+    cy.wait(2000);
+    cy.get('.hotel-card').each(($card, index, $list) => {
+      if (index < $list.length - 1) {
+        const currentPrice = parseFloat($card.find('.hotel-price').text().replace('฿', '').trim());
+        const nextPrice = parseFloat($list.eq(index + 1).find('.hotel-price').text().replace('฿', '').trim());
+        expect(currentPrice).to.be.at.least(nextPrice);
+      }
     });
   });
 
-   it('Verify Ratings Sorting in Ascending Order', () => {
-    cy.contains('Rating').click(); 
-    cy.wait(2000); 
-
-    cy.get('.hotel-card').find('.MuiRating-root').then($ratings => {
-        const ratings = $ratings.toArray().map(rating => parseFloat(rating.getAttribute('aria-label')));
-        const sortedRatings = [...ratings].sort((a, b) => a - b);
-        expect(ratings).to.deep.equal(sortedRatings);
+  it('Verify Ratings Sorting in Ascending Order', () => {
+    cy.contains('Rating').click();
+    cy.wait(2000);
+    cy.get('.hotel-card').each(($card, index, $list) => {
+      if (index < $list.length - 1) {
+        const currentRating = parseFloat($card.find('.hotel-rating').text());
+        const nextRating = parseFloat($list.eq(index + 1).find('.hotel-rating').text());
+        expect(currentRating).to.be.at.most(nextRating);
+      }
     });
   });
 
  
   it('Verify Ratings Sorting in Descending Order', () => {
-    cy.contains('Rating').click(); 
+    cy.contains('Rating').click();
     cy.get('#sortButton').should('be.visible').click();
     cy.wait(2000);
-
-    cy.get('.hotel-card').find('.MuiRating-root').then($ratings => {
-        const ratings = $ratings.toArray().map(rating => parseFloat(rating.getAttribute('aria-label')));
-        const sortedRatings = [...ratings].sort((a, b) => b - a);
-        expect(ratings).to.deep.equal(sortedRatings);
+    cy.get('.hotel-card').each(($card, index, $list) => {
+      if (index < $list.length - 1) {
+        const currentRating = parseFloat($card.find('.hotel-rating').text());
+        const nextRating = parseFloat($list.eq(index + 1).find('.hotel-rating').text());
+        expect(currentRating).to.be.at.least(nextRating);
+      }
     });
+    
   });
-
 });
 
 describe('Review Test', () => {
@@ -223,7 +228,7 @@ describe('Review Test', () => {
 
     cy.wait(1000);
 
-    cy.get('.hotel-card') // Adjust selector if needed
+    cy.get('.hotel-card') 
       .contains('The Rose Hotel')
       .click();
 
@@ -234,30 +239,27 @@ describe('Review Test', () => {
   });
 
   it('verifies review', () => {
-    // 1. Write with random 5 digit number review
-    const randomReview = Math.floor(Math.random() * 100000).toString().padStart(5, '0'); // Generate random 5-digit string
-    cy.get('.h-full.rounded-md.px-3.py-2.w-[70%].focus:outline-none') // Adjust selector if needed
+
+    const randomReview = Math.floor(Math.random() * 100000).toString().padStart(5, '0'); 
+    cy.get('.h-full.rounded-md.px-3.py-2.w-[70%].focus:outline-none') 
       .type(randomReview);
 
-    // 2. Submit the review
-    cy.get('button.h-10.w-10.bg-cover.bg-center.hover:scale-110.transition-all.duration-200').click(); // Adjust selector if needed
 
-    // 3. Wait for processing (modify wait time as needed)
-    cy.wait(3000); // Adjust wait time based on expected processing time
+    cy.get('button.h-10.w-10.bg-cover.bg-center.hover:scale-110.transition-all.duration-200').click(); 
 
-    // 4. Verify the review is displayed (modify selector as needed)
-    cy.get('.review-content').should('contain.text', randomReview); // Adjust selector to target the displayed review content
+    cy.wait(3000);
+
+    
+    cy.get('.review-content').should('contain.text', randomReview); 
   });
 
   it('verifies review submission with empty review', () => {
-    // 1. Submit the review without writing any text
-    cy.get('button.h-10.w-10.bg-cover.bg-center.hover:scale-110.transition-all.duration-200').click(); // Adjust selector if needed
+  
+    cy.get('button.h-10.w-10.bg-cover.bg-center.hover:scale-110.transition-all.duration-200').click();
 
-    // 2. Wait for processing (modify wait time as needed)
-    cy.wait(3000); // Adjust wait time based on expected processing time
+    cy.wait(3000); 
 
-    // 3. Verify error message for empty review (modify selector as needed)
-    cy.get('.error-message').should('contain.text', 'Please write a review before submitting.'); // Adjust selector to target the error message
+    cy.get('.error-message').should('contain.text', 'Please write a review before submitting.'); 
   });
 
 });
