@@ -3,6 +3,16 @@ import nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
 require('dotenv').config();
 
+/**
+ * @swagger
+ * /api/v2/email:
+ *   post:
+ *     description: Send the response email
+ *     response:
+ *       500:
+ *         description: Failed to send response email
+ */
+
 export async function POST(request: NextRequest) {
   const { email, name, message } = await request.json();
 

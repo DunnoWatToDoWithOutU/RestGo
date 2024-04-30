@@ -2,6 +2,31 @@ import connectDB from "@/libs/connectDB"
 import Promotion from "@/models/Promotion"
 import { NextRequest, NextResponse } from "next/server";
 
+/**
+ * @swagger
+ * /api/v2/promotions:
+ *   get:
+ *     description: Fetch all promotions
+ *     response:
+ *       200:
+ *         description: Fetching Promotions Successfully
+ *       500:
+ *         description: Internal server error
+ *   post:
+ *     description: Create the promotion
+ *     response:
+ *       201:
+ *         description: The promotion is successfully created
+ *       500:
+ *         description: Internal server error
+ *   delete:
+ *     description: Delete the promotion
+ *     response:
+ *       200:
+ *         description: The promotion is successfully deleted
+ *       500:
+ *         description: Internal server error
+ */
 
 export const GET = async ()=>{
     try{

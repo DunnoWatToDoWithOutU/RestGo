@@ -2,6 +2,19 @@ import Appointment from "@/models/Appointment";
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/libs/connectDB";
 import protect from "@/libs/protect";
+
+/**
+ * @swagger
+ * /api/v2/appointments:
+ *   get:
+ *     description: Shows all Appointment
+ *     response:
+ *       200:
+ *         description: Fetch Appointments Success
+ *       500:
+ *         description: Internal server error 
+ */
+
 export async function GET(req: NextRequest) {
   const user = await protect(req);
   console.log(user);

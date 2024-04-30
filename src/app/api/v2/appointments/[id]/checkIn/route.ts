@@ -3,6 +3,18 @@ import Appointment from "@/models/Appointment";
 import { NextRequest, NextResponse } from "next/server";
 import protect from "@/libs/protect";
 
+/**
+ * @swagger
+ * /api/v2/appointments/[id]/checkIn:
+ *   put:
+ *     description: CheckIn the booking
+ *     response:
+ *       200:
+ *         description: CheckIn Success
+ *       500:
+ *         description: Internal server error 
+ */
+
 export const PUT = async (req: NextRequest, {params}: {params: {id: string}}) => {
     const user = await protect(req);
     if (!user || !(user.role === "admin" || user.role === "staff")) {
