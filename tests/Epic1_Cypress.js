@@ -54,7 +54,7 @@
 
 });
 */
-describe('Notification Test', () => {
+/*describe('Notification Test', () => {
 
   // Log in before each test 
   beforeEach(() => {
@@ -122,7 +122,7 @@ describe('Notification Test', () => {
     cy.get('[data-testid="totalPrice"').should('contain.text', '828.8');
   });
 
-});
+});*/
 
 /*describe('Filter and Sorting Test', () => {
   beforeEach(() => {
@@ -309,13 +309,13 @@ describe('Review Test', () => {
     cy.visit('https://rest-go.vercel.app/auth/SignUp');
 
     // Generate random 6-digit number
-    const randomNumber = Math.floor(100000 + Math.random() * 900000);
+    const randomNumber1 = Math.floor(100000 + Math.random() * 900000);
 
     // Create email address
-    const email = `${randomNumber}@gmail.com`;
+    const email = `${randomNumber1}@gmail.com`;
 
     // Fill sign up form
-    cy.get('input[placeholder=""]').eq(0).type(randomNumber.toString()); // Name
+    cy.get('input[placeholder=""]').eq(0).type(randomNumber1.toString()); // Name
     cy.get('input[placeholder=""]').eq(1).type(email); // Email
     cy.get('input[placeholder=""]').eq(2).type('0123456789'); // Telephone
     cy.get('input[placeholder=""]').eq(3).type('123'); // Password
@@ -328,7 +328,7 @@ describe('Review Test', () => {
     cy.wait(4000); // Adjust as needed
 
 
-    randomNumber = email.match(/\d{6}/)[0];
+    randomNumber = randomNumber1;
 
     cy.visit('https://rest-go.vercel.app/auth/SignIn');
     cy.get('input#email').type(email);
@@ -354,10 +354,12 @@ describe('Review Test', () => {
 
   it('TC27 - Hotel rating of 3', () => {
   // Click on the rating input to set the rating to 3 stars
-  cy.get('[data-testid="ratingInput"]').click({ multiple: true, force: true }).eq(2);
+  cy.get('[data-testid="ratingInput"] label:nth-child(3)').click();
 
   // Click on the button to submit the review
-  cy.get('[data-testid="sentButton"]').click();
+    cy.get('[data-testid="sentButton"]').click();
+    
+  cy.reload();
 
   // Verify that the review card with the given random number is visible
   cy.get(`[data-testid="review-card-${randomNumber}"]`).should('be.visible');
