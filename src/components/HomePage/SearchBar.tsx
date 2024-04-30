@@ -5,7 +5,7 @@ export function SearchBar(props: { setSearch: (search: string) => void }) {
     <div className="relative flex items-center my-7 mx-auto justify-center">
       <input
         onChange={(event) => {
-          props.setSearch(event.target.value);
+          props.setSearch(event.target.value.trim());
         }}
         id="search-input"
         className="shadow-xl w-[30rem] h-10 p-2 px-4 focus:outline-primary_dark focus:border-[3px] bg-white border-primary border-2 rounded-full"
