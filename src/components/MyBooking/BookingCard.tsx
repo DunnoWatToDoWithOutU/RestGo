@@ -57,8 +57,8 @@ export function BookingCard(props: {
       await updateBooking(
         updatedAppt._id,
         session ? session?.user.token : "",
-        startDate,
-        endDate
+        props.appointment.startDate,
+        props.appointment.endDate
       );
       toast.success("Appointment details updated successfully");
     } catch (error) {
@@ -94,9 +94,7 @@ export function BookingCard(props: {
       {showEditPopup && (
         <EditPopup
           Appt={props.appointment}
-          onSave={async () => {
-            await handleSaveEdit;
-          }}
+          onSave={handleSaveEdit}
           onCancel={handleCancelEdit}
           Hotel={undefined}
         />
