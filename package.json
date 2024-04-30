@@ -34,6 +34,7 @@
     "next-auth": "^4.24.7",
     "node-fetch": "^3.3.2",
     "pnpm": "^9.0.6",
+    "qrcode": "^1.5.3",
     "react": "^18",
     "react-dom": "^18",
     "rheostat": "^4.1.1",
