@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
     new Promise<string>((resolve, reject) => {
       transport.sendMail(mailOptions, function (err) {
         if (!err) {
-          resolve('Email sent');
+          resolve('Booking Successful');
           console.log('Email sent')
         } else {
           console.log(err.message)
@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
     console.log(process.env.NEXT_PUBLIC_REST_GO_EMAIL)
     console.log(process.env.NEXT_PUBLIC_APP_PASSWORD)
     await sendMailPromise();
-    return NextResponse.json({ message: 'Email sent' });
+    return NextResponse.json({ message: 'Booking Successful' });
   } catch (err) {
     return NextResponse.json({ error: err }, { status: 500 });
   }

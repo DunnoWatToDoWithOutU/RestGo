@@ -1,3 +1,5 @@
+import { toast } from "sonner";
+
 require('dotenv').config();
 
 type mailObject = {
@@ -22,9 +24,9 @@ export async function sendEmail(email:string, name: string, message: string) {
   })
     .then((res) => res.json())
     .then((response) => {
-      alert(`Error in sendmail function parsing response to json${response.message}`);
+      toast.success(`${response.message}`);
     })
     .catch((err) => {
-      alert(`Error in sendmail function catch try http request ${err}`);
+      toast.error(`Error in sendmail function catch try http request ${err}`);
     });
 }
