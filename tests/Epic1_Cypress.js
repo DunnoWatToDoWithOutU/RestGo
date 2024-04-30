@@ -154,57 +154,56 @@ describe('Filter and Sorting Test', () => {
 
 
   it('Verify Price Sorting in Ascending Order', () => {
-    cy.contains('Price').click();
-    cy.wait(2000);
-    cy.get('.hotel-card').each(($card, index, $list) => {
-      if (index < $list.length - 1) {
-        const currentPrice = parseFloat($card.find('.hotel-price').text().replace('฿', '').trim());
-        const nextPrice = parseFloat($list.eq(index + 1).find('.hotel-price').text().replace('฿', '').trim());
-        expect(currentPrice).to.be.at.most(nextPrice);
-      }
-    });
-  });
-
-  it('Verify Price Sorting in Descending Order', () => {
-    cy.contains('Price').click();
-    cy.get('#sortButton').should('be.visible').click();
-    cy.wait(2000);
-    cy.get('.hotel-card').each(($card, index, $list) => {
-      if (index < $list.length - 1) {
-        const currentPrice = parseFloat($card.find('.hotel-price').text().replace('฿', '').trim());
-        const nextPrice = parseFloat($list.eq(index + 1).find('.hotel-price').text().replace('฿', '').trim());
-        expect(currentPrice).to.be.at.least(nextPrice);
-      }
-    });
-  });
-
-  it('Verify Ratings Sorting in Ascending Order', () => {
-    cy.contains('Rating').click();
-    cy.wait(2000);
-    cy.get('.hotel-card').each(($card, index, $list) => {
-      if (index < $list.length - 1) {
-        const currentRating = parseFloat($card.find('.hotel-rating').text());
-        const nextRating = parseFloat($list.eq(index + 1).find('.hotel-rating').text());
-        expect(currentRating).to.be.at.most(nextRating);
-      }
-    });
-  });
-
- 
-  it('Verify Ratings Sorting in Descending Order', () => {
-    cy.contains('Rating').click();
-    cy.get('#sortButton').should('be.visible').click();
-    cy.wait(2000);
-    cy.get('.hotel-card').each(($card, index, $list) => {
-      if (index < $list.length - 1) {
-        const currentRating = parseFloat($card.find('.hotel-rating').text());
-        const nextRating = parseFloat($list.eq(index + 1).find('.hotel-rating').text());
-        expect(currentRating).to.be.at.least(nextRating);
-      }
-    });
-    
+  cy.contains('Price').click();
+  cy.wait(2000);
+  cy.get('.hotel-card').each(($card, index, $list) => {
+    if (index < $list.length - 1) {
+      const currentPrice = parseFloat($card.find('.hotel-price').text().replace(' ฿', '').trim());
+      const nextPrice = parseFloat($list.eq(index + 1).find('.hotel-price').text().replace(' ฿', '').trim());
+      expect(currentPrice).to.be.at.most(nextPrice);
+    }
   });
 });
+
+it('Verify Price Sorting in Descending Order', () => {
+  cy.contains('Price').click();
+  cy.get('#sortButton').should('be.visible').click();
+  cy.wait(2000);
+  cy.get('.hotel-card').each(($card, index, $list) => {
+    if (index < $list.length - 1) {
+      const currentPrice = parseFloat($card.find('.hotel-price').text().replace(' ฿', '').trim());
+      const nextPrice = parseFloat($list.eq(index + 1).find('.hotel-price').text().replace(' ฿', '').trim());
+      expect(currentPrice).to.be.at.least(nextPrice);
+    }
+  });
+});
+
+it('Verify Ratings Sorting in Ascending Order', () => {
+  cy.contains('Rating').click();
+  cy.wait(2000);
+  cy.get('.hotel-card').each(($card, index, $list) => {
+    if (index < $list.length - 1) {
+      const currentRating = parseFloat($card.find('.hotel-rating').text().trim());
+      const nextRating = parseFloat($list.eq(index + 1).find('.hotel-rating').text().trim());
+      expect(currentRating).to.be.at.most(nextRating);
+    }
+  });
+});
+
+it('Verify Ratings Sorting in Descending Order', () => {
+  cy.contains('Rating').click();
+  cy.get('#sortButton').should('be.visible').click();
+  cy.wait(2000);
+  cy.get('.hotel-card').each(($card, index, $list) => {
+    if (index < $list.length - 1) {
+      const currentRating = parseFloat($card.find('.hotel-rating').text().trim());
+      const nextRating = parseFloat($list.eq(index + 1).find('.hotel-rating').text().trim());
+      expect(currentRating).to.be.at.least(nextRating);
+    }
+  });
+});
+  });
+ 
 
 describe('Review Test', () => {
 

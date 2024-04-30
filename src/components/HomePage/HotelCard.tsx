@@ -46,7 +46,7 @@ export function HotelCard(props: { hotel: HotelProps }) {
           <div id="hotel-price" className=" min-w-[20%]  text-end">
             <div className="flex h-40 flex-col justify-between">
               <div>
-                <div className=" font-bold text-xl md:text-3xl ">
+                <div className=" font-bold text-xl md:text-3xl hotel-price">
                   {props.hotel.price} ฿
                 </div>
                 <p>/ night</p>
@@ -69,7 +69,7 @@ export function HotelCard(props: { hotel: HotelProps }) {
             );
           })}
         </div>
-        <div id="hotel-rating" className="flex z-10 space-x-1 px-3 text-base md:text-xl items-center text-white">
+        <div id="hotel-rating" className="flex z-10 space-x-1 px-3 text-base md:text-xl items-center text-white hotel-rating">
           <p>{props.hotel.rating}</p>
           <span className="hidden sm:inline">
             <Rating
