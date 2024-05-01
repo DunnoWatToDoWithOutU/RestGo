@@ -44,6 +44,9 @@ function Max(num1: number, num2: number) {
 *                   type: array
 *                   items:
 *                       type: string
+*       Review:
+*           type: object
+*           properties:  
 */
 
 /**

@@ -14,17 +14,7 @@ export const getApiDocs = async () => {
                     url: "https://rest-go.vercel.app",
                     description: "My API Document",
                 }
-            ],
-            components: {
-                securitySchemes: {
-                    BearerAuth: {
-                        type: 'http',
-                        scheme: 'bearer',
-                        bearerFormat: 'JWT'
-                    }
-                }
-            },
-            security: []
+            ]
         }
     });
     return spec;
