@@ -9,7 +9,7 @@ export function TagPiece(props: {
   return (
     <button
       className={`flex hover:bg-gray-100 flex-col items-center border-l-2 transition duration-300 ease-in-out ${
-        props.selected ? "bg-gray-200" : ""
+        props.selected ? "bg-[#26cbfc] bg-opacity-30" : ""
       }`}
       onClick={props.onClick}
     >
