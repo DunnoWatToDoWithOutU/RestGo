@@ -3,7 +3,7 @@ import Hotel from '@/models/Hotel';
 import { model } from 'mongoose';
 import { NextRequest, NextResponse } from 'next/server';
 import { HotelProps } from '../../../../../@types/type';
-
+ 
 function Max(num1: number, num2: number) {
     return num1 > num2 ? num1 : num2;
   }
@@ -44,6 +44,12 @@ function Max(num1: number, num2: number) {
 *                   type: array
 *                   items:
 *                       type: string
+*               __v: 
+*                   type: number
+*               rating:
+*                   type: number
+*               id:
+*                   type: string
 *       Review:
 *           type: object
 *           properties:
@@ -109,7 +115,7 @@ function Max(num1: number, num2: number) {
  *         description: Internal server error 
  */
 
-export async function GET(req: NextRequest) {
+export async function GET(req: NextRequest, res: NextResponse) {
     try {
         await connectDB();
         const hotels:HotelProps[] = await Hotel.find()
