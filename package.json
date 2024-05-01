@@ -43,6 +43,8 @@
     "rheostat": "^4.1.1",
     "sonner": "^1.4.41",
     "styled-components": "^6.1.8",
+    "swagger-jsdoc": "^6.0.0",
+    "swagger-ui-express": "^5.0.0",
     "swagger-ui-react": "^5.17.2",
     "tw-elements-react": "^1.0.0-alpha2"
   },
