@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { AddPeoplePopup } from "./AddPeoplePopup";
 import dayjs, { Dayjs } from "dayjs";
 import { CheckInCheckOutPopup } from "./CheckInCheckOutPopup";
+import Link from "next/link";
 
 export function MenuBox() {
   //const [showCalendar, setShowCalendar] = useState(false);
@@ -195,9 +196,13 @@ export function MenuBox() {
           Private-stay
         </button>
       </div>
-      <button className=" absolute left-[28%] hover:bg-primary_dark -bottom-5 text-white bg-primary px-24 rounded-lg p-1 text-xl shadow-lg">
-        Search Here
-      </button>
+      <Link href="/hotellist">
+        <button 
+          className=" absolute left-[28%] hover:bg-primary_dark -bottom-5 text-white bg-primary px-24 rounded-lg p-1 text-xl shadow-lg"
+          >
+          Search Here
+        </button>
+      </Link>
     </div>
   );
 }

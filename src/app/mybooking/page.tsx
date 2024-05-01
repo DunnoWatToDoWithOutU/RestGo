@@ -3,7 +3,7 @@ import { ExpireBookingList } from "@/components/MyBooking/ExpireBookingList";
 
 export default function Home() {
   return (
-    <section className="md:px-[10%] px-[3%] mt-20">
+    <section className="md:px-[10%] px-[3%] mt-20 min-h-[450px]">
       <div className="w-full text-[#15439C]  border-[3px] rounded-2xl md:p-7 p-2  relative border-[#15439C]">
         <p className="text-[13pt] md:text-[18pt] absolute left-10 -top-5 px-4 bg-white  text-[#15439C] font-bold">
           Your Booking History

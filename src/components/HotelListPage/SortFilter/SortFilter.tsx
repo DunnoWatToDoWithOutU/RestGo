@@ -44,7 +44,7 @@ export default function SortFilter(props: {
           onClick={() => {
             props.setMaxtoMin(!props.MaxtoMin);
           }}
-          className="md:h-6 md:w-6 h-4 w-4 bg-[#D9D9D980] rounded-md flex items-center justify-center mt-0.5 "
+          className="md:h-6 md:w-6 h-4 w-4 bg-[#26cbfc] bg-opacity-40 rounded-md flex items-center justify-center mt-0.5 "
         >
           <Image
             src={"/sortingIcon/sortByIcon.png"}
@@ -64,9 +64,9 @@ export default function SortFilter(props: {
             <div
               className={`${
                 selectedButtonIndexes == index
-                  ? "bg-[#D9D9D980] rounded-md  md:mx-3 mx-1 my-1 md:my-2 md:px-2 md:py-0.5 "
+                  ? "bg-[#26cbfc] bg-opacity-40 rounded-md  md:mx-3 mx-1 my-1 md:my-2 md:px-2 md:py-0.5 "
                   : "md:mx-5 md:my-2.5 my-1 mx-1"
-              } flex `}
+              } flex transition-all duration-300 ease-in-out`}
             >
               <p className="md:text-xl text-sm mx-2 md:mx-2">{item.name}</p>
               <div className="md:h-6 md:w-6 md:block hidden ">
