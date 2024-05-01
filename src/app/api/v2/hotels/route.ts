@@ -46,7 +46,17 @@ function Max(num1: number, num2: number) {
 *                       type: string
 *       Review:
 *           type: object
-*           properties:  
+*           properties:
+*               rating: 
+*                   type: Number
+*                   description: the rating of this review
+*               reviewText: 
+*                   type: String
+*                user: {
+*                    type: mongoose.Schema.Types.ObjectId,
+*                    ref: 'User',
+*                    required: true,
+*                },
 */
 
 /**
