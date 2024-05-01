@@ -9,6 +9,12 @@ export const getApiDocs = async () => {
                 title: 'Next Swagger API',
                 version: '1.0'
             },
+            servers: [
+                {
+                    url: "https://rest-go.vercel.app",
+                    description: "My API Document",
+                }
+            ],
             components: {
                 securitySchemes: {
                     BearerAuth: {
